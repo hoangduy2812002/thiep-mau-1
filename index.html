@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hoàng Duy &amp; Anh Thư</title>
+    <link rel="icon" type="image/png" href="./images/anh1.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════
+     MÀN HÌNH BÌA
+═══════════════════════════════════ -->
+    <div id="cover" class="cover">
+        <!-- Trái tim rơi -->
+        <div class="cover-hearts" id="coverHearts" aria-hidden="true"></div>
+
+        <!-- Các ký hiệu trang trí nền -->
+        <div class="cover-ornaments" aria-hidden="true">
+            <span class="orn orn-1">✿</span>
+            <span class="orn orn-2">❋</span>
+            <span class="orn orn-3">✿</span>
+            <span class="orn orn-4">❀</span>
+            <span class="orn orn-5">✿</span>
+            <span class="orn orn-6">❋</span>
+            <span class="orn orn-7">❀</span>
+            <span class="orn orn-8">✿</span>
+            <span class="orn orn-9">✦</span>
+            <span class="orn orn-10">✦</span>
+            <span class="orn orn-11">✦</span>
+            <span class="orn orn-12">✦</span>
+        </div>
+
+        <!-- Thiệp bìa chính -->
+        <div class="cover-card" id="coverCard">
+            <div class="cover-card-inner">
+                <div class="cover-top-symbol">❦</div>
+
+                <div id="orn_thiep">
+                    <h1 class="cover-name cover-groom-name">Hoàng Duy</h1>
+                    <div class="cover-and">&amp;</div>
+                    <h1 class="cover-name cover-bride-name">Anh Thư</h1>
+                </div>
+
+                <div class="cover-divider">
+                    <span class="div-line"></span>
+                    <span class="div-icon">❦</span>
+                    <span class="div-line"></span>
+                </div>
+
+                <p class="cover-date" id="ngayCuoi">20/09/2026</p>
+
+                <p class="cover-invite">Trân trọng kính mời</p>
+                <p class="cover-guest" id="coverGuestName">Quý Khách</p>
+
+                <button class="cover-btn" id="openBtn" onclick="openInvitation()">
+                    Mở thiệp
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════
+     NỘI DUNG CHÍNH
+═══════════════════════════════════ -->
+    <div id="main" class="main hidden">
+
+        <!-- ── TÊN CẶP ĐÔI ── -->
+        <section class="section-header">
+            <div class="header-inner animate-on-scroll">
+                <div id="orn_thiep_trong">
+                    <h1 class="header-groom">Hoàng Duy</h1>
+                    <div class="header-and">&amp;</div>
+                    <h1 class="header-bride">Anh Thư</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── LỄ GIA TIÊN ── -->
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">LỄ GIA TIÊN</h2>
+
+            <div class="parents-wrapper animate-on-scroll" id="orn_thiep_bame">
+                <div class="parents-block">
+                    <p class="parents-label">Ông Bà</p>
+                    <p class="parents-name">Tôma Đặng Văn Doanh</p>
+                    <p class="parents-name">Maria Nguyễn Thị Tiến</p>
+                    <p class="parents-address">Tổ 15 - Ấp Trung Hoà<br> Xã Xuân Bắc - TP. Đồng Nai</p>
+                </div>
+                <div class="parents-sep">❦</div>
+                <div class="parents-block">
+                    <p class="parents-label">Ông Bà</p>
+                    <p class="parents-name">Phêrô Trần Thanh Hùng</p>
+                    <p class="parents-name"> Maria Dương Thị Tố Kim</p>
+                    <p class="parents-address">Tổ 10 - Thôn Đức Hạnh<br>Xã Hoài Đức - T. Lâm Đồng</p>
+                </div>
+            </div>
+
+            <div class="announce-block animate-on-scroll">
+                <p class="announce-top">TRÂN TRỌNG BÁO TIN</p>
+                <p class="announce-sub">LỄ <span id="checkTenLe">TÂN HÔN</span> CỦA CON CHÚNG TÔI</p>
+                <div id="orn_ten_vo_chong">
+                    <h2 class="couple-name">Đặng Hoàng Duy <p class="couple-title">TRƯỞNG NAM</p>
+                    </h2>
+                    <div class="couple-and">&amp;</div>
+                    <h2 class="couple-name">Trần Thị Anh Thư <p class="couple-title">TRƯỞNG NỮ</p>
+                    </h2>
+                </div>
+
+            </div>
+
+            <div class="gia-tien-card animate-on-scroll">
+                <p class="gt-line">Hôn lễ được cử hành tại</p>
+                <p class="gt-place">THÁNH ĐƯỜNG GIÁO XỨ VÕ ĐẮT</p>
+                <p class="gt-time">VÀO LÚC 04:30 THỨ BẢY</p>
+                <p class="gt-date">THỨ BẢY <span class="gt-sep">|</span> 19.09.2026</p>
+                <p class="gt-lunar">(Nhằm ngày 09 tháng 08 năm Bính Ngọ)</p>
+            </div>
+        </section>
+
+        <!-- ── THÔNG TIN TIỆC CƯỚI TẠI NHÀ HÀNG ── -->
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">TIỆC CƯỚI TẠI TƯ GIA</h2>
+
+            <div class="venue-info animate-on-scroll">
+                <p class="venue-address" id="diaChiXa">Tổ 15 - Ấp Trung Hoà </p>
+                <p class="venue-address" id="diaChiThanhPho">Xã Xuân Bắc - TP. Đồng Nai</p>
+                <p class="venue-invite">Trân trọng kính mời</p>
+                <p class="venue-guest" id="venueGuestName">Quý Khách</p>
+                <p class="venue-invite-sub">Đến dự buổi tiệc chung vui cùng gia đình chúng tôi</p>
+            </div>
+
+            <div class="party-card animate-on-scroll">
+                <p class="party-card-sub">TIỆC CƯỚI SẼ DIỄN RA VÀO LÚC:</p>
+                <div class="party-time">11:00</div>
+
+                <div class="party-date-row">
+                    <span class="party-day-name" id="gioCuoi">CHỦ NHẬT</span>
+                    <div class="party-date-center">
+                        <span class="date-sep">|</span>
+                        <span class="party-day-num" id="ngayCuoiDau">20</span>
+                        <span class="date-sep">|</span>
+                    </div>
+                    <span class="party-month-name">THÁNG 09</span>
+                </div>
+
+                <div class="party-year">2026</div>
+                <div class="party-lunar">(NHẰM NGÀY <span id="ngayCuoiCoDau">10</span> THÁNG 08 NĂM BÍNH NGỌ)</div>
+
+            </div>
+
+            <!-- Đếm ngược -->
+            <div class="countdown-wrapper animate-on-scroll">
+                <p class="cd-title">Cùng đếm ngược</p>
+                <div class="countdown">
+                    <div class="cd-item"><span class="cd-num" id="cdDays">00</span><span class="cd-label">ngày</span>
+                    </div>
+                    <span class="cd-sep">:</span>
+                    <div class="cd-item"><span class="cd-num" id="cdHours">00</span><span class="cd-label">giờ</span>
+                    </div>
+                    <span class="cd-sep">:</span>
+                    <div class="cd-item"><span class="cd-num" id="cdMinutes">00</span><span class="cd-label">phút</span>
+                    </div>
+                    <span class="cd-sep">:</span>
+                    <div class="cd-item"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label">giây</span>
+                    </div>
+                </div>
+                <!-- <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%C4%90%C3%A1m+c%C6%B0%E1%BB%9Bi+V%C4%83n+Ch%C6%B0%C6%A1ng+%26+H%E1%BB%93ng+Th%C6%B0&dates=20260725T040000Z%2F20260725T070000Z&ctz=Asia%2FHo_Chi_Minh&details=Ti%E1%BB%87c+c%C6%B0%E1%BB%9Bi+c%E1%BB%A7a+Ph%E1%BA%A1m+V%C4%83n+Ch%C6%B0%C6%A1ng+%26+Nguy%E1%BB%85n+H%E1%BB%93ng+Th%C6%B0&location=Royal+Center%2C+180%2F4+Song+H%C3%A0nh%2C+X%C3%A3+B%C3%A0+%C4%90i%E1%BB%83m%2C+Tp.+H%E1%BB%93+Ch%C3%AD+Minh"
+                    target="_blank" rel="noopener noreferrer" class="add-cal-btn">Thêm vào lịch</a> -->
+            </div>
+        </section>
+
+        <!-- ── BẢN ĐỒ ── -->
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">BẢN ĐỒ CHỈ ĐƯỜNG</h2>
+            <div class="map-wrapper animate-on-scroll">
+                <!-- <iframe
+                title="Bản đồ địa điểm tiệc cưới"
+                src="https://maps.google.com/maps?q=180%2F4+Song+H%C3%A0nh%2C+X%C3%A3+B%C3%A0+%C4%90i%E1%BB%83m%2C+H%C3%B3c+M%C3%B4n%2C+TP+H%E1%BB%93+Ch%C3%AD+Minh&output=embed&hl=vi"
+                width="100%" height="280"
+                style="border:0; border-radius:8px; display:block;"
+                allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe> -->
+                <!-- <iframe src="" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe> -->
+                <iframe id="myIframe" title="Bản đồ địa điểm tiệc cưới" src="" width="100%" height="280"
+                    style="border:0; border-radius:8px; display:block;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- ── ALBUM ẢNH CƯỚI ── -->
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">ALBUM ẢNH CƯỚI</h2>
+            <div class="album-grid animate-on-scroll">
+                <!-- Đặt ảnh cưới vào thư mục images/ với tên anh1.jpg → anh7.jpg -->
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh1.jpg" alt="Ảnh cưới 1"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 1</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh2.jpg" alt="Ảnh cưới 2"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 2</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh5.jpg" alt="Ảnh cưới 3"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 3</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh6.jpg" alt="Ảnh cưới 4"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 4</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh7.jpg" alt="Ảnh cưới 5"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 5</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh8.jpg" alt="Ảnh cưới 6"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 6</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh3.jpg" alt="Ảnh cưới 7"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 7</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh4.jpg" alt="Ảnh cưới 8"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 8</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh9.jpg" alt="Ảnh cưới 9"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 9</span></div>
+                </div>
+                <div class="album-item" onclick="openLightbox(this)">
+                    <img src="images/anh10.jpg" alt="Ảnh cưới 10"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 10</span></div>
+                </div>
+                <!-- <div class="album-item album-item-wide" onclick="openLightbox(this)">
+                    <img src="images/anh7.jpg" alt="Ảnh cưới 7"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="album-placeholder"><span>📷</span><span>Ảnh cưới 7</span></div>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- ── SỔ LƯU BÚT ── -->
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">SỔ LƯU BÚT</h2>
+            <form class="gb-form animate-on-scroll" id="gbForm" novalidate>
+                <input type="text" id="gbName" class="gb-input" placeholder="Họ tên của bạn" maxlength="100" required>
+                <textarea id="gbMessage" class="gb-textarea" placeholder="Lời chúc của bạn..." maxlength="500" required
+                    rows="3"></textarea>
+                <button type="submit" class="gb-btn">🪄 GỬI LỜI CHÚC</button>
+            </form>
+            <div class="gb-list" id="gbList"></div>
+        </section>
+
+        <!-- ── HỘP MỪNG CƯỚI ── -->
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">HỘP MỪNG CƯỚI</h2>
+            <div class="gift-wrapper animate-on-scroll">
+                <div class="gift-envelope" id="giftEnvelope" onclick="toggleGift()">
+                    <div class="envelope-icon">🧧</div>
+                    <p class="envelope-tap" style="color: black;">Nhấn để mở</p>
+                </div>
+                <div class="gift-content" id="giftContent">
+                    <p class="gift-message">Mọi sự chúc mừng của quý khách<br>là niềm hạnh phúc lớn nhất của chúng tôi
+                    </p>
+                    <div class="qr-area">
+                        <!-- Đặt ảnh QR tại images/qr-chu-re.png và images/qr-co-dau.png -->
+                        <div class="qr-card">
+                            <p class="qr-label">🤵 Chú rể</p>
+                            <img src="images/qr_chu_re.jpg" alt="QR Chú rể" class="qr-img"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="qr-placeholder">
+                                <span>QR Chú rể</span>
+                                <span class="qr-hint">images/qr-chu-re.png</span>
+                            </div>
+                        </div>
+                        <div class="qr-card">
+                            <p class="qr-label">👰 Cô dâu</p>
+                            <img src="images/qr_co_dau.jpg" alt="QR Cô dâu" class="qr-img"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="qr-placeholder">
+                                <span>QR Cô dâu</span>
+                                <span class="qr-hint">images/qr-co-dau.png</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FOOTER ── -->
+        <footer class="wedding-footer">
+            <div class="footer-symbol">❦</div>
+            <div class="footer-names" id="orn_footer_ten_vo_chong"><span>Hoàng Duy</span><span style="
+            padding-left: 4px; padding-right: 4px;
+            "> &amp;</span> <span>Anh Thư</span></div>
+            <p class="footer-date">19 & 20 · 09 · 2026</p>
+            <p class="footer-wish">Trăm Năm Hạnh Phúc</p>
+        </footer>
+
+    </div><!-- /main -->
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <!-- Nhạc nền đám cưới – đặt file tại music/nhac.m4a -->
+    <audio id="bgMusic" loop>
+        <source src="nhacFull.m4a" type="audio/mpeg">
+    </audio>
+
+    <!-- Nút bật/tắt nhạc -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Bật nhạc" aria-label="Bật tắt nhạc">
+        🎵
+    </button>
+
+    <script src="danhSachKhachMoi.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

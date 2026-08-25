@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thiệp Cưới – Văn Chương &amp; Hồng Thư</title>
+    <script>
+        // GitHub Pages không hỗ trợ route động cho site tĩnh.
+        // Trang 404 này chuyển hướng /dam-cuoi/<ten-khach> về /dam-cuoi/?/<ten-khach>
+        // để index.html khôi phục lại đường dẫn gốc (kỹ thuật spa-github-pages).
+        var pathSegmentsToKeep = 1; // giữ lại "/dam-cuoi"
+
+        var l = window.location = "/?/d/";
+        // l.replace(
+        //     l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        //     l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        //     l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        //     (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        //     l.hash
+        // );
+    </script>
+</head>
+<body></body>
+</html>
