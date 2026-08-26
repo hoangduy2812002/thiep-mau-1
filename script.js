@@ -2,82 +2,34 @@
    THIỆP CƯỚI – Script.js
    Văn Chương & Hồng Thư – 25/07/2026
 ================================================ */
-
+// Khởi động khi load: tên khách mời + hiệu ứng trái tim
+document.addEventListener("DOMContentLoaded", () => {
+  getName();
+  initGuestName();
+  initFallingHearts();
+});
 // ── TÊN KHÁCH MỜI TỪ URL ────────────────────────
 // URL dạng https://.../dam-cuoi/anh-viet → slug "anh-viet"
 // Tra trong danhSachKhachMoi (danhSachKhachMoi.js) để hiện tên lên bìa.
-let checkNgayGio = false;
 function initGuestName() {
-  // deleteEntry(4);
   if (typeof danhSachKhachMoi === "undefined") return;
 
-  const segments = window.location.search.split("?").filter(Boolean);
-
-  let checkDR;
-  if (segments?.length > 0) {
-    checkDR = segments[0][1];
-  }
-
-
-  if (checkDR?.toLowerCase() === "d" || checkDR?.toLocaleLowerCase() === "D") {
-    document.getElementById("ngayCuoi").innerHTML = "19/09/2026";
-    document.getElementById("diaChiXa").innerHTML = "Tổ 10 - Thôn Đức Hạnh";
-    document.getElementById("diaChiThanhPho").innerHTML = "Xã Hoài Đức - T. Lâm Đồng";
-    document.getElementById("myIframe").src = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3914.5894640863276!2d107.50056!3d11.143922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDA4JzM4LjEiTiAxMDfCsDMwJzAyLjAiRQ!5e0!3m2!1svi!2s!4v1787296528578!5m2!1svi!2s";
-    checkNgayGio = true;
-    document.getElementById("checkTenLe").innerHTML = "VU QUY";
-
-    doiViTri();
-
-  } else {
-    document.getElementById("myIframe").src = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3915.9630930859425!2d107.287165!3d11.041394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDAyJzI5LjAiTiAxMDfCsDE3JzEzLjgiRQ!5e0!3m2!1svi!2s!4v1787295714607!5m2!1svi!2";
-
-  }
-
-  const slug = decodeURIComponent(
-    segments[segments.length - 1]?.split("/").slice(2).join("/") || ""
-  )
+  const segments = window.location.pathname.split("/").filter(Boolean);
+  const slug = decodeURIComponent(segments[segments.length - 1] || "")
     .replace(/\.html$/i, "")
     .toLowerCase();
-
-  const tenNguoiMoi = slug?.split('&')[0]
-
-
   if (!slug) return;
 
-  // const guest = danhSachKhachMoi.find(k => k.link.toLowerCase() === slug);
-  const guest = danhSachKhachMoi.find(k => k.link.toLowerCase() === tenNguoiMoi);
-
-
+  const guest = danhSachKhachMoi.find(k => k.link.toLowerCase() === slug);
   if (!guest) return;
 
-  // document.title = `Hoàng Duy & Anh Thư - Kính mời ${guest.ten}`;
+  document.title = `Thiệp Cưới – Văn Chương & Hồng Thư – Kính mời ${guest.ten}`;
 
   // Điền tên khách mời ở cả bìa thiệp và phần thông tin nhà hàng
-  ["coverGuestName", "venueGuestName",].forEach(id => {
+  ["coverGuestName", "venueGuestName"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = guest.ten;
   });
-
-  document.getElementById("gbName").value = guest?.ten;
-}
-
-function doiViTri() {
-  const orn_thiep = document.getElementById("orn_thiep");
-  [...orn_thiep.children].reverse().forEach(el => orn_thiep.appendChild(el));
-  // =====
-  const orn_thiep_trong = document.getElementById("orn_thiep_trong");
-  [...orn_thiep_trong.children].reverse().forEach(el => orn_thiep_trong.appendChild(el));
-  // =====
-  const orn_thiep_bame = document.getElementById("orn_thiep_bame");
-  [...orn_thiep_bame.children].reverse().forEach(el => orn_thiep_bame.appendChild(el));
-
-  const orn_ten_vo_chong = document.getElementById("orn_ten_vo_chong");
-  [...orn_ten_vo_chong.children].reverse().forEach(el => orn_ten_vo_chong.appendChild(el));
-  // 
-  const orn_footer_ten_vo_chong = document.getElementById("orn_footer_ten_vo_chong");
-  [...orn_footer_ten_vo_chong.children].reverse().forEach(el => orn_footer_ten_vo_chong.appendChild(el));
-
 }
 
 // ── TRÁI TIM RƠI ────────────────────────────────
@@ -152,12 +104,6 @@ function stopFallingHearts() {
 
 // ── NHẠC NỀN ─────────────────────────────────
 function playMusic() {
-  if (checkNgayGio) {
-    document.getElementById("gioCuoi").innerHTML = "THỨ BẢY";
-    document.getElementById("ngayCuoiDau").innerHTML = "19";
-    document.getElementById("ngayCuoiCoDau").innerHTML = "09";
-  }
-
   const audio = document.getElementById("bgMusic");
   const btn = document.getElementById("musicBtn");
   if (!audio) return;
@@ -169,7 +115,7 @@ function playMusic() {
         btn.title = "Tắt nhạc";
       }
     })
-    .catch(() => { }); // Trình duyệt có thể chặn – người dùng bấm nút để bật
+    .catch(() => {}); // Trình duyệt có thể chặn – người dùng bấm nút để bật
 }
 
 function toggleMusic() {
@@ -186,7 +132,7 @@ function toggleMusic() {
         btn.classList.add("playing");
         btn.classList.remove("muted");
       })
-      .catch(() => { });
+      .catch(() => {});
   } else {
     audio.pause();
     btn.textContent = "🔇";
@@ -219,43 +165,36 @@ function openInvitation() {
 
 // ── ĐẾM NGƯỢC ────────────────────────────────
 // Ngày cưới: 25/07/2026 lúc 12:00 Giờ VN (UTC+7) = 05:00 UTC
-let WEDDING_DATE = new Date("2026-09-20T11:00:00+07:00");
+const WEDDING_DATE = new Date(CONFIG.ngayThangNamDienRaTiecCuoi);
 
 function startCountdown() {
-  try {
-    function tick() {
-      if (checkNgayGio) {
-        WEDDING_DATE = new Date("2026-09-19T11:00:00+07:00");
-      }
-      const now = new Date();
-      const diff = WEDDING_DATE - now;
+  function tick() {
+    const now = new Date();
+    const diff = WEDDING_DATE - now;
 
-      const pad = n => String(Math.max(0, n)).padStart(2, "0");
+    const pad = n => String(Math.max(0, n)).padStart(2, "0");
 
-      if (diff <= 0) {
-        ["cdDays", "cdHours", "cdMinutes", "cdSeconds"].forEach(id => {
-          document.getElementById(id).textContent = "00";
-        });
-        clearInterval(timer);
-        return;
-      }
-
-      const days = Math.floor(diff / 86400000);
-      const hours = Math.floor(diff % 86400000 / 3600000);
-      const minutes = Math.floor(diff % 3600000 / 60000);
-      const seconds = Math.floor(diff % 60000 / 1000);
-
-      document.getElementById("cdDays").textContent = pad(days);
-      document.getElementById("cdHours").textContent = pad(hours);
-      document.getElementById("cdMinutes").textContent = pad(minutes);
-      document.getElementById("cdSeconds").textContent = pad(seconds);
+    if (diff <= 0) {
+      ["cdDays", "cdHours", "cdMinutes", "cdSeconds"].forEach(id => {
+        document.getElementById(id).textContent = "00";
+      });
+      clearInterval(timer);
+      return;
     }
 
-    tick();
-    const timer = setInterval(tick, 1000);
-  } catch (error) {
-    console.log((error))
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor(diff % 86400000 / 3600000);
+    const minutes = Math.floor(diff % 3600000 / 60000);
+    const seconds = Math.floor(diff % 60000 / 1000);
+
+    document.getElementById("cdDays").textContent = pad(days);
+    document.getElementById("cdHours").textContent = pad(hours);
+    document.getElementById("cdMinutes").textContent = pad(minutes);
+    document.getElementById("cdSeconds").textContent = pad(seconds);
   }
+
+  tick();
+  const timer = setInterval(tick, 1000);
 }
 
 // ── HIỆU ỨNG CUỘN ────────────────────────────
@@ -287,41 +226,37 @@ function initScrollAnimations() {
 
 // ── SỔ LƯU BÚT (Google Sheets) ─────────────────────────────────────
 /*
-  HƯỚNG DẪN CÀI ĐẶT GOOGLE SHEETS:
-  1. Mở https://script.google.com → tạo project mới
-  2. Dán đoạn code sau vào editor và lưu:
-  ──────────────────────────────────────────────────────────────────
-  function doPost(e) {
-    var data  = JSON.parse(e.postData.contents);
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    sheet.appendRow([new Date().toLocaleString('vi-VN'), data.name, data.message]);
-    return ContentService
-      .createTextOutput(JSON.stringify({status:'ok'}))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-  function doGet() {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var rows  = sheet.getDataRange().getValues().slice(1).reverse();
-    var data  = rows.map(function(r){return{date:r[0],name:r[1],message:r[2]};});
-    return ContentService
-      .createTextOutput(JSON.stringify(data))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-  ──────────────────────────────────────────────────────────────────
-  3. Deploy → New deployment → Web app
-     - Execute as: Me
-     - Who has access: Anyone
-  4. Copy URL dán vào APPS_SCRIPT_URL bên dưới
+HƯỚNG DẪN CÀI ĐẶT GOOGLE SHEETS:
+1. Mở https://script.google.com → tạo project mới
+2. Dán đoạn code sau vào editor và lưu:
+──────────────────────────────────────────────────────────────────
+function doPost(e) {
+  var data  = JSON.parse(e.postData.contents);
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([new Date().toLocaleString('vi-VN'), data.name, data.message]);
+  return ContentService
+    .createTextOutput(JSON.stringify({status:'ok'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+function doGet() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var rows  = sheet.getDataRange().getValues().slice(1).reverse();
+  var data  = rows.map(function(r){return{date:r[0],name:r[1],message:r[2]};});
+  return ContentService
+    .createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+──────────────────────────────────────────────────────────────────
+3. Deploy → New deployment → Web app
+   - Execute as: Me
+   - Who has access: Anyone
+4. Copy URL dán vào APPS_SCRIPT_URL bên dưới
 */
 
 // ↓ Dán URL Google Apps Script vào đây:
 const APPS_SCRIPT_URL =
-  // "https://script.google.com/macros/s/AKfycbzSotbHLC2NpI4mrVpoKswHrXBM8cnO3jjD3Ldkx_Y0nVyvwZehSOoWJ-mt-bvYBnKI/exec";
-  // "https://script.google.com/macros/s/AKfycbw17FwDK_uuh9LhH73fdzISVM3M8OrgUeYizt7jRjZV8Qs0EYQugwZSfCx1rIze9j1z/exec"
-  // "https://script.google.com/macros/s/AKfycbz1_DCV96dR5ODfyQNDKJZU2MKxUgJCT7Kud8ExI1KFFzLysN8Jr-32amaNr6oGh2ZU/exec"
-  // "https://script.google.com/macros/s/AKfycbyoS8XKwRs4UbTYwWRrMOWsG_M2ifpxAFrDMD5RHwvx8KnNJXPV8wCq-OCoLlLIGFe9/exec";
-"https://script.google.com/macros/s/AKfycbwUj79NtXaCB3MTwkTVwpReHbldiWY0rw2QHP5NyPvLXJejltX7doxq3om_KnZgiL4A/exec";
-
+  "https://script.google.com/macros/s/AKfycbzWg5SkfRVuUp2rFJXgF1iAb70TBD0Eh3o4qniVvEFej3zYlilzytGgwEb7eeB-RzVd/exec"
+  ;
 
 function loadGuestBook() {
   const list = document.getElementById("gbList");
@@ -344,7 +279,7 @@ function loadGuestBook() {
           '<p class="gb-empty">Hãy là người đầu tiên gửi lời chúc! 💌</p>';
         return;
       }
-      entries.reverse().forEach(e => list.appendChild(buildEntry(e)));
+      entries.forEach(e => list.appendChild(buildEntry(e)));
     })
     .catch(() => {
       list.innerHTML =
@@ -362,18 +297,15 @@ function saveEntry(name, message) {
   });
 }
 
-
 function buildEntry(entry) {
-
   const div = document.createElement("div");
   div.className = "gb-entry";
   div.innerHTML = `
-        <div class="gb-avatar">${safe(entry.name).charAt(0).toUpperCase()}</div>
-        <div class="gb-body">
-            <div class="gb-entry-name">${safe(entry.name)}</div>
-            <div class="gb-entry-msg">${safe(entry.message)}</div>
-        </div>
-        `;
+      <div class="gb-avatar">${safe(entry.name).charAt(0).toUpperCase()}</div>
+      <div class="gb-body">
+          <div class="gb-entry-name">${safe(entry.name)}</div>
+          <div class="gb-entry-msg">${safe(entry.message)}</div>
+      </div>`;
   return div;
 }
 
@@ -384,22 +316,14 @@ function safe(str) {
   return d.innerHTML;
 }
 
-// Khởi động khi load: tên khách mời + hiệu ứng trái tim
-document.addEventListener("DOMContentLoaded", () => {
-  initGuestName();
-  initFallingHearts();
-});
-
 // Gắn sự kiện form
 const gbForm = document.getElementById("gbForm");
 if (gbForm) {
   gbForm.addEventListener("submit", e => {
     e.preventDefault();
     const name = document.getElementById("gbName").value.trim();
-
     const message = document.getElementById("gbMessage").value.trim();
     if (!name || !message) return;
-
     if (name.length > 100 || message.length > 500) {
       alert("Tên tối đa 100 ký tự, lời chúc tối đa 500 ký tự.");
       return;
@@ -428,7 +352,6 @@ if (gbForm) {
       });
   });
 }
-
 
 // ── HỘP MỪNG CƯỚI ────────────────────────────
 function toggleGift() {
@@ -476,5 +399,129 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeLightbox();
 });
 
+function getName() {
+  document.querySelectorAll(".chu-re").forEach(el => {
+    el.textContent = CONFIG.chuRe;
+  });
 
+  document.querySelectorAll(".co-dau").forEach(el => {
+    el.textContent = CONFIG.coDau;
+  });
+  document.querySelectorAll(".ngay-cuoi").forEach(el => {
+    el.textContent = CONFIG.ngayCuoi;
+  });
 
+  document.querySelectorAll(".ba-chu-re").forEach(el => {
+    el.textContent = CONFIG.baChuRe;
+  });
+
+  document.querySelectorAll(".me-chu-re").forEach(el => {
+    el.textContent = CONFIG.meChuRe;
+  });
+
+  document.querySelectorAll(".ba-co-dau").forEach(el => {
+    el.textContent = CONFIG.baCoDau;
+  });
+
+  document.querySelectorAll(".me-co-dau").forEach(el => {
+    el.textContent = CONFIG.meCodau;
+  });
+
+  document.querySelectorAll(".dia-chi-phuong-chu-re").forEach(el => {
+    el.textContent = CONFIG.diaChiPhuongChuRe;
+  });
+
+  document.querySelectorAll(".dia-chi-tp-chu-re").forEach(el => {
+    el.textContent = CONFIG.diaChiTPChuRe;
+  });
+
+  document.querySelectorAll(".dia-chi-phuong-co-dau").forEach(el => {
+    el.textContent = CONFIG.diaChiPhuongCoDau;
+  });
+
+  document.querySelectorAll(".dia-chi-tp-co-dau").forEach(el => {
+    el.textContent = CONFIG.diaChiTPCoDau;
+  });
+
+  document.querySelectorAll(".danh-xung-chu-re").forEach(el => {
+    el.textContent = CONFIG.danhXungChuRe;
+  });
+
+  document.querySelectorAll(".danh-xung-co-dau").forEach(el => {
+    el.textContent = CONFIG.danhXungCoDau;
+  });
+
+  document.querySelectorAll(".chu-re-full").forEach(el => {
+    el.textContent = CONFIG.chuReFull;
+  });
+
+  document.querySelectorAll(".co-dau-full").forEach(el => {
+    el.textContent = CONFIG.coDauFull;
+  });
+
+  document.querySelectorAll(".tiec-cuoi-tai").forEach(el => {
+    el.textContent = CONFIG.tiecCuoiTai;
+  });
+
+  document.querySelectorAll(".ten-nha-hang").forEach(el => {
+    el.textContent = CONFIG.tenNhaHang;
+  });
+
+  document.querySelectorAll(".dia-chi-phuong-tiec-cuoi").forEach(el => {
+    el.textContent = CONFIG.diaChiPhuongTiecCuoi;
+  });
+
+  document.querySelectorAll(".dia-chi-tp-tiec-cuoi").forEach(el => {
+    el.textContent = CONFIG.diaChiTpTiecCuoi;
+  });
+
+  document.querySelectorAll(".gio-tiec-cuoi-dien-ra").forEach(el => {
+    el.textContent = CONFIG.gioTiecCuoiDienRa;
+  });
+
+  document.querySelectorAll(".thu-tiec-cuoi-dien-ra").forEach(el => {
+    el.textContent = CONFIG.thuTiecCuoiDienRa;
+  });
+
+  document.querySelectorAll(".ngay-tiec-cuoi-dien-ra").forEach(el => {
+    el.textContent = CONFIG.ngayTiecCuoiDienRa;
+  });
+
+  document.querySelectorAll(".thang-tiec-cuoi-dien-ra").forEach(el => {
+    el.textContent = CONFIG.thangTiecCuoiDienRa;
+  });
+
+  document.querySelectorAll(".nam-tiec-cuoi-dien-ra").forEach(el => {
+    el.textContent = CONFIG.namTiecCuoiDienRa;
+  });
+
+  document.querySelectorAll(".nham-ngay-tiec-cuoi-dien-ra").forEach(el => {
+    el.textContent = CONFIG.nhamNgayTiecCuoiDienRa;
+  });
+
+  // co ben dao hay khong
+  getGiaoXu();
+  //
+}
+
+function getGiaoXu() {
+  document.querySelectorAll(".thanh-duong-giao-xu").forEach(el => {
+    el.textContent = CONFIG.thanhDuongGiaoXu;
+  });
+
+  document.querySelectorAll(".gio-le-nha-tho").forEach(el => {
+    el.textContent = CONFIG.gioLeNhaTho;
+  });
+
+  document.querySelectorAll(".thu-lam-le").forEach(el => {
+    el.textContent = CONFIG.thuLamLe;
+  });
+
+  document.querySelectorAll(".ngay-lam-le").forEach(el => {
+    el.textContent = CONFIG.ngay;
+  });
+
+  document.querySelectorAll(".nham-ngay").forEach(el => {
+    el.textContent = CONFIG.nhamNgay;
+  });
+}
