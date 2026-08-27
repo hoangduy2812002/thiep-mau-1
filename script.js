@@ -300,31 +300,14 @@ async function loadMessages() {
   list.innerHTML = '<p class="gb-loading">⏳ Đang tải lời chúc...</p>';
 
   const response = await fetch("/api/data");
+  try {
+    const result = await response.json();
 
-  const result = await response.json();
-
-  if (!response.ok) {
-    throw new Error(result.message || "Không thể tải dữ liệu");
+    result.forEach(e => list.appendChild(buildEntry(e)));
+  } catch (error) {
+    list.innerHTML =
+      '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
   }
-
-  console.log("entries---", result);
-
-  fetch(APPS_SCRIPT_URL)
-    // .then(r => r.json())
-    // .then(entries => {
-    //   list.innerHTML = "";
-    //   if (!entries.length) {
-    //     list.innerHTML =
-    //       '<p class="gb-empty">Hãy là người đầu tiên gửi lời chúc! 💌</p>';
-    //     return;
-    //   }
-    //   // entries.forEach(e => list.appendChild(buildEntry(e)));
-    //   // console.log('entries---',entries)
-    // })
-    .catch(() => {
-      list.innerHTML =
-        '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
-    });
 }
 
 // function saveEntry(name, message) {
