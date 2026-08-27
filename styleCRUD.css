@@ -296,3 +296,136 @@ button:disabled {
     color: #777;
 
 }
+
+/* ================================================
+   SECTION DÙNG CHUNG
+================================================ */
+.section {
+    position: relative;
+    z-index: 1;
+    padding: 64px 20px;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section + .section::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #8c8c8c, transparent);
+    margin: 0 auto 64px;
+}
+
+.section-title {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    color: #c41d7f;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+.section-title::before,
+.section-title::after {
+    content: ' ✦ ';
+    color: #c41d7f;
+    opacity: 0.5;
+    font-size: 0.65rem;
+}
+
+/* ================================================
+   ALBUM ẢNH
+================================================ */
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.album-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    cursor: pointer;
+    width: 44%;
+    margin: auto;
+    max-width: 335px;
+    min-width: 160px;
+    
+}
+.album-item-wide {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+    
+}
+.album-item img {
+    width: 100%; 
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.45s ease;
+    display: block;
+    
+}
+.album-item:hover img { transform: scale(1.06); }
+
+.album-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    align-content: center;
+}
+
+.album-note{
+    background-color: #0958d9;
+    width: 55px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 8px;
+
+    opacity: 0;
+    transition: 0.3s;
+}
+
+/* Khi hover */
+.album-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(70%);
+}
+
+.album-item:hover .hover-text {
+    opacity: 1;
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
+}
+
+.item-tinh-nang{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    /* width: max-content; */
+    margin: auto;
+    border-radius: 10px;
+    background-color: #8c8c8c;
+    color: #fff;
+    max-width: max-content;
+    padding: 30px;
+    line-height: 25px;
+}
