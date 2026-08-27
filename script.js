@@ -143,7 +143,7 @@ function toggleMusic() {
 }
 
 // ── MỞ THIỆP ──────────────────────────────────
-function openInvitation() {
+async function openInvitation() {
   const cover = document.getElementById("cover");
   const main = document.getElementById("main");
 
