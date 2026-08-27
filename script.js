@@ -291,19 +291,13 @@ async function loadMessages() {
   const list = document.getElementById("gbList");
   if (!list) return;
 
-  // if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") {
-  //   list.innerHTML =
-  //     '<p class="gb-empty">⚙️ Chưa cấu hình Google Sheets. Xem hướng dẫn trong script.js</p>';
-  //   return;
-  // }
-
   list.innerHTML = '<p class="gb-loading">⏳ Đang tải lời chúc...</p>';
 
   const response = await fetch("/api/data");
   try {
     const result = await response.json();
-
-    result.forEach(e => list.appendChild(buildEntry(e)));
+    console.log('---->',result)
+    // result.forEach(e => list.appendChild(buildEntry(e)));
   } catch (error) {
     list.innerHTML =
       '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
