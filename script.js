@@ -297,7 +297,7 @@ async function loadMessages() {
   try {
     const result = await response.json();
     console.log('---->',result)
-    // result.forEach(e => list.appendChild(buildEntry(e)));
+    result?.data?.forEach(e => list.appendChild(buildEntry(e)));
   } catch (error) {
     list.innerHTML =
       '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
