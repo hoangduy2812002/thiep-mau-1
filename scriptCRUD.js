@@ -309,17 +309,6 @@ async function deleteMessage(
         );
 
 
-        // Nếu đang sửa item vừa xóa
-
-        if (
-            editingId === id
-        ) {
-
-            cancelEdit();
-
-        }
-
-
         // Tải lại
 
         await loadMessages();
