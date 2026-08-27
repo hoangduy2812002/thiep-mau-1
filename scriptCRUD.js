@@ -144,36 +144,6 @@ async function loadMessages() {
 
 
                 // =========================
-                // EDIT
-                // =========================
-
-                const editButton =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                editButton.className =
-                    "edit-button";
-
-
-                editButton.textContent =
-                    "Sửa";
-
-
-                editButton.addEventListener(
-                    "click",
-                    () => {
-
-                        startEdit(
-                            item
-                        );
-
-                    }
-                );
-
-
-                // =========================
                 // DELETE
                 // =========================
 

@@ -6,10 +6,7 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
         Quản lý lời chúc
@@ -17,7 +14,6 @@
 
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -61,13 +57,10 @@
             border-radius: 10px;
 
             box-shadow:
-                0 2px 10px
-                rgba(
+                0 2px 10px rgba(0,
                     0,
                     0,
-                    0,
-                    0.08
-                );
+                    0.08);
 
         }
 
@@ -176,6 +169,10 @@
             background:
                 #d00000;
 
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+
         }
 
 
@@ -217,6 +214,11 @@
             background:
                 #fafafa;
 
+            position: relative;
+
+            display: flex;
+            flex-wrap: wrap;
+
         }
 
 
@@ -227,6 +229,8 @@
             font-weight: bold;
 
             margin-bottom: 8px;
+
+            width: 100%;
 
         }
 
@@ -240,7 +244,7 @@
             white-space: pre-wrap;
 
             margin-bottom: 10px;
-
+            width: 100%;
         }
 
 
@@ -250,7 +254,9 @@
 
             color: #999;
 
-            margin-bottom: 12px;
+            position: absolute;
+
+            right: 10px;
 
         }
 
@@ -264,7 +270,6 @@
             color: #777;
 
         }
-
     </style>
 
 </head>
@@ -273,40 +278,40 @@
 <body>
 
 
-<div class="container">
-    <!-- ================================= -->
-    <!-- DANH SÁCH -->
-    <!-- ================================= -->
+    <div class="container">
+        <!-- ================================= -->
+        <!-- DANH SÁCH -->
+        <!-- ================================= -->
 
-    <div class="box">
+        <div class="box">
 
-        <h2>
+            <h2>
 
-            Danh sách lời chúc
+                Danh sách lời chúc
 
-        </h2>
-
-
-        <button id="reloadButton">
-
-            Tải lại
-
-        </button>
+            </h2>
 
 
-        <div id="list">
+            <button id="reloadButton">
 
-            Đang tải...
+                Tải lại
+
+            </button>
+
+
+            <div id="list">
+
+                Đang tải...
+
+            </div>
 
         </div>
+
 
     </div>
 
 
-</div>
-
-
-<script src="/scriptCRUD.js"></script>
+    <script src="/scriptCRUD.js"></script>
 
 
 </body>
