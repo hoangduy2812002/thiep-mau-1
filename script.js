@@ -354,12 +354,6 @@ if (gbForm) {
       alert("Tên tối đa 100 ký tự, lời chúc tối đa 500 ký tự.");
       return;
     }
-
-    if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") {
-      alert("⚙️ Vui lòng cấu hình APPS_SCRIPT_URL trong script.js trước!");
-      return;
-    }
-
     const btn = gbForm.querySelector(".gb-btn");
     btn.disabled = true;
     btn.textContent = "⏳ Đang gửi...";
