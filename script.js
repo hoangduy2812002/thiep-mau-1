@@ -158,7 +158,6 @@ async function openInvitation() {
 
     startCountdown();
     initScrollAnimations();
-    // loadGuestBook();
     playMusic(); // Tự phát nhạc sau khi mở thiệp
   }, 800);
 
@@ -227,66 +226,7 @@ function initScrollAnimations() {
 }
 
 // ── SỔ LƯU BÚT (Google Sheets) ─────────────────────────────────────
-/*
-HƯỚNG DẪN CÀI ĐẶT GOOGLE SHEETS:
-1. Mở https://script.google.com → tạo project mới
-2. Dán đoạn code sau vào editor và lưu:
-──────────────────────────────────────────────────────────────────
-function doPost(e) {
-  var data  = JSON.parse(e.postData.contents);
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  sheet.appendRow([new Date().toLocaleString('vi-VN'), data.name, data.message]);
-  return ContentService
-    .createTextOutput(JSON.stringify({status:'ok'}))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-function doGet() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var rows  = sheet.getDataRange().getValues().slice(1).reverse();
-  var data  = rows.map(function(r){return{date:r[0],name:r[1],message:r[2]};});
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-──────────────────────────────────────────────────────────────────
-3. Deploy → New deployment → Web app
-   - Execute as: Me
-   - Who has access: Anyone
-4. Copy URL dán vào APPS_SCRIPT_URL bên dưới
-*/
 
-// ↓ Dán URL Google Apps Script vào đây:
-const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzWg5SkfRVuUp2rFJXgF1iAb70TBD0Eh3o4qniVvEFej3zYlilzytGgwEb7eeB-RzVd/exec";
-
-function loadGuestBook() {
-  const list = document.getElementById("gbList");
-  if (!list) return;
-
-  if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") {
-    list.innerHTML =
-      '<p class="gb-empty">⚙️ Chưa cấu hình Google Sheets. Xem hướng dẫn trong script.js</p>';
-    return;
-  }
-
-  list.innerHTML = '<p class="gb-loading">⏳ Đang tải lời chúc...</p>';
-
-  fetch(APPS_SCRIPT_URL)
-    .then(r => r.json())
-    .then(entries => {
-      list.innerHTML = "";
-      if (!entries.length) {
-        list.innerHTML =
-          '<p class="gb-empty">Hãy là người đầu tiên gửi lời chúc! 💌</p>';
-        return;
-      }
-      entries.forEach(e => list.appendChild(buildEntry(e)));
-    })
-    .catch(() => {
-      list.innerHTML =
-        '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
-    });
-}
 async function loadMessages() {
   const list = document.getElementById("gbList");
   if (!list) return;
@@ -296,23 +236,12 @@ async function loadMessages() {
   const response = await fetch("/api/data");
   try {
     const result = await response.json();
-    console.log('--|||-->',result)
     result?.data?.forEach(e => list.appendChild(buildEntry(e)));
   } catch (error) {
     list.innerHTML =
       '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
   }
 }
-
-// function saveEntry(name, message) {
-//   // mode: no-cors → tránh CORS preflight, request vẫn được gửi thành công
-//   // return fetch(APPS_SCRIPT_URL, {
-//   //   method: "POST",
-//   //   mode: "no-cors",
-//   //   headers: { "Content-Type": "text/plain" },
-//   //   body: JSON.stringify({ name: name.trim(), message: message.trim() })
-//   // });
-// }
 
 // ========================================
 // LƯU
@@ -440,7 +369,7 @@ if (gbForm) {
         gbForm.reset();
         document.getElementById("gbName").focus();
         // Chờ 1.5s để Sheets kịp ghi rồi reload
-        // setTimeout(loadGuestBook, 1500);
+        setTimeout(loadMessages, 1500);
       })
       .catch(() => alert("Không thể gửi lời chúc. Vui lòng thử lại!"))
       .finally(() => {
