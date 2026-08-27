@@ -158,7 +158,8 @@ function openInvitation() {
 
     startCountdown();
     initScrollAnimations();
-    loadGuestBook();
+    // loadGuestBook();
+    loadMessages();
     playMusic(); // Tự phát nhạc sau khi mở thiệp
   }, 800);
 }
@@ -255,8 +256,7 @@ function doGet() {
 
 // ↓ Dán URL Google Apps Script vào đây:
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzWg5SkfRVuUp2rFJXgF1iAb70TBD0Eh3o4qniVvEFej3zYlilzytGgwEb7eeB-RzVd/exec"
-  ;
+  "https://script.google.com/macros/s/AKfycbzWg5SkfRVuUp2rFJXgF1iAb70TBD0Eh3o4qniVvEFej3zYlilzytGgwEb7eeB-RzVd/exec";
 
 function loadGuestBook() {
   const list = document.getElementById("gbList");
@@ -286,15 +286,134 @@ function loadGuestBook() {
         '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
     });
 }
+async function loadMessages() {
+  const list = document.getElementById("gbList");
+  if (!list) return;
 
-function saveEntry(name, message) {
-  // mode: no-cors → tránh CORS preflight, request vẫn được gửi thành công
-  return fetch(APPS_SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain" },
-    body: JSON.stringify({ name: name.trim(), message: message.trim() })
-  });
+  // if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") {
+  //   list.innerHTML =
+  //     '<p class="gb-empty">⚙️ Chưa cấu hình Google Sheets. Xem hướng dẫn trong script.js</p>';
+  //   return;
+  // }
+
+  list.innerHTML = '<p class="gb-loading">⏳ Đang tải lời chúc...</p>';
+
+  const response = await fetch("/api/data");
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message || "Không thể tải dữ liệu");
+  }
+
+  console.log('entries---',result)
+
+  fetch(APPS_SCRIPT_URL)
+    // .then(r => r.json())
+    // .then(entries => {
+    //   list.innerHTML = "";
+    //   if (!entries.length) {
+    //     list.innerHTML =
+    //       '<p class="gb-empty">Hãy là người đầu tiên gửi lời chúc! 💌</p>';
+    //     return;
+    //   }
+    //   // entries.forEach(e => list.appendChild(buildEntry(e)));
+    //   // console.log('entries---',entries)
+    // })
+    .catch(() => {
+      list.innerHTML =
+        '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
+    });
+}
+
+// function saveEntry(name, message) {
+//   // mode: no-cors → tránh CORS preflight, request vẫn được gửi thành công
+//   // return fetch(APPS_SCRIPT_URL, {
+//   //   method: "POST",
+//   //   mode: "no-cors",
+//   //   headers: { "Content-Type": "text/plain" },
+//   //   body: JSON.stringify({ name: name.trim(), message: message.trim() })
+//   // });
+// }
+
+// ========================================
+// LƯU
+// ========================================
+
+async function saveEntry(name, message, editing) {
+  console.log(name, "-", message, "---", editing);
+
+  try {
+    // =================================
+    // SỬA
+    // =================================
+
+    if (editing) {
+      const response = await fetch("/api/data", {
+        method: "PUT",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          name: name,
+
+          message: message
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Không thể sửa");
+      }
+
+      alert("Sửa thành công!");
+
+      await loadMessages();
+
+      return;
+    }
+
+    // =================================
+    // THÊM
+    // =================================
+    const response = await fetch("/api/data", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        name: name,
+
+        message: message
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Không thể thêm");
+    }
+
+    // Xóa form
+
+    // showStatus(
+    //     "Thêm thành công!"
+    // );
+
+    // Tải lại danh sách
+
+    await loadMessages();
+  } catch (error) {
+    console.error("SAVE ERROR:", error);
+
+    showStatus("Lỗi: " + error.message);
+  } finally {
+  }
 }
 
 function buildEntry(entry) {
@@ -338,12 +457,12 @@ if (gbForm) {
     btn.disabled = true;
     btn.textContent = "⏳ Đang gửi...";
 
-    saveEntry(name, message)
+    saveEntry(name, message, false)
       .then(() => {
         gbForm.reset();
         document.getElementById("gbName").focus();
         // Chờ 1.5s để Sheets kịp ghi rồi reload
-        setTimeout(loadGuestBook, 1500);
+        // setTimeout(loadGuestBook, 1500);
       })
       .catch(() => alert("Không thể gửi lời chúc. Vui lòng thử lại!"))
       .finally(() => {
