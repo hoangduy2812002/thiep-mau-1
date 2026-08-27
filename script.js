@@ -115,7 +115,7 @@ function playMusic() {
         btn.title = "Tắt nhạc";
       }
     })
-    .catch(() => {}); // Trình duyệt có thể chặn – người dùng bấm nút để bật
+    .catch(() => { }); // Trình duyệt có thể chặn – người dùng bấm nút để bật
 }
 
 function toggleMusic() {
@@ -132,7 +132,7 @@ function toggleMusic() {
         btn.classList.add("playing");
         btn.classList.remove("muted");
       })
-      .catch(() => {});
+      .catch(() => { });
   } else {
     audio.pause();
     btn.textContent = "🔇";
@@ -303,11 +303,11 @@ async function saveEntry(name, message, editing) {
 
     if (!response.ok) {
       throw new Error(result.message || "Không thể thêm");
-    }else{
+    } else {
       await loadMessages();
     }
 
-    
+
   } catch (error) {
     console.error("SAVE ERROR:", error);
 
@@ -536,3 +536,10 @@ function getGiaoXu() {
     el.textContent = CONFIG.nhamNgay;
   });
 }
+
+
+
+
+
+
+
