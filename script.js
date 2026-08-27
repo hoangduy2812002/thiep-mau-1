@@ -236,6 +236,7 @@ async function loadMessages() {
   const response = await fetch("/api/data");
   try {
     const result = await response.json();
+    list.innerHTML = "";
     result?.data?.forEach(e => list.appendChild(buildEntry(e)));
   } catch (error) {
     list.innerHTML =
@@ -248,40 +249,38 @@ async function loadMessages() {
 // ========================================
 
 async function saveEntry(name, message, editing) {
-  console.log(name, "-", message, "---", editing);
-
   try {
     // =================================
     // SỬA
     // =================================
 
-    if (editing) {
-      const response = await fetch("/api/data", {
-        method: "PUT",
+    // if (editing) {
+    //   const response = await fetch("/api/data", {
+    //     method: "PUT",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
 
-        body: JSON.stringify({
-          name: name,
+    //     body: JSON.stringify({
+    //       name: name,
 
-          message: message
-        })
-      });
+    //       message: message
+    //     })
+    //   });
 
-      const result = await response.json();
+    //   const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.message || "Không thể sửa");
-      }
+    //   if (!response.ok) {
+    //     throw new Error(result.message || "Không thể sửa");
+    //   }
 
-      alert("Sửa thành công!");
+    //   alert("Sửa thành công!");
 
-      await loadMessages();
+    //   await loadMessages();
 
-      return;
-    }
+    //   return;
+    // }
 
     // =================================
     // THÊM
@@ -304,17 +303,11 @@ async function saveEntry(name, message, editing) {
 
     if (!response.ok) {
       throw new Error(result.message || "Không thể thêm");
+    }else{
+      await loadMessages();
     }
 
-    // Xóa form
-
-    // showStatus(
-    //     "Thêm thành công!"
-    // );
-
-    // Tải lại danh sách
-
-    await loadMessages();
+    
   } catch (error) {
     console.error("SAVE ERROR:", error);
 
@@ -362,8 +355,6 @@ if (gbForm) {
       .then(() => {
         gbForm.reset();
         document.getElementById("gbName").focus();
-        // Chờ 1.5s để Sheets kịp ghi rồi reload
-        setTimeout(loadMessages, 1500);
       })
       .catch(() => alert("Không thể gửi lời chúc. Vui lòng thử lại!"))
       .finally(() => {
