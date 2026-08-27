@@ -11,301 +11,66 @@
     <title>
         Quản lý lời chúc
     </title>
-
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-
-        body {
-
-            margin: 0;
-
-            padding: 10px;
-
-            font-family:
-                Arial,
-                sans-serif;
-
-            background:
-                #f5f5f5;
-
-        }
-
-
-        .container {
-
-            width: 100%;
-
-            max-width: 700px;
-
-            margin: auto;
-
-        }
-
-
-        .box {
-
-            background: white;
-
-            padding: 20px;
-
-            margin-bottom: 20px;
-
-            border-radius: 10px;
-
-            box-shadow:
-                0 2px 10px rgba(0,
-                    0,
-                    0,
-                    0.08);
-
-        }
-
-
-        h1,
-        h2 {
-
-            margin-top: 0;
-
-        }
-
-
-        label {
-
-            display: block;
-
-            margin-bottom: 7px;
-
-            font-weight: bold;
-
-        }
-
-
-        input,
-        textarea {
-
-            width: 100%;
-
-            padding: 12px;
-
-            margin-bottom: 15px;
-
-            border:
-                1px solid #ccc;
-
-            border-radius: 6px;
-
-            font-size: 16px;
-
-            font-family:
-                Arial,
-                sans-serif;
-
-        }
-
-
-        textarea {
-
-            height: 120px;
-
-            resize: vertical;
-
-        }
-
-
-        button {
-
-            padding:
-                10px 16px;
-
-            border: none;
-
-            border-radius: 6px;
-
-            background:
-                #000;
-
-            color: white;
-
-            cursor: pointer;
-
-            font-size: 14px;
-
-            margin-right: 5px;
-
-        }
-
-
-        button:hover {
-
-            opacity: 0.8;
-
-        }
-
-
-        button:disabled {
-
-            opacity: 0.5;
-
-            cursor:
-                not-allowed;
-
-        }
-
-
-        .edit-button {
-
-            background:
-                #444;
-
-        }
-
-
-        .delete-button {
-
-            background:
-                #d00000;
-
-            position: absolute;
-            bottom: 5px;
-            right: 10px;
-
-        }
-
-
-        .cancel-button {
-
-            background:
-                #777;
-
-        }
-
-
-        #status {
-
-            display: none;
-
-            margin-top: 15px;
-
-            padding: 10px;
-
-            border-radius: 6px;
-
-            background:
-                #eee;
-
-        }
-
-
-        .item {
-
-            padding: 15px;
-
-            margin-top: 10px;
-
-            border:
-                1px solid #ddd;
-
-            border-radius: 8px;
-
-            background:
-                #fafafa;
-
-            position: relative;
-
-            display: flex;
-            flex-wrap: wrap;
-
-        }
-
-
-        .name {
-
-            font-size: 17px;
-
-            font-weight: bold;
-
-            margin-bottom: 8px;
-
-            width: 100%;
-
-        }
-
-
-        .message {
-
-            color: #555;
-
-            line-height: 1.5;
-
-            white-space: pre-wrap;
-
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-
-        .date {
-
-            font-size: 12px;
-
-            color: #999;
-
-            position: absolute;
-
-            right: 10px;
-
-        }
-
-
-        .empty {
-
-            padding: 20px;
-
-            text-align: center;
-
-            color: #777;
-
-        }
-    </style>
+    <link rel="stylesheet" href="styleCRUD.css">
 
 </head>
 
 
 <body>
+    <div class="tabs">
 
-
-    <div class="container">
-        <!-- ================================= -->
-        <!-- DANH SÁCH -->
-        <!-- ================================= -->
-
-        <div class="box">
-
-            <h2>
-
-                Danh sách lời chúc
-
-            </h2>
-
-
-            <button id="reloadButton">
-
-                Tải lại
-
+        <!-- 2 nút tab -->
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="openTab('tab1', this)">
+                Lời chúc
             </button>
 
+            <button class="tab-button" onclick="openTab('tab2', this)">
+                Album
+            </button>
+        </div>
 
-            <div id="list">
+        <!-- Nội dung Tab 1 -->
+        <div id="tab1" class="tab-content active">
+            <!-- ================================= -->
+            <!-- DANH SÁCH -->
+            <!-- ================================= -->
 
-                Đang tải...
+            <div class="box">
+
+                <h2>
+
+                    Danh sách lời chúc
+
+                </h2>
+
+
+                <button id="reloadButton">
+
+                    Tải lại
+
+                </button>
+
+
+                <div id="list">
+
+                    Đang tải...
+
+                </div>
 
             </div>
-
         </div>
+
+        <!-- Nội dung Tab 2 -->
+        <div id="tab2" class="tab-content">
+            <h2>Nội dung Tab 2</h2>
+            <p>Đây là nội dung của tab thứ hai.</p>
+        </div>
+
+    </div>
+
+    <div class="container">
+
 
 
     </div>

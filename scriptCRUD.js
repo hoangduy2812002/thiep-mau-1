@@ -3,6 +3,29 @@ const listElement = document.getElementById("list");
 const reloadButton = document.getElementById("reloadButton");
 
 
+
+function openTab(tabId, button) {
+
+    // Ẩn tất cả nội dung
+    document.querySelectorAll(".tab-content")
+        .forEach(tab => {
+            tab.classList.remove("active");
+        });
+
+    // Bỏ active tất cả button
+    document.querySelectorAll(".tab-button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+    // Hiển thị tab được chọn
+    document.getElementById(tabId)
+        .classList.add("active");
+
+    // Active button được chọn
+    button.classList.add("active");
+}
+
 // ========================================
 // TẢI DANH SÁCH
 // ========================================
