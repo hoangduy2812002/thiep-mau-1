@@ -159,9 +159,10 @@ async function openInvitation() {
     startCountdown();
     initScrollAnimations();
     // loadGuestBook();
-    loadMessages();
     playMusic(); // Tự phát nhạc sau khi mở thiệp
   }, 800);
+
+  await loadMessages();
 }
 
 // ── ĐẾM NGƯỢC ────────────────────────────────
@@ -306,7 +307,7 @@ async function loadMessages() {
     throw new Error(result.message || "Không thể tải dữ liệu");
   }
 
-  console.log('entries---',result)
+  console.log("entries---", result);
 
   fetch(APPS_SCRIPT_URL)
     // .then(r => r.json())
