@@ -376,3 +376,10 @@ async function deleteMessage(
     }
 
 }
+
+reloadButton.addEventListener(
+    "click",
+    loadMessages
+);
+
+loadMessages();
