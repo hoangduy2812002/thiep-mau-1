@@ -296,7 +296,7 @@ async function loadMessages() {
   const response = await fetch("/api/data");
   try {
     const result = await response.json();
-    console.log('---->',result)
+    console.log('--|||-->',result)
     result?.data?.forEach(e => list.appendChild(buildEntry(e)));
   } catch (error) {
     list.innerHTML =
