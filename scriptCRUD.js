@@ -193,11 +193,6 @@ async function loadMessages() {
 
 
                 element.appendChild(
-                    editButton
-                );
-
-
-                element.appendChild(
                     deleteButton
                 );
 
