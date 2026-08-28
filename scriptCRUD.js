@@ -284,3 +284,5 @@ function updateImage(event, album) {
 
   // Gọi API lưu DB ở đây
 }
+
+
