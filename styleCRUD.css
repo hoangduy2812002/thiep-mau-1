@@ -412,27 +412,12 @@ button:disabled {
     left: 0;
     display: none;
 }
-/* Khi hover */
-/* .album-item:hover img {
-    transform: scale(1.05);
-    filter: brightness(70%);
-}
 
-.album-item:hover .hover-text {
-    opacity: 1;
-    background-color: #fff;
-    color: black;
-    font-weight: bold;
-} */
-
-/* .item-tinh-nang{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    width: max-content;
-    margin: auto;
-    border-radius: 10px;
-    background-color: #8c8c8c;
+.notification{
+    background-color: #1d39c4;
     color: #fff;
-    max-width: max-content;
-    padding: 30px;
-    line-height: 25px;
-} */
+    padding: 12px;
+    position: absolute;
+    top: 0;
+    display: none;
+}

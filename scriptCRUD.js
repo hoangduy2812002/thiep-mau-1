@@ -200,7 +200,7 @@ function changeImage(album) {
   input.accept = "image/*";
 
   // 5. Xử lý khi người dùng chọn một file
-  input.onchange = function(event) {
+  input.onchange = function (event) {
     // 6. Lấy file đầu tiên mà người dùng chọn
     const file = event.target.files[0];
 
@@ -237,7 +237,7 @@ function changeImage(album) {
     img.src = imageURL;
 
     // 11. Khi ảnh đã được hiển thị
-    img.onload = function() {
+    img.onload = function () {
       // 12. Xóa URL tạm thời khỏi bộ nhớ
       URL.revokeObjectURL(imageURL);
     };
@@ -250,7 +250,7 @@ function changeImage(album) {
     const reader = new FileReader();
 
     // 14. Xử lý khi FileReader đọc file xong
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       // 15. Lấy dữ liệu Base64
       const base64 = e.target.result;
 
@@ -272,7 +272,7 @@ function changeImage(album) {
 }
 async function updateImage(event, album) {
   event.stopPropagation();
-
+  updateButton.style.display = "none";
   const base64 = album.dataset.base64;
 
   if (!base64) {
@@ -299,10 +299,12 @@ async function updateImage(event, album) {
 
   if (!response.ok) {
     throw new Error(result.message);
-  }else{
-    alert('Cập nhật thành công');
-    updateButton.style.display = "none";
+  } else {
 
+    const notification = album.querySelector(".update-button");
+    notification.style.display = "block";
+     // Chờ 2s để Sheets kịp ghi rồi reload
+     setTimeout(notification.style.display = "none", 2000);
   }
 
 }
@@ -311,37 +313,37 @@ async function loadImages() {
 
   try {
 
-      const response =
-          await fetch(
-              "/api/data?type=images"
-          );
+    const response =
+      await fetch(
+        "/api/data?type=images"
+      );
 
 
-      const result =
-          await response.json();
+    const result =
+      await response.json();
 
 
-      if (!response.ok) {
+    if (!response.ok) {
 
-          throw new Error(
-              result.message ||
-              "Không thể tải ảnh"
-          );
+      throw new Error(
+        result.message ||
+        "Không thể tải ảnh"
+      );
 
-      }
-      console.log('re-----',result.data)
-      createListImage(result?.data);
-      return result?.data;
+    }
+    console.log('re-----', result.data)
+    createListImage(result?.data);
+    return result?.data;
 
 
   } catch (error) {
 
-      console.error(
-          "LOAD IMAGES ERROR:",
-          error
-      );
+    console.error(
+      "LOAD IMAGES ERROR:",
+      error
+    );
 
-      return [];
+    return [];
 
   }
 }
@@ -350,7 +352,7 @@ async function loadImages() {
 // TẢI DANH SÁCH IMAGE
 // ========================================
 
-function createListImage (e){
+function createListImage(e) {
   for (let index = 0; index < 7; index++) {
     const item = e[index];
 
@@ -361,13 +363,13 @@ function createListImage (e){
     imgDiv.src = item?.image || '/images/noImage.png'
 
     const albumDiv = document.createElement("div");
-    albumDiv.className="album-placeholder";
+    albumDiv.className = "album-placeholder";
 
     const albumNote = document.createElement("div");
-    albumNote.className="album-note";
+    albumNote.className = "album-note";
 
     const btnCapNhat = document.createElement("button");
-    btnCapNhat.className="update-button";
+    btnCapNhat.className = "update-button";
     btnCapNhat.innerHTML = "Cập nhật";
 
     elementDiv.appendChild(imgDiv);
@@ -375,20 +377,20 @@ function createListImage (e){
     elementDiv.appendChild(albumDiv)
     elementDiv.appendChild(btnCapNhat)
     // ===== Lay index anh
-    albumNote.innerHTML = "Ảnh "+(index+1);
+    albumNote.innerHTML = "Ảnh " + (index + 1);
 
-// Them chuc nang click vao anh
+    // Them chuc nang click vao anh
     imgDiv.addEventListener("click", (event) => {
       event.stopPropagation();
       changeImage(elementDiv);
-  });
+    });
 
-  // Them chuc nang click vao button
-  btnCapNhat.addEventListener("click", (event) => {
-    updateImage(event,elementDiv);
-});
+    // Them chuc nang click vao button
+    btnCapNhat.addEventListener("click", (event) => {
+      updateImage(event, elementDiv);
+    });
     listImage.appendChild(elementDiv);
-    
+
   }
 }
 
