@@ -187,10 +187,6 @@ async function deleteMessage(id) {
 }
 
 // ========================================
-// THÊM ẢNH
-// ========================================
-
-// ========================================
 // THÊM ẢNH BASE64
 // ========================================
 
@@ -233,6 +229,47 @@ async function addImage(base64) {
 }
 
 // ========================================
+// LẤY DANH SÁCH ẢNH
+// ========================================
+
+async function getImages() {
+  const result = await list({
+    prefix: IMAGE_DIRECTORY
+  });
+
+  const data = [];
+
+  for (const blob of result.blobs) {
+    try {
+      const item = await readBlob(blob.pathname);
+
+      if (!item) {
+        continue;
+      }
+
+      data.push({
+        // ID của ảnh
+        id: blob.pathname,
+
+        // Base64
+        image: item.image,
+
+        // Ngày tạo
+        createdAt: item.createdAt || null
+      });
+    } catch (error) {
+      console.error("READ IMAGE ERROR:", blob.pathname, error);
+    }
+  }
+
+  // Ảnh mới nhất lên đầu
+
+  data.reverse();
+
+  return data;
+}
+
+// ========================================
 // API HANDLER
 // ========================================
 
@@ -241,8 +278,25 @@ export default async function handler(req, res) {
     // =================================
     // GET
     // =================================
-
     if (req.method === "GET") {
+      // ==============================
+      // LẤY IMAGES
+      // ==============================
+
+      if (req.query.type === "images") {
+        const data = await getImages();
+
+        return res.status(200).json({
+          success: true,
+
+          data: data
+        });
+      }
+
+      // ==============================
+      // LẤY MESSAGES
+      // ==============================
+
       const data = await getMessages();
 
       return res.status(200).json({

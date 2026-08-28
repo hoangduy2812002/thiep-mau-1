@@ -302,3 +302,52 @@ async function updateImage(event, album) {
 
   console.log("Đã lưu:", result.data);
 }
+
+async function loadImages() {
+
+  try {
+
+      const response =
+          await fetch(
+              "/api/data?type=images"
+          );
+
+
+      const result =
+          await response.json();
+
+
+      if (!response.ok) {
+
+          throw new Error(
+              result.message ||
+              "Không thể tải ảnh"
+          );
+
+      }
+
+
+      console.log(
+          "Danh sách ảnh:",
+          result.data
+      );
+
+
+      return result.data;
+
+
+  } catch (error) {
+
+      console.error(
+          "LOAD IMAGES ERROR:",
+          error
+      );
+
+      return [];
+
+  }
+
+}
+
+const images = await loadImages();
+console.log('--images--',images)
