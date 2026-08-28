@@ -190,6 +190,10 @@ async function deleteMessage(id) {
 // THÊM ẢNH
 // ========================================
 
+// ========================================
+// THÊM ẢNH BASE64
+// ========================================
+
 async function addImage(base64) {
   // Kiểm tra Base64
 
@@ -197,68 +201,34 @@ async function addImage(base64) {
     throw new Error("Dữ liệu hình ảnh không hợp lệ");
   }
 
-  // ------------------------------------
-  // Tách loại ảnh và dữ liệu Base64
-  // ------------------------------------
-
-  const matches = base64.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
-
-  if (!matches) {
-    throw new Error("Base64 hình ảnh không hợp lệ");
-  }
-
-  const imageType = matches[1];
-
-  const imageData = matches[2];
-
-  // ------------------------------------
-  // Chuyển Base64 thành Buffer
-  // ------------------------------------
-
-  const buffer = Buffer.from(imageData, "base64");
-
-  // ------------------------------------
   // Tạo ID duy nhất
-  // ------------------------------------
 
   const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
 
-  // ------------------------------------
-  // Xác định đuôi file
-  // ------------------------------------
+  // Tạo đường dẫn
 
-  let extension = imageType;
+  const pathname = `${IMAGE_DIRECTORY}${id}.json`;
 
-  if (extension === "jpeg") {
-    extension = "jpg";
-  }
+  // Dữ liệu lưu
 
-  // ------------------------------------
-  // Đường dẫn lưu ảnh
-  // ------------------------------------
+  const data = {
+    image: base64,
 
-  const pathname = `${IMAGE_DIRECTORY}${id}.${extension}`;
+    createdAt: new Date().toISOString()
+  };
 
-  // ------------------------------------
-  // Lưu ảnh vào Vercel Blob
-  // ------------------------------------
+  // Lưu JSON vào Vercel Blob
 
-  const blob = await put(pathname, buffer, {
-    access: "public",
+  const blob = await put(pathname, JSON.stringify(data, null, 4), {
+    access: "private",
 
-    contentType: `image/${imageType}`
+    contentType: "application/json"
   });
-
-  // ------------------------------------
-  // Trả kết quả
-  // ------------------------------------
 
   return {
     id: blob.pathname,
 
-    url: blob.url,
-
-    type: imageType
+    ...data
   };
 }
 
@@ -290,7 +260,7 @@ export default async function handler(req, res) {
       const { type, image } = req.body || {};
 
       // =================================
-      // UPLOAD ẢNH
+      // LƯU ẢNH BASE64
       // =================================
 
       if (type === "image") {
@@ -307,14 +277,11 @@ export default async function handler(req, res) {
         return res.status(201).json({
           success: true,
 
-          message: "Upload ảnh thành công",
+          message: "Lưu ảnh thành công",
 
           data: data
         });
       }
-
-      const { name, message } = req.body || {};
-
       // Kiểm tra tên
 
       if (typeof name !== "string" || !name.trim()) {
