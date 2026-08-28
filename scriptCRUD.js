@@ -269,111 +269,36 @@ function changeImage(album) {
   // 20. Mở cửa sổ chọn file
   input.click();
 }
-
 async function updateImage(event, album) {
-
-  // Không cho click truyền lên album-item
   event.stopPropagation();
 
   const base64 = album.dataset.base64;
 
   if (!base64) {
-
     alert("Không có ảnh mới để cập nhật!");
 
     return;
-
   }
 
+  const response = await fetch("/api/data", {
+    method: "POST",
 
-  try {
+    headers: {
+      "Content-Type": "application/json"
+    },
 
-    const response =
-      await fetch(
-        "/api/data",
-        {
+    body: JSON.stringify({
+      type: "image",
 
-          method: "POST",
+      image: base64
+    })
+  });
 
-          headers: {
+  const result = await response.json();
 
-            "Content-Type":
-              "application/json"
-
-          },
-
-          body:
-            JSON.stringify({
-
-              type:
-                "image",
-
-              image:
-                base64
-
-            })
-
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "Không thể cập nhật ảnh"
-      );
-
-    }
-
-
-    console.log(
-      "Ảnh đã lưu:",
-      result.data
-    );
-
-
-    alert(
-      "Cập nhật ảnh thành công!"
-    );
-
-
-    // Ẩn nút cập nhật
-    const updateButton =
-      album.querySelector(
-        ".update-button"
-      );
-
-
-    if (updateButton) {
-
-      updateButton.style.display =
-        "none";
-
-    }
-
-
-    // Xóa Base64 tạm
-    delete album.dataset.base64;
-
-
-  } catch (error) {
-
-    console.error(
-      "UPDATE IMAGE ERROR:",
-      error
-    );
-
-
-    alert(
-      "Lỗi: " +
-      error.message
-    );
-
+  if (!response.ok) {
+    throw new Error(result.message);
   }
 
+  console.log("Đã lưu:", result.data);
 }
