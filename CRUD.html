@@ -22,7 +22,7 @@
       <!-- 2 nút tab -->
         <div class="tab-buttons">
             <button class="tab-button active" onclick="openTab('tab1', this)">
-                Lời chúc 7
+                Lời chúc 8
             </button>
 
             <button class="tab-button" onclick="openTab('tab2', this)">
@@ -65,10 +65,12 @@
         <div id="tab2" class="tab-content">
             <div id="tab2">
                 <h2>Click để sửa</h2>
+                
                 <section class="section">
-                    <div class="album-grid animate-on-scroll">
-                        <div class="album-item">
-                            <img src="" alt="Ảnh cưới 1" onclick="changeImage(this.parentElement)">
+                    
+                    <div class="album-grid animate-on-scroll" id="listImage">
+                        <!-- <div class="album-item">
+                            <img src="/images/noImage.png" alt="Ảnh 1" onclick="changeImage(this.parentElement)">
 
                             <div class="album-placeholder">
                                 <div class="album-note">Ảnh 1</div>
@@ -77,58 +79,7 @@
                             <button class="update-button" style="display: none;"
                                 onclick="updateImage(event, this.parentElement)">
                                 Cập nhật
-                            </button>
-
-                        </div>
-                        <div class="album-item" onclick="changeImage(this)">
-                            <img src="images/anh2.png" alt="Ảnh cưới 2">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 2</div>
-                            </div>
-                        </div>
-                        <div class="album-item" onclick="changeImage(this)">
-                            <img src="images/anh3.png" alt="Ảnh cưới 3">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 3</div>
-                            </div>
-                        </div>
-                        <div class="album-item" onclick="changeImage(this)">
-                            <img src="images/anh4.png" alt="Ảnh cưới 4">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 4</div>
-                            </div>
-                        </div>
-                        <div class="album-item" onclick="changeImage(this)">
-                            <img src="images/anh5.png" alt="Ảnh cưới 5">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 5</div>
-                            </div>
-                        </div>
-                        <div class="album-item" onclick="changeImage(this)">
-                            <img src="images/anh6.png" alt="Ảnh cưới 6">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 6</div>
-                            </div>
-                        </div>
-                        <div class="album-item" onclick="changeImage(this)">
-                            <img src="images/anh7.png" alt="Ảnh cưới 7">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 7</div>
-                            </div>
-                        </div>
-                        <div class="album-item" onclick="openLightbox(this)">
-                            <img src="images/anh8.png" alt="Ảnh cưới 8">
-                            <div class="hover-text">Sửa</div>
-                            <div class="album-placeholder">
-                                <div class="album-note">Ảnh 8</div>
-                            </div>
-                        </div>
+                            </button> -->
                     </div>
                 </section>
             </div>

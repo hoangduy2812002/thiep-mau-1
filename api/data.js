@@ -192,7 +192,6 @@ async function deleteMessage(id) {
 
 async function addImage(base64) {
   // Kiểm tra Base64
-    console.log('-2-',base64)
   if (typeof base64 !== "string" || !base64.startsWith("data:image/")) {
     throw new Error("Dữ liệu hình ảnh không hợp lệ");
   }

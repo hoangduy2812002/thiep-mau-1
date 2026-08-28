@@ -410,6 +410,7 @@ button:disabled {
     bottom: 0;
     width: 100%;
     left: 0;
+    display: none;
 }
 /* Khi hover */
 /* .album-item:hover img {
