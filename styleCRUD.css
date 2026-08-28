@@ -413,7 +413,7 @@ button:disabled {
     display: none;
 }
 
-.notification{
+#notification{
     background-color: #1d39c4;
     color: #fff;
     padding: 12px;
