@@ -184,9 +184,9 @@ async function deleteMessage(id) {
 reloadButton.addEventListener("click", loadMessages);
 
 let selectedImageBase64 = null;
+const updateButton = album.querySelector(".update-button");
 
 function changeImage(album) {
-  const updateButton = album.querySelector(".update-button");
   // 1. Tìm thẻ <img> bên trong album
   const img = album.querySelector("img");
 
@@ -299,6 +299,10 @@ async function updateImage(event, album) {
 
   if (!response.ok) {
     throw new Error(result.message);
+  }else{
+    alert('Cập nhật thành công');
+    updateButton.style.display = "none";
+
   }
 
 }
@@ -385,120 +389,6 @@ function createListImage (e){
 });
     listImage.appendChild(elementDiv);
     
-  }
-}
-
-async function loadMessages11111() {
-  try {
-    listElement.innerHTML = "Đang tải...";
-
-    const response = await fetch("/api/data");
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.message || "Không thể tải dữ liệu");
-    }
-
-    const data = result.data || [];
-
-    // ------------------------------
-    // Không có dữ liệu
-    // ------------------------------
-
-    if (data.length === 0) {
-      listElement.innerHTML = `
-                <div class="empty">
-                Hãy là người đầu tiên gửi lời chúc! 💌
-                </div>
-            `;
-
-      return;
-    }
-
-    listElement.innerHTML = "";
-
-    // ------------------------------
-    // Hiển thị từng lời chúc
-    // ------------------------------
-
-    data.forEach(item => {
-      const element = document.createElement("div");
-
-      element.className = "item";
-
-      // =========================
-      // NAME
-      // =========================
-
-      const name = document.createElement("div");
-
-      name.className = "name";
-
-      name.textContent = item.name;
-
-      // =========================
-      // MESSAGE
-      // =========================
-
-      const message = document.createElement("div");
-
-      message.className = "message";
-
-      message.textContent = item.message;
-
-      // =========================
-      // DATE
-      // =========================
-
-      const date = document.createElement("div");
-
-      date.className = "date";
-
-      if (item.createdAt) {
-        date.textContent = new Date(item.createdAt).toLocaleString("vi-VN");
-      }
-
-      // =========================
-      // DELETE
-      // =========================
-
-      const deleteButton = document.createElement("button");
-
-      deleteButton.className = "delete-button";
-
-      deleteButton.textContent = "Xóa";
-
-      deleteButton.addEventListener("click", () => {
-        deleteMessage(item.id);
-      });
-
-      // =========================
-      // APPEND
-      // =========================
-
-      element.appendChild(name);
-
-      element.appendChild(message);
-
-      element.appendChild(date);
-
-      element.appendChild(deleteButton);
-
-      listElement.appendChild(element);
-    });
-  } catch (error) {
-    console.error("LOAD ERROR:", error);
-
-    listElement.innerHTML = "";
-
-    const errorElement = document.createElement("div");
-
-    errorElement.className = "empty";
-
-    errorElement.textContent = "Lỗi: " + error.message;
-
-    listElement.appendChild(errorElement);
   }
 }
 
