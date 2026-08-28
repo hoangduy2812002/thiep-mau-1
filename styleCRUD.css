@@ -390,7 +390,7 @@ button:disabled {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.hover-text {
+/* .hover-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -403,10 +403,16 @@ button:disabled {
 
     opacity: 0;
     transition: 0.3s;
+} */
+.update-button{
+    background-color: #389e0d;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
 }
-
 /* Khi hover */
-.album-item:hover img {
+/* .album-item:hover img {
     transform: scale(1.05);
     filter: brightness(70%);
 }
@@ -416,11 +422,11 @@ button:disabled {
     background-color: #fff;
     color: black;
     font-weight: bold;
-}
+} */
 
-.item-tinh-nang{
+/* .item-tinh-nang{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    /* width: max-content; */
+    width: max-content;
     margin: auto;
     border-radius: 10px;
     background-color: #8c8c8c;
@@ -428,4 +434,4 @@ button:disabled {
     max-width: max-content;
     padding: 30px;
     line-height: 25px;
-}
+} */

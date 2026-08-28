@@ -11,7 +11,7 @@ import {
 // ========================================
 
 const DIRECTORY = "messages/";
-
+const IMAGE_DIRECTORY = "images/";
 
 // ========================================
 // ĐỌC MỘT BLOB
@@ -628,4 +628,54 @@ export default async function handler(
 
     }
 
+}
+
+
+
+// ========================================
+// ADD IMAGE
+// ========================================
+async function addImage(base64) {
+
+    // Tách phần header của Base64
+    const matches = base64.match(
+        /^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/
+    );
+
+    if (!matches) {
+        throw new Error("Base64 hình ảnh không hợp lệ");
+    }
+
+    const extension = matches[1];
+    const imageData = matches[2];
+
+    // Chuyển Base64 thành Buffer
+    const buffer = Buffer.from(
+        imageData,
+        "base64"
+    );
+
+    // Tạo tên file
+    const id =
+        `${Date.now()}-${Math.random()
+            .toString(36)
+            .substring(2, 10)}`;
+
+    const pathname =
+        `${IMAGE_DIRECTORY}${id}.${extension}`;
+
+    // Lưu ảnh vào Vercel Blob
+    const blob = await put(
+        pathname,
+        buffer,
+        {
+            access: "private",
+            contentType: `image/${extension}`
+        }
+    );
+
+    return {
+        id: blob.pathname,
+        url: blob.url
+    };
 }
