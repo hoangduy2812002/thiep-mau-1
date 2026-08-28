@@ -244,7 +244,7 @@ async function addImage(base64) {
   // ------------------------------------
 
   const blob = await put(pathname, buffer, {
-    access: "private",
+    access: "public",
 
     contentType: `image/${imageType}`
   });
