@@ -332,8 +332,8 @@ async function loadImages() {
           result.data
       );
 
-
-      return result.data;
+      console.log('re-----',result.data)
+      return result?.data;
 
 
   } catch (error) {
@@ -349,5 +349,4 @@ async function loadImages() {
 
 }
 
-const images = await loadImages();
-console.log('--images--',images)
+loadImages()
