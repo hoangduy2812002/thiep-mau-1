@@ -270,229 +270,110 @@ function changeImage(album) {
   input.click();
 }
 
-function updateImage(event, album) {
-  // Không cho click tiếp tục truyền lên album-item
+async function updateImage(event, album) {
+
+  // Không cho click truyền lên album-item
   event.stopPropagation();
 
   const base64 = album.dataset.base64;
+
   if (!base64) {
+
     alert("Không có ảnh mới để cập nhật!");
+
     return;
+
   }
 
-  addImage(base64)
 
-  // Gọi API lưu DB ở đây
-}
+  try {
+
+    const response =
+      await fetch(
+        "/api/data",
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              type:
+                "image",
+
+              image:
+                base64
+
+            })
+
+        }
+      );
 
 
-// ========================================
-// THÊM ẢNH
-// ========================================
-const IMAGE_DIRECTORY = "images/";
+    const result =
+      await response.json();
 
-async function addImage(base64) {
 
-    // Kiểm tra Base64
-    if (
-        typeof base64 !== "string" ||
-        !base64.startsWith("data:image/")
-    ) {
-        throw new Error(
-            "Dữ liệu hình ảnh không hợp lệ"
-        );
+    if (!response.ok) {
+
+      throw new Error(
+        result.message ||
+        "Không thể cập nhật ảnh"
+      );
+
     }
 
 
-    // ------------------------------------
-    // Tách thông tin Base64
-    // ------------------------------------
-
-    const matches =
-        base64.match(
-            /^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/
-        );
+    console.log(
+      "Ảnh đã lưu:",
+      result.data
+    );
 
 
-    if (!matches) {
+    alert(
+      "Cập nhật ảnh thành công!"
+    );
 
-        throw new Error(
-            "Base64 hình ảnh không hợp lệ"
-        );
+
+    // Ẩn nút cập nhật
+    const updateButton =
+      album.querySelector(
+        ".update-button"
+      );
+
+
+    if (updateButton) {
+
+      updateButton.style.display =
+        "none";
 
     }
 
 
-    // Ví dụ:
-    //
-    // imageType = "jpeg"
-    // imageData = "9j/4AAQSkZJRg..."
-    //
-
-    const imageType =
-        matches[1];
-
-    const imageData =
-        matches[2];
+    // Xóa Base64 tạm
+    delete album.dataset.base64;
 
 
-    // ------------------------------------
-    // Chuyển Base64 thành Buffer
-    // ------------------------------------
+  } catch (error) {
 
-    const buffer =
-        Buffer.from(
-            imageData,
-            "base64"
-        );
+    console.error(
+      "UPDATE IMAGE ERROR:",
+      error
+    );
 
 
-    // ------------------------------------
-    // Tạo ID duy nhất
-    // ------------------------------------
+    alert(
+      "Lỗi: " +
+      error.message
+    );
 
-    const id =
-        `${Date.now()}-${Math.random()
-            .toString(36)
-            .substring(2, 10)}`;
-
-
-    // ------------------------------------
-    // Xác định đuôi file
-    // ------------------------------------
-
-    let extension =
-        imageType;
-
-
-    // Một số trường hợp
-    if (extension === "jpeg") {
-        extension = "jpg";
-    }
-
-
-    // ------------------------------------
-    // Tạo đường dẫn
-    // ------------------------------------
-
-    const pathname =
-        `${IMAGE_DIRECTORY}${id}.${extension}`;
-
-
-    // ------------------------------------
-    // Lưu ảnh vào Vercel Blob
-    // ------------------------------------
-
-    const blob =
-        await put(
-
-            pathname,
-
-            buffer,
-
-            {
-
-                access:
-                    "private",
-
-                contentType:
-                    `image/${imageType}`
-
-            }
-
-        );
-
-
-    // ------------------------------------
-    // Trả kết quả
-    // ------------------------------------
-
-    return {
-
-        id:
-            blob.pathname,
-
-        url:
-            blob.url,
-
-        type:
-            imageType
-
-    };
+  }
 
 }
-    // Kiểm tra Base64
-    if (typeof base64 !== "string" || !base64.startsWith("data:image/")) {
-      throw new Error("Dữ liệu hình ảnh không hợp lệ");
-    }
-  
-    // ------------------------------------
-    // Tách thông tin Base64
-    // ------------------------------------
-  
-    const matches = base64.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
-  
-    if (!matches) {
-      throw new Error("Base64 hình ảnh không hợp lệ");
-    }
-  
-    // Ví dụ:
-    //
-    // imageType = "jpeg"
-    // imageData = "9j/4AAQSkZJRg..."
-    //
-  
-    const imageType = matches[1];
-  
-    const imageData = matches[2];
-  
-    // ------------------------------------
-    // Chuyển Base64 thành Buffer
-    // ------------------------------------
-  
-    const buffer = Buffer.from(imageData, "base64");
-  
-    // ------------------------------------
-    // Tạo ID duy nhất
-    // ------------------------------------
-  
-    const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
-  
-    // ------------------------------------
-    // Xác định đuôi file
-    // ------------------------------------
-  
-    let extension = imageType;
-  
-    // Một số trường hợp
-    if (extension === "jpeg") {
-      extension = "jpg";
-    }
-  
-    // ------------------------------------
-    // Tạo đường dẫn
-    // ------------------------------------
-  
-    const pathname = `${IMAGE_DIRECTORY}${id}.${extension}`;
-  
-    // ------------------------------------
-    // Lưu ảnh vào Vercel Blob
-    // ------------------------------------
-  
-    const blob = await put(pathname, buffer, {
-      access: "private",
-  
-      contentType: `image/${imageType}`
-    });
-  
-    // ------------------------------------
-    // Trả kết quả
-    // ------------------------------------
-  
-    return {
-      id: blob.pathname,
-  
-      url: blob.url,
-  
-      type: imageType
-    };
