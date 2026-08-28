@@ -293,7 +293,7 @@ async function updateImage(event, album) {
       image: base64
     })
   });
-
+  console.log(base64)
   const result = await response.json();
 
   if (!response.ok) {
