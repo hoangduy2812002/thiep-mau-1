@@ -333,302 +333,302 @@ async function deleteMessage(id) {
 // API HANDLER
 // ========================================
 
-export default async function handler(
-    req,
-    res
-) {
+// export default async function handler(
+//     req,
+//     res
+// ) {
 
-    try {
+//     try {
 
-        // =================================
-        // GET
-        // =================================
+//         // =================================
+//         // GET
+//         // =================================
 
-        if (
-            req.method === "GET"
-        ) {
+//         if (
+//             req.method === "GET"
+//         ) {
 
-            const data =
-                await getMessages();
+//             const data =
+//                 await getMessages();
 
 
-            return res.status(200).json({
+//             return res.status(200).json({
 
-                success:
-                    true,
+//                 success:
+//                     true,
 
-                data:
-                    data
+//                 data:
+//                     data
 
-            });
+//             });
 
-        }
+//         }
 
 
-        // =================================
-        // POST
-        // =================================
+//         // =================================
+//         // POST
+//         // =================================
 
-        if (
-            req.method === "POST"
-        ) {
+//         if (
+//             req.method === "POST"
+//         ) {
 
-            const {
-                name,
-                message
-            } =
-                req.body || {};
+//             const {
+//                 name,
+//                 message
+//             } =
+//                 req.body || {};
 
 
-            // Kiểm tra tên
+//             // Kiểm tra tên
 
-            if (
-                typeof name !== "string" ||
-                !name.trim()
-            ) {
+//             if (
+//                 typeof name !== "string" ||
+//                 !name.trim()
+//             ) {
 
-                return res.status(400).json({
+//                 return res.status(400).json({
 
-                    success:
-                        false,
+//                     success:
+//                         false,
 
-                    message:
-                        "Tên không được để trống"
+//                     message:
+//                         "Tên không được để trống"
 
-                });
+//                 });
 
-            }
+//             }
 
 
-            // Kiểm tra lời chúc
+//             // Kiểm tra lời chúc
 
-            if (
-                typeof message !== "string" ||
-                !message.trim()
-            ) {
+//             if (
+//                 typeof message !== "string" ||
+//                 !message.trim()
+//             ) {
 
-                return res.status(400).json({
+//                 return res.status(400).json({
 
-                    success:
-                        false,
+//                     success:
+//                         false,
 
-                    message:
-                        "Lời chúc không được để trống"
+//                     message:
+//                         "Lời chúc không được để trống"
 
-                });
+//                 });
 
-            }
+//             }
 
 
-            const data =
-                await addMessage(
-                    name,
-                    message
-                );
+//             const data =
+//                 await addMessage(
+//                     name,
+//                     message
+//                 );
 
 
-            return res.status(201).json({
+//             return res.status(201).json({
 
-                success:
-                    true,
+//                 success:
+//                     true,
 
-                message:
-                    "Thêm thành công",
+//                 message:
+//                     "Thêm thành công",
 
-                data:
-                    data
+//                 data:
+//                     data
 
-            });
+//             });
 
-        }
+//         }
 
 
-        // =================================
-        // PUT
-        // =================================
+//         // =================================
+//         // PUT
+//         // =================================
 
-        if (
-            req.method === "PUT"
-        ) {
+//         if (
+//             req.method === "PUT"
+//         ) {
 
-            const {
-                id,
-                name,
-                message
-            } =
-                req.body || {};
+//             const {
+//                 id,
+//                 name,
+//                 message
+//             } =
+//                 req.body || {};
 
 
-            // Kiểm tra ID
+//             // Kiểm tra ID
 
-            if (
-                typeof id !== "string"
-            ) {
+//             if (
+//                 typeof id !== "string"
+//             ) {
 
-                return res.status(400).json({
+//                 return res.status(400).json({
 
-                    success:
-                        false,
+//                     success:
+//                         false,
 
-                    message:
-                        "Thiếu ID"
+//                     message:
+//                         "Thiếu ID"
 
-                });
+//                 });
 
-            }
+//             }
 
 
-            // Kiểm tra tên
+//             // Kiểm tra tên
 
-            if (
-                typeof name !== "string" ||
-                !name.trim()
-            ) {
+//             if (
+//                 typeof name !== "string" ||
+//                 !name.trim()
+//             ) {
 
-                return res.status(400).json({
+//                 return res.status(400).json({
 
-                    success:
-                        false,
+//                     success:
+//                         false,
 
-                    message:
-                        "Tên không được để trống"
+//                     message:
+//                         "Tên không được để trống"
 
-                });
+//                 });
 
-            }
+//             }
 
 
-            // Kiểm tra lời chúc
+//             // Kiểm tra lời chúc
 
-            if (
-                typeof message !== "string" ||
-                !message.trim()
-            ) {
+//             if (
+//                 typeof message !== "string" ||
+//                 !message.trim()
+//             ) {
 
-                return res.status(400).json({
+//                 return res.status(400).json({
 
-                    success:
-                        false,
+//                     success:
+//                         false,
 
-                    message:
-                        "Lời chúc không được để trống"
+//                     message:
+//                         "Lời chúc không được để trống"
 
-                });
+//                 });
 
-            }
+//             }
 
 
-            const data =
-                await updateMessage(
+//             const data =
+//                 await updateMessage(
 
-                    id,
+//                     id,
 
-                    name,
+//                     name,
 
-                    message
+//                     message
 
-                );
+//                 );
 
 
-            return res.status(200).json({
+//             return res.status(200).json({
 
-                success:
-                    true,
+//                 success:
+//                     true,
 
-                message:
-                    "Sửa thành công",
+//                 message:
+//                     "Sửa thành công",
 
-                data:
-                    data
+//                 data:
+//                     data
 
-            });
+//             });
 
-        }
+//         }
 
 
-        // =================================
-        // DELETE
-        // =================================
+//         // =================================
+//         // DELETE
+//         // =================================
 
-        if (
-            req.method === "DELETE"
-        ) {
+//         if (
+//             req.method === "DELETE"
+//         ) {
 
-            const {
-                id
-            } =
-                req.body || {};
+//             const {
+//                 id
+//             } =
+//                 req.body || {};
 
 
-            if (
-                typeof id !== "string"
-            ) {
+//             if (
+//                 typeof id !== "string"
+//             ) {
 
-                return res.status(400).json({
+//                 return res.status(400).json({
 
-                    success:
-                        false,
+//                     success:
+//                         false,
 
-                    message:
-                        "Thiếu ID"
+//                     message:
+//                         "Thiếu ID"
 
-                });
+//                 });
 
-            }
+//             }
 
 
-            await deleteMessage(id);
+//             await deleteMessage(id);
 
 
-            return res.status(200).json({
+//             return res.status(200).json({
 
-                success:
-                    true,
+//                 success:
+//                     true,
 
-                message:
-                    "Xóa thành công"
+//                 message:
+//                     "Xóa thành công"
 
-            });
+//             });
 
-        }
+//         }
 
 
-        // =================================
-        // METHOD KHÔNG HỖ TRỢ
-        // =================================
+//         // =================================
+//         // METHOD KHÔNG HỖ TRỢ
+//         // =================================
 
-        return res.status(405).json({
+//         return res.status(405).json({
 
-            success:
-                false,
+//             success:
+//                 false,
 
-            message:
-                "Method không được hỗ trợ"
+//             message:
+//                 "Method không được hỗ trợ"
 
-        });
+//         });
 
 
-    } catch (error) {
+//     } catch (error) {
 
-        console.error(
-            "API ERROR:",
-            error
-        );
+//         console.error(
+//             "API ERROR:",
+//             error
+//         );
 
 
-        return res.status(500).json({
+//         return res.status(500).json({
 
-            success:
-                false,
+//             success:
+//                 false,
 
-            message:
-                error.message
+//             message:
+//                 error.message
 
-        });
+//         });
 
-    }
+//     }
 
-}
+// }
 
 
 
