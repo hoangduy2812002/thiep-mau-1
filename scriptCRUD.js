@@ -286,3 +286,213 @@ function updateImage(event, album) {
 }
 
 
+// ========================================
+// THÊM ẢNH
+// ========================================
+const IMAGE_DIRECTORY = "images/";
+
+async function addImage(base64) {
+
+    // Kiểm tra Base64
+    if (
+        typeof base64 !== "string" ||
+        !base64.startsWith("data:image/")
+    ) {
+        throw new Error(
+            "Dữ liệu hình ảnh không hợp lệ"
+        );
+    }
+
+
+    // ------------------------------------
+    // Tách thông tin Base64
+    // ------------------------------------
+
+    const matches =
+        base64.match(
+            /^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/
+        );
+
+
+    if (!matches) {
+
+        throw new Error(
+            "Base64 hình ảnh không hợp lệ"
+        );
+
+    }
+
+
+    // Ví dụ:
+    //
+    // imageType = "jpeg"
+    // imageData = "9j/4AAQSkZJRg..."
+    //
+
+    const imageType =
+        matches[1];
+
+    const imageData =
+        matches[2];
+
+
+    // ------------------------------------
+    // Chuyển Base64 thành Buffer
+    // ------------------------------------
+
+    const buffer =
+        Buffer.from(
+            imageData,
+            "base64"
+        );
+
+
+    // ------------------------------------
+    // Tạo ID duy nhất
+    // ------------------------------------
+
+    const id =
+        `${Date.now()}-${Math.random()
+            .toString(36)
+            .substring(2, 10)}`;
+
+
+    // ------------------------------------
+    // Xác định đuôi file
+    // ------------------------------------
+
+    let extension =
+        imageType;
+
+
+    // Một số trường hợp
+    if (extension === "jpeg") {
+        extension = "jpg";
+    }
+
+
+    // ------------------------------------
+    // Tạo đường dẫn
+    // ------------------------------------
+
+    const pathname =
+        `${IMAGE_DIRECTORY}${id}.${extension}`;
+
+
+    // ------------------------------------
+    // Lưu ảnh vào Vercel Blob
+    // ------------------------------------
+
+    const blob =
+        await put(
+
+            pathname,
+
+            buffer,
+
+            {
+
+                access:
+                    "private",
+
+                contentType:
+                    `image/${imageType}`
+
+            }
+
+        );
+
+
+    // ------------------------------------
+    // Trả kết quả
+    // ------------------------------------
+
+    return {
+
+        id:
+            blob.pathname,
+
+        url:
+            blob.url,
+
+        type:
+            imageType
+
+    };
+
+}
+    // Kiểm tra Base64
+    if (typeof base64 !== "string" || !base64.startsWith("data:image/")) {
+      throw new Error("Dữ liệu hình ảnh không hợp lệ");
+    }
+  
+    // ------------------------------------
+    // Tách thông tin Base64
+    // ------------------------------------
+  
+    const matches = base64.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+  
+    if (!matches) {
+      throw new Error("Base64 hình ảnh không hợp lệ");
+    }
+  
+    // Ví dụ:
+    //
+    // imageType = "jpeg"
+    // imageData = "9j/4AAQSkZJRg..."
+    //
+  
+    const imageType = matches[1];
+  
+    const imageData = matches[2];
+  
+    // ------------------------------------
+    // Chuyển Base64 thành Buffer
+    // ------------------------------------
+  
+    const buffer = Buffer.from(imageData, "base64");
+  
+    // ------------------------------------
+    // Tạo ID duy nhất
+    // ------------------------------------
+  
+    const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
+  
+    // ------------------------------------
+    // Xác định đuôi file
+    // ------------------------------------
+  
+    let extension = imageType;
+  
+    // Một số trường hợp
+    if (extension === "jpeg") {
+      extension = "jpg";
+    }
+  
+    // ------------------------------------
+    // Tạo đường dẫn
+    // ------------------------------------
+  
+    const pathname = `${IMAGE_DIRECTORY}${id}.${extension}`;
+  
+    // ------------------------------------
+    // Lưu ảnh vào Vercel Blob
+    // ------------------------------------
+  
+    const blob = await put(pathname, buffer, {
+      access: "private",
+  
+      contentType: `image/${imageType}`
+    });
+  
+    // ------------------------------------
+    // Trả kết quả
+    // ------------------------------------
+  
+    return {
+      id: blob.pathname,
+  
+      url: blob.url,
+  
+      type: imageType
+    };
