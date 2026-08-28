@@ -301,10 +301,10 @@ async function updateImage(event, album) {
     throw new Error(result.message);
   } else {
 
-    const notification = album.querySelector(".update-button");
+    const notification = album.querySelector(".notification");
     notification.style.display = "block";
      // Chờ 2s để Sheets kịp ghi rồi reload
-    //  setTimeout(notification.style.display = "none", 2000);
+     setTimeout(notification.style.display = "none", 2000);
   }
 
 }
