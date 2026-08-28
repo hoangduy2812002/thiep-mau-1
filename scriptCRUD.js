@@ -184,9 +184,9 @@ async function deleteMessage(id) {
 reloadButton.addEventListener("click", loadMessages);
 
 let selectedImageBase64 = null;
-const updateButton = album.querySelector(".update-button");
-
+let updateButton = null;
 function changeImage(album) {
+  updateButton = album.querySelector(".update-button");
   // 1. Tìm thẻ <img> bên trong album
   const img = album.querySelector("img");
 
