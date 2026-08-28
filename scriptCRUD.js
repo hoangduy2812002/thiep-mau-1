@@ -301,7 +301,7 @@ async function updateImage(event, album) {
     throw new Error(result.message);
   } else {
 
-    const notification = document.getElementById(".notification");
+    const notification = document.getElementById("notification");
     notification.style.display = "block";
      // Chờ 2s để Sheets kịp ghi rồi reload
      setTimeout(notification.style.display = "none", 2000);
