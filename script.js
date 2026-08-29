@@ -351,7 +351,7 @@ if (gbForm) {
     btn.disabled = true;
     btn.textContent = "⏳ Đang gửi...";
 
-    saveEntry(name, message, false)
+    saveEntry(name, message)
       .then(() => {
         gbForm.reset();
         document.getElementById("gbName").focus();
