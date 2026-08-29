@@ -403,8 +403,7 @@ async function getNickName() {
     prefix: NICKNAME_DIRECTORY
   });
 
-  const data = [];
-  return result
+  return result?.blobs;
   // for (const blob of result.blobs) {
   //   try {
   //     const item = await readBlob(blob.pathname);
