@@ -418,19 +418,14 @@ async function getNickName() {
         id: blob.pathname,
         name: item.name,
         message: item.message,
-
-        content:item,
-        index:result.blobs.length,
-        it : result.blobs,
-
-        createdAt: item.createdAt || null
       });
     } catch (error) {
       console.error("READ ERROR:", blob.pathname, error);
     }
 
-    return data;
   }
+  return data;
+
 }
 
 // ========================================
