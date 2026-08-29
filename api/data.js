@@ -408,7 +408,7 @@ async function getNickName() {
   for (const blob of result.blobs) {
     try {
       const item = await readBlob(blob.pathname);
-
+      console.log('item->',item)
       if (!item) {
         continue;
       }
@@ -427,9 +427,6 @@ async function getNickName() {
     } catch (error) {
       console.error("READ ERROR:", blob.pathname, error);
     }
-
-    console.log('--->', data);
-
     return data;
   }
 }

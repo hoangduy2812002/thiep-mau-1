@@ -684,6 +684,7 @@ async function loadNickName() {
       );
 
     }
+    console.log('------------',result);
     console.log('||||',result?.data);
     // let listData = [];
 
