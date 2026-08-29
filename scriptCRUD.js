@@ -562,4 +562,6 @@ async function getVercel (){
   
 }
 
+getVercel();
+
 loadImages();
