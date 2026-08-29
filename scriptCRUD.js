@@ -203,7 +203,6 @@ function changeImage(album) {
   _id = album?.id;
   updateButton = album.querySelector(".update-button");
 
-  console.log('run--|| -')
   // 1. Tìm thẻ <img> bên trong album
   const img = album.querySelector("img");
 
@@ -556,4 +555,11 @@ async function updateImageAPI(album) {
   }
 
 }
-loadImages()
+
+async function getVercel (){
+  const response = await fetch("/api/vercel-usage");
+  console.log(response);
+  
+}
+
+loadImages();
