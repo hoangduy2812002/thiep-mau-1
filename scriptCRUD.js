@@ -12,6 +12,10 @@ let updateButton = null;
 
 
 function openTab(tabId, button) {
+  loadMessages();
+  if(tabId==='tab2'){
+    loadImages();
+  }
   // Ẩn tất cả nội dung
   document.querySelectorAll(".tab-content").forEach(tab => {
     tab.classList.remove("active");
@@ -555,5 +559,3 @@ async function updateImageAPI(album) {
   }
 
 }
-
-loadImages();
