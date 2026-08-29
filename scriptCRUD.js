@@ -1,3 +1,5 @@
+const totalNumberImage = 8;
+
 let _id = undefined;
 const listElement = document.getElementById("list");
 const listImage = document.getElementById("listImage");
@@ -329,6 +331,7 @@ async function createImage(event,album,stt) {
 
 async function loadImages() {
 
+createListImage(result);
   try {
 
     const response =
@@ -349,12 +352,30 @@ async function loadImages() {
       );
 
     }
-    result?.data.sort((a, b) => a.stt - b.stt);
-    console.log(result?.data);
+    const listData = [];
+    for (let stt = 1; stt <= totalNumberImage; stt++) {
+    
+      const item = result?.data.find(
+          item => Number(item.stt) === stt
+      );
+    
+      if (item) {
+    
+          result.push(item);
+    
+      } else {
+    
+          result.push({
+              stt: stt
+          });
+    
+      }
+    }
+    console.log(listData);
 
 
-    createListImage(result?.data);
-    return result?.data;
+    // createListImage(result?.data);
+    return listData;
 
 
   } catch (error) {
@@ -374,14 +395,14 @@ async function loadImages() {
 // ========================================
 
 function createListImage(e) {
-  for (let index = 1; index < 9; index++) {
-    const item = e[index];
+  console.log('--',e)
 
-    const elementDiv = document.createElement("div");
+  e.forEach((item,stt) => {
+    let index = stt+1;
+     const elementDiv = document.createElement("div");
     elementDiv.className = "album-item";
     elementDiv.id = item?.id
-
-    const imgDiv = document.createElement("img");
+      const imgDiv = document.createElement("img");
     imgDiv.src = item?.image || '/images/noImage.png'
 
     const albumDiv = document.createElement("div");
@@ -394,7 +415,7 @@ function createListImage(e) {
     btnCapNhat.className = "update-button";
     btnCapNhat.innerHTML = "Cập nhật";
 
-    elementDiv.appendChild(imgDiv);
+     elementDiv.appendChild(imgDiv);
     albumDiv.appendChild(albumNote);
     elementDiv.appendChild(albumDiv)
     elementDiv.appendChild(btnCapNhat)
@@ -412,8 +433,7 @@ function createListImage(e) {
       createImage(event, elementDiv,Number(index));
     });
     listImage.appendChild(elementDiv);
-
-  }
+  });
 }
 
 
