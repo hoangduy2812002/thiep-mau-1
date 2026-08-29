@@ -351,10 +351,10 @@ async function loadImages() {
       );
 
     }
-    let listData = result?.data;
+    let listData = [];
     
-    if(result?.data.length < totalNumberImage-1){
-      console.log('------->',)
+    // if(result?.data.length < totalNumberImage-1){
+      console.log('-----|| -->',)
       for (let stt = 1; stt <= totalNumberImage; stt++) {
     
         const item = result?.data.find(
@@ -373,7 +373,7 @@ async function loadImages() {
       
         }
       }
-    }
+    // }
 
     createListImage(listData);
     return listData;
