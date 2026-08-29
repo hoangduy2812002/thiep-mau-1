@@ -35,37 +35,39 @@ async function getMessages() {
     prefix: DIRECTORY
   });
 
-  const data = [];
+  return result;
 
-  for (const blob of result.blobs) {
-    try {
-      const item = await readBlob(blob.pathname);
+  // const data = [];
 
-      if (!item) {
-        continue;
-      }
+  // for (const blob of result.blobs) {
+  //   try {
+  //     const item = await readBlob(blob.pathname);
 
-      data.push({
-        // Đây chính là ID
-        // dùng để sửa và xóa
-        id: blob.pathname,
+  //     if (!item) {
+  //       continue;
+  //     }
 
-        name: item.name,
+  //     data.push({
+  //       // Đây chính là ID
+  //       // dùng để sửa và xóa
+  //       id: blob.pathname,
 
-        message: item.message,
+  //       name: item.name,
 
-        createdAt: item.createdAt || null
-      });
-    } catch (error) {
-      console.error("READ ERROR:", blob.pathname, error);
-    }
-  }
+  //       message: item.message,
 
-  // Mới nhất lên đầu
+  //       createdAt: item.createdAt || null
+  //     });
+  //   } catch (error) {
+  //     console.error("READ ERROR:", blob.pathname, error);
+  //   }
+  // }
 
-  data.reverse();
+  // // Mới nhất lên đầu
 
-  return data;
+  // data.reverse();
+
+  // return data;
 }
 
 // ========================================
@@ -415,7 +417,6 @@ async function getNickName() {
 
       data.push({
         // Đây chính là ID
-        // dùng để sửa và xóa
         id: blob.pathname,
 
         name: item.name,
