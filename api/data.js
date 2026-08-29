@@ -191,7 +191,7 @@ async function deleteMessage(id) {
 // THÊM ẢNH BASE64
 // ========================================
 
-async function addImage(base64,stt) {
+async function addImage(base64, stt) {
   // Kiểm tra Base64
 
   if (typeof base64 !== "string" || !base64.startsWith("data:image/")) {
@@ -210,7 +210,7 @@ async function addImage(base64,stt) {
 
   const data = {
     image: base64,
-    stt:stt,
+    stt: stt,
     createdAt: new Date().toISOString()
   };
 
@@ -243,14 +243,14 @@ async function updateImage(
   // ------------------------------------
 
   if (
-      typeof id !== "string" ||
-      !id.startsWith(IMAGE_DIRECTORY) ||
-      !id.endsWith(".json")
+    typeof id !== "string" ||
+    !id.startsWith(IMAGE_DIRECTORY) ||
+    !id.endsWith(".json")
   ) {
 
-      throw new Error(
-          "ID ảnh không hợp lệ"
-      );
+    throw new Error(
+      "ID ảnh không hợp lệ"
+    );
 
   }
 
@@ -260,13 +260,13 @@ async function updateImage(
   // ------------------------------------
 
   if (
-      typeof base64 !== "string" ||
-      !base64.startsWith("data:image/")
+    typeof base64 !== "string" ||
+    !base64.startsWith("data:image/")
   ) {
 
-      throw new Error(
-          "Dữ liệu ảnh không hợp lệ"
-      );
+    throw new Error(
+      "Dữ liệu ảnh không hợp lệ"
+    );
 
   }
 
@@ -276,14 +276,14 @@ async function updateImage(
   // ------------------------------------
 
   const oldData =
-      await readBlob(id);
+    await readBlob(id);
 
 
   if (!oldData) {
 
-      throw new Error(
-          "Không tìm thấy ảnh"
-      );
+    throw new Error(
+      "Không tìm thấy ảnh"
+    );
 
   }
 
@@ -294,14 +294,14 @@ async function updateImage(
 
   const newData = {
 
-      image:
-          base64,
+    image:
+      base64,
 
-      // Giữ stt va ngày tạo cũ
-      stt:oldData.stt,
-      createdAt:
-          oldData.createdAt ||
-          new Date().toISOString()
+    // Giữ stt va ngày tạo cũ
+    stt: oldData.stt,
+    createdAt:
+      oldData.createdAt ||
+      new Date().toISOString()
 
   };
 
@@ -312,26 +312,26 @@ async function updateImage(
 
   await put(
 
-      id,
+    id,
 
-      JSON.stringify(
-          newData,
-          null,
-          4
-      ),
+    JSON.stringify(
+      newData,
+      null,
+      4
+    ),
 
-      {
+    {
 
-          access:
-              "private",
+      access:
+        "private",
 
-          contentType:
-              "application/json",
+      contentType:
+        "application/json",
 
-          allowOverwrite:
-              true
+      allowOverwrite:
+        true
 
-      }
+    }
 
   );
 
@@ -342,10 +342,10 @@ async function updateImage(
 
   return {
 
-      id:
-          id,
+    id:
+      id,
 
-      ...newData
+    ...newData
 
   };
 
@@ -376,7 +376,7 @@ async function getImages() {
         // Base64
         image: item?.image,
 
-        stt:item?.stt,
+        stt: item?.stt,
 
         // Ngày tạo
         createdAt: item?.createdAt || null
@@ -438,38 +438,45 @@ export default async function handler(req, res) {
 
     if (req.method === "POST") {
       console.log('runnn---check->');
-      const { type, image,stt,name,message } = req.body || {};
+      const { type, image, stt, name, message } = req.body || {};
 
       // =================================
       // LƯU ẢNH BASE64
       // =================================
 
       if (type === "image") {
-        console.log("----add image")
-        // if (typeof image !== "string" || !image.startsWith("data:image/")) {
-        //   return res.status(400).json({
-        //     success: false,
+        if (typeof image !== "string" || !image.startsWith("data:image/")) {
+          return res.status(400).json({
+            success: false,
 
-        //     message: "Ảnh không hợp lệ"
-        //   });
-        // }
+            message: "Ảnh không hợp lệ"
+          });
+        }
 
-        // const data = await addImage(image,stt);
+        const data = await addImage(image, stt);
 
-        // return res.status(201).json({
-        //   success: true,
+        return res.status(201).json({
+          success: true,
 
-        //   message: "Lưu ảnh thành công",
+          message: "Lưu ảnh thành công",
 
-        //   data: data
-        // });
+          data: data
+        });
       }
 
 
-      if(type==='nickName'){
-        console.log('runnn---->');
+      if (type === 'nickName') {
+        const data = await addNickName(name, message);
+
+        return res.status(201).json({
+          success: true,
+
+          message: "Thêm thành công Biệt danh",
+
+          data: data
+        });
       }
-      
+
       // Kiểm tra tên
       if (typeof name !== "string" || !name.trim()) {
         return res.status(400).json({
@@ -501,74 +508,74 @@ export default async function handler(req, res) {
         image,
         // name,
         // message
-    } =
+      } =
         req.body || {};
 
 
-    // =================================
-    // CẬP NHẬT ẢNH
-    // =================================
+      // =================================
+      // CẬP NHẬT ẢNH
+      // =================================
 
-    if (
+      if (
         type === "image"
-    ) {
+      ) {
 
         if (
-            typeof id !== "string"
+          typeof id !== "string"
         ) {
 
-            return res.status(400).json({
+          return res.status(400).json({
 
-                success:
-                    false,
+            success:
+              false,
 
-                message:
-                    "Thiếu ID ảnh"
+            message:
+              "Thiếu ID ảnh"
 
-            });
+          });
 
         }
 
 
         if (
-            typeof image !== "string" ||
-            !image.startsWith("data:image/")
+          typeof image !== "string" ||
+          !image.startsWith("data:image/")
         ) {
 
-            return res.status(400).json({
+          return res.status(400).json({
 
-                success:
-                    false,
+            success:
+              false,
 
-                message:
-                    "Ảnh không hợp lệ"
+            message:
+              "Ảnh không hợp lệ"
 
-            });
+          });
 
         }
 
 
         const data =
-            await updateImage(
-                id,
-                image
-            );
+          await updateImage(
+            id,
+            image
+          );
 
 
         return res.status(200).json({
 
-            success:
-                true,
+          success:
+            true,
 
-            message:
-                "Cập nhật ảnh thành công",
+          message:
+            "Cập nhật ảnh thành công",
 
-            data:
-                data
+          data:
+            data
 
         });
 
-    }
+      }
 
 
       // Kiểm tra ID

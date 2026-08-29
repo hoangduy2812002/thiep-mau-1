@@ -573,8 +573,9 @@ async function createNickName(event, album, stt) {
 
   //   return;
   // }
-
-  fetch("/api/data", {
+  const name = "duy";
+  const message = "message"
+  const response = await fetch("/api/data", {
     method: "POST",
 
     headers: {
@@ -582,9 +583,22 @@ async function createNickName(event, album, stt) {
     },
 
     body: JSON.stringify({
+      name: name,
       type: "nickName",
+      message: message
     })
   });
+  // const response = await fetch("/api/data", {
+  //   method: "POST",
+
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+
+  //   body: JSON.stringify({
+  //     type: "nickName",
+  //   })
+  // });
 
   // const result = await response.json();
 
