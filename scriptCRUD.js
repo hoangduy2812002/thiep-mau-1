@@ -194,10 +194,16 @@ reloadButton.addEventListener("click", loadMessages);
 
 function changeImage(album) {
 
+  const resetButton = document.querySelectorAll(".btn-button");
+
+  resetButton.forEach(button => {
+    button.style.display = "none";
+  });
+
   _id = album?.id;
   updateButton = album.querySelector(".update-button");
-  updateButton.style.display = "none";
-console.log('run')
+
+  console.log('run---')
   // 1. Tìm thẻ <img> bên trong album
   const img = album.querySelector("img");
 
@@ -281,12 +287,12 @@ console.log('run')
   // 20. Mở cửa sổ chọn file
   input.click();
 }
-async function createImage(event,album,stt) {
+async function createImage(event, album, stt) {
   event.stopPropagation();
   updateButton.style.display = "none";
 
   if (_id === undefined || _id === 'undefined') {
-  
+
     const base64 = album.dataset.base64;
 
     if (!base64) {
@@ -305,7 +311,7 @@ async function createImage(event,album,stt) {
       body: JSON.stringify({
         type: "image",
         image: base64,
-        stt:stt
+        stt: stt
       })
     });
 
@@ -354,25 +360,25 @@ async function loadImages() {
 
     }
     let listData = [];
-    
-      for (let stt = 1; stt <= totalNumberImage; stt++) {
-    
-        const item = result?.data.find(
-            item => Number(item.stt) === stt
-        );
-      
-        if (item) {
-      
-            listData.push(item);
-      
-        } else {
-      
-            listData.push({
-                stt: stt
-            });
-      
-        }
+
+    for (let stt = 1; stt <= totalNumberImage; stt++) {
+
+      const item = result?.data.find(
+        item => Number(item.stt) === stt
+      );
+
+      if (item) {
+
+        listData.push(item);
+
+      } else {
+
+        listData.push({
+          stt: stt
+        });
+
       }
+    }
 
     createListImage(listData);
     return listData;
@@ -396,12 +402,12 @@ async function loadImages() {
 
 function createListImage(e) {
 
-  e.forEach((item,stt) => {
-    let index = stt+1;
-     const elementDiv = document.createElement("div");
+  e.forEach((item, stt) => {
+    let index = stt + 1;
+    const elementDiv = document.createElement("div");
     elementDiv.className = "album-item";
     elementDiv.id = item?.id
-      const imgDiv = document.createElement("img");
+    const imgDiv = document.createElement("img");
     imgDiv.src = item?.image || '/images/noImage.png'
 
     const albumDiv = document.createElement("div");
@@ -414,12 +420,12 @@ function createListImage(e) {
     btnCapNhat.className = "update-button";
     btnCapNhat.innerHTML = "Cập nhật";
 
-     elementDiv.appendChild(imgDiv);
+    elementDiv.appendChild(imgDiv);
     albumDiv.appendChild(albumNote);
     elementDiv.appendChild(albumDiv)
     elementDiv.appendChild(btnCapNhat)
     // ===== Lay index anh
-    albumNote.innerHTML = "Ảnh " +index;
+    albumNote.innerHTML = "Ảnh " + index;
 
     // Them chuc nang click vao anh
     imgDiv.addEventListener("click", (event) => {
@@ -429,7 +435,7 @@ function createListImage(e) {
 
     // Them chuc nang click vao button
     btnCapNhat.addEventListener("click", (event) => {
-      createImage(event, elementDiv,Number(index));
+      createImage(event, elementDiv, Number(index));
     });
     listImage.appendChild(elementDiv);
   });
