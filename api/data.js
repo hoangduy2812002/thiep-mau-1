@@ -402,34 +402,33 @@ async function getNickName() {
   const result = await list({
     prefix: NICKNAME_DIRECTORY
   });
-return result;
-  // const data = [];
 
-  // for (const blob of result.blobs) {
-  //   try {
-  //     const item = await readBlob(blob.pathname);
+  const data = [];
 
-  //     if (!item) {
-  //       continue;
-  //     }
+  for (const blob of result.blobs) {
+    try {
+      const item = await readBlob(blob.pathname);
 
-  //     data.push({
-  //       // Đây chính là ID
+      if (!item) {
+        continue;
+      }
 
-  //       id: blob.pathname,
+      data.push({
+        // Đây chính là ID
+        id: blob.pathname,
 
-  //       name: item.name,
+        name: item.name,
 
-  //       message: item.message,
+        message: item.message,
 
-  //       createdAt: item.createdAt || null
-  //     });
-  //   } catch (error) {
-  //     console.error("READ ERROR:", blob.pathname, error);
-  //   }
+        createdAt: item.createdAt || null
+      });
+    } catch (error) {
+      console.error("READ ERROR:", blob.pathname, error);
+    }
 
-  //   return data;
-  // }
+    return data;
+  }
 }
 
 // ========================================
