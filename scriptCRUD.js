@@ -360,11 +360,11 @@ async function loadImages() {
     
       if (item) {
     
-          result.push(item);
+          listData.push(item);
     
       } else {
     
-          result.push({
+          listData.push({
               stt: stt
           });
     
