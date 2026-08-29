@@ -459,7 +459,7 @@ export default async function handler(req, res) {
       // LẤY NICKNAME
       // ==============================
 
-      if (req.query.type === "nickName") {
+      // if (req.query.type === "nickName") {
         const data = await getNickName();
 
         return res.status(200).json({
@@ -467,20 +467,20 @@ export default async function handler(req, res) {
 
           data: data
         });
-      }
+      // }
 
 
       // ==============================
       // LẤY MESSAGES
       // ==============================
 
-      const data = await getMessages();
+      // const data = await getMessages();
 
-      return res.status(200).json({
-        success: true,
+      // return res.status(200).json({
+      //   success: true,
 
-        data: data
-      });
+      //   data: data
+      // });
     }
 
     // =================================

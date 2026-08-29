@@ -665,11 +665,11 @@ async function deleteNickName(id) {
 async function loadNickName() {
 
   try {
-
-    const response =
-      await fetch(
-        "/api/data?type=nickName"
-      );
+    const response = await fetch("/api/data");
+    // const response =
+    //   await fetch(
+    //     "/api/data?type=nickName"
+    //   );
 
 
     const result =
