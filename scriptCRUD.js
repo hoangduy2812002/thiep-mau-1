@@ -370,10 +370,8 @@ async function loadImages() {
     
       }
     }
-    console.log(listData);
 
-
-    // createListImage(result?.data);
+    createListImage(listData);
     return listData;
 
 
