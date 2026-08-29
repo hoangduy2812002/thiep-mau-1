@@ -349,7 +349,9 @@ async function loadImages() {
       );
 
     }
+    result?.data.sort((a, b) => a.stt - b.stt);
     console.log(result?.data);
+
     createListImage(result?.data);
     return result?.data;
 
@@ -372,6 +374,7 @@ async function loadImages() {
 
 function createListImage(e) {
   for (let index = 1; index < 9; index++) {
+
     const item = e[index];
 
     const elementDiv = document.createElement("div");
@@ -379,7 +382,18 @@ function createListImage(e) {
     elementDiv.id = item?.id
 
     const imgDiv = document.createElement("img");
-    imgDiv.src = item?.image || '/images/noImage.png'
+    const foundIndex = data.findIndex(
+      item => Number(item.stt) === stt
+  );
+  if (foundIndex !== -1) {
+
+    imgDiv.src = item?.image
+
+
+} else{
+  imgDiv.src = '/images/noImage.png'
+
+}
 
     const albumDiv = document.createElement("div");
     albumDiv.className = "album-placeholder";
@@ -406,7 +420,7 @@ function createListImage(e) {
 
     // Them chuc nang click vao button
     btnCapNhat.addEventListener("click", (event) => {
-      createImage(event, elementDiv,index);
+      createImage(event, elementDiv,Number(index));
     });
     listImage.appendChild(elementDiv);
 
