@@ -445,23 +445,24 @@ export default async function handler(req, res) {
       // =================================
 
       if (type === "image") {
-        if (typeof image !== "string" || !image.startsWith("data:image/")) {
-          return res.status(400).json({
-            success: false,
+        console.log("----add image")
+        // if (typeof image !== "string" || !image.startsWith("data:image/")) {
+        //   return res.status(400).json({
+        //     success: false,
 
-            message: "Ảnh không hợp lệ"
-          });
-        }
+        //     message: "Ảnh không hợp lệ"
+        //   });
+        // }
 
-        const data = await addImage(image,stt);
+        // const data = await addImage(image,stt);
 
-        return res.status(201).json({
-          success: true,
+        // return res.status(201).json({
+        //   success: true,
 
-          message: "Lưu ảnh thành công",
+        //   message: "Lưu ảnh thành công",
 
-          data: data
-        });
+        //   data: data
+        // });
       }
 
 
