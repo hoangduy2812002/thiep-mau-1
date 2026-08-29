@@ -194,6 +194,7 @@ reloadButton.addEventListener("click", loadMessages);
 
 function changeImage(album) {
   console.log(album?.id)
+  updateButton.style.display = "none";
   _id = album?.id;
   updateButton = album.querySelector(".update-button");
   // 1. Tìm thẻ <img> bên trong album
@@ -353,8 +354,6 @@ async function loadImages() {
     }
     let listData = [];
     
-    // if(result?.data.length < totalNumberImage-1){
-      console.log('-----|| -->',)
       for (let stt = 1; stt <= totalNumberImage; stt++) {
     
         const item = result?.data.find(
@@ -373,7 +372,6 @@ async function loadImages() {
       
         }
       }
-    // }
 
     createListImage(listData);
     return listData;
