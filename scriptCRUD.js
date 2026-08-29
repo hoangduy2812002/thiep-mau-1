@@ -618,4 +618,48 @@ async function createNickName(event, album, stt) {
 
 }
 
+
+// ========================================
+// XÓA NICKNAME
+// ========================================
+
+async function deleteNickName(id) {
+  const confirmed = confirm("Bạn có chắc muốn xóa?");
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/data", {
+      method: "DELETE",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        id: id,
+      type: "nickName",
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Không thể xóa");
+    }
+
+    alert("Xóa thành công!");
+
+    // Tải lại
+
+    await loadMessages();
+  } catch (error) {
+    console.error("DELETE ERROR:", error);
+
+    alert("Lỗi: " + error.message);
+  }
+}
+
 loadMessages()

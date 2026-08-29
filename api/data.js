@@ -624,7 +624,7 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "DELETE") {
-      const { id } = req.body || {};
+      const { id ,type } = req.body || {};
 
       if (typeof id !== "string") {
         return res.status(400).json({
@@ -634,13 +634,18 @@ export default async function handler(req, res) {
         });
       }
 
-      await deleteMessage(id);
-
+      if(type==='nickName'){
+        await deleteNickName(id);
+      }else{
+        await deleteMessage(id);
+      }
       return res.status(200).json({
         success: true,
 
         message: "Xóa thành công"
       });
+
+    
     }
 
     // =================================
@@ -694,4 +699,29 @@ async function addNickName(name, message) {
 
     ...data
   };
+}
+
+
+// ========================================
+// XÓA NICKNAME
+// ========================================
+
+async function deleteNickName(id) {
+  // ------------------------------------
+  // Kiểm tra ID
+  // ------------------------------------
+
+  if (
+    typeof id !== "string" ||
+    !id.startsWith(NICKNAME_DIRECTORY) ||
+    !id.endsWith(".json")
+  ) {
+    throw new Error("ID không hợp lệ");
+  }
+
+  // ------------------------------------
+  // Xóa Blob
+  // ------------------------------------
+
+  await del(id);
 }
