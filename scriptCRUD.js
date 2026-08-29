@@ -331,7 +331,6 @@ async function createImage(event,album,stt) {
 
 async function loadImages() {
 
-createListImage(result);
   try {
 
     const response =
