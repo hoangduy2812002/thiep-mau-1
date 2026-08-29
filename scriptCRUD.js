@@ -573,7 +573,7 @@ async function createNickName(event, album, stt) {
 
   //   return;
   // }
-  const name = "chi";
+  const name = "duyyyyyyyyyyyy";
   const message = "||||||||"
   const response = await fetch("/api/data", {
     method: "POST",
