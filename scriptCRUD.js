@@ -573,7 +573,7 @@ async function createNickName(event, album, stt) {
 
   //   return;
   // }
-  const name = "duyyyyyyyyyyyy";
+  const name = "chi";
   const message = "||||||||"
   const response = await fetch("/api/data", {
     method: "POST",
@@ -665,11 +665,11 @@ async function deleteNickName(id) {
 async function loadNickName() {
 
   try {
-    const response = await fetch("/api/data");
-    // const response =
-    //   await fetch(
-    //     "/api/data?type=nickName"
-    //   );
+
+    const response =
+      await fetch(
+        "/api/data?type=nickName"
+      );
 
 
     const result =
