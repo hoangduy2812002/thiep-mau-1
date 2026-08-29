@@ -12,12 +12,11 @@ let updateButton = null;
 
 
 function openTab(tabId, button) {
-  if (tabId === 'tab2') {
-    loadImages();
-  } else if (tabId === 'tab1') {
+  if (tabId === 'tab1') {
     loadMessages();
     listImage.innerHTML = "";
-
+  }else if (tabId === 'tab3') {
+    loadImages();
   }
   // Ẩn tất cả nội dung
   document.querySelectorAll(".tab-content").forEach(tab => {
@@ -563,6 +562,46 @@ async function updateImageAPI(album) {
 
 }
 
+async function createNickName(event, album, stt) {
+  // event.stopPropagation();
+  // updateButton.style.display = "none";
 
+  // const base64 = album.dataset.base64;
+
+  // if (!base64) {
+  //   alert("Không có ảnh mới để cập nhật!");
+
+  //   return;
+  // }
+
+  fetch("/api/data", {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      type: "nickName",
+    })
+  });
+
+  // const result = await response.json();
+
+  // if (!response.ok) {
+  //   throw new Error(result.message);
+  // } else {
+
+  //   const notification = document.getElementById("notification");
+  //   notification.style.display = "block";
+  //   // Chờ 2s để Sheets kịp ghi rồi reload
+  //   setTimeout(() => {
+
+  //     notification.style.display = "none";
+
+  //   }, 4000);
+  // }
+
+}
 
 loadMessages()

@@ -248,7 +248,7 @@ async function loadMessages() {
 // LƯU
 // ========================================
 
-async function saveEntry(name, message, editing) {
+async function saveEntry(name, message) {
   try {
     // =================================
     // SỬA

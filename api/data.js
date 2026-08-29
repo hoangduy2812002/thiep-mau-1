@@ -6,6 +6,7 @@ import { put, list, get, del } from "@vercel/blob";
 
 const DIRECTORY = "messages/";
 const IMAGE_DIRECTORY = "images/";
+const NICKNAME_DIRECTORY = "nickname/";
 
 // ========================================
 // ĐỌC MỘT BLOB
@@ -470,16 +471,12 @@ export default async function handler(req, res) {
           message: "Tên không được để trống"
         });
       }
+      
 
-      // Kiểm tra lời chúc
-
-      if (typeof message !== "string" || !message.trim()) {
-        return res.status(400).json({
-          success: false,
-
-          message: "Lời chúc không được để trống"
-        });
+      if(type==='nickName'){
+        console.log('runnn---->');
       }
+
 
       const data = await addMessage(name, message);
 
@@ -657,4 +654,37 @@ export default async function handler(req, res) {
       message: error.message
     });
   }
+}
+
+
+async function addNickName(name, message) {
+  // Tạo tên file duy nhất
+
+  const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
+
+  const pathname = `${NICKNAME_DIRECTORY}${id}.json`;
+
+  // Dữ liệu lưu
+
+  const data = {
+    name: name.trim(),
+
+    message: message.trim(),
+
+    createdAt: new Date().toISOString()
+  };
+
+  // Tạo Blob mới
+
+  const blob = await put(pathname, JSON.stringify(data, null, 4), {
+    access: "private",
+
+    contentType: "application/json"
+  });
+
+  return {
+    id: blob.pathname,
+
+    ...data
+  };
 }

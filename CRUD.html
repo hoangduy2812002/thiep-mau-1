@@ -22,10 +22,15 @@
       <!-- 2 nút tab -->
         <div class="tab-buttons">
             <button class="tab-button active" onclick="openTab('tab1', this)">
-                Lời chúc 8
+                Lời chúc
             </button>
 
             <button class="tab-button" onclick="openTab('tab2', this)">
+                Biệt danh
+                <button onclick="createNickName()">Nick name</button>
+            </button>
+
+            <button class="tab-button" onclick="openTab('tab3', this)">
                 Album
             </button>
         </div>
@@ -60,10 +65,21 @@
 
             </div>
         </div>
-
         <!-- Nội dung Tab 2 -->
         <div id="tab2" class="tab-content">
-            <div id="tab2">
+
+            <div class="box">
+                <h2>
+                    Danh sách biệt danh
+
+                </h2>
+
+            </div>
+        </div>
+
+        <!-- Nội dung Tab 3 -->
+        <div id="tab3" class="tab-content">
+            <div id="tab3">
                 <div style="position: relative;">
                     <h2>Click để sửa 2</h2>
                 <h2 id="notification">Cập nhật thành công</h2>
