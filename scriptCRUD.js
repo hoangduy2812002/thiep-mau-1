@@ -3,9 +3,6 @@ const listElement = document.getElementById("list");
 const listImage = document.getElementById("listImage");
 
 const reloadButton = document.getElementById("reloadButton");
-let selectedImageBase64 = null;
-let updateButton = null;
-
 
 function openTab(tabId, button) {
   // Ẩn tất cả nội dung
@@ -187,7 +184,8 @@ async function deleteMessage(id) {
 
 reloadButton.addEventListener("click", loadMessages);
 
-
+let selectedImageBase64 = null;
+let updateButton = null;
 function changeImage(album) {
   console.log(album?.id)
   _id = album?.id;
@@ -275,9 +273,9 @@ function changeImage(album) {
   // 20. Mở cửa sổ chọn file
   input.click();
 }
-async function updateImage(album) {
-  updateButton.style.display = "none";
+async function updateImage(event,album) {
   if (_id === undefined || _id === 'undefined') {
+    updateButton.style.display = "none";
     const base64 = album.dataset.base64;
 
     if (!base64) {
@@ -323,6 +321,7 @@ async function updateImage(album) {
 }
 
 async function loadImages() {
+
   try {
 
     const response =
@@ -408,8 +407,7 @@ function createListImage(e) {
 
 
 async function updateImageAPI(album) {
-
-  // Không cho click truyền lên album-item
+  console.log('----',album)
   // --------------------------------
   // Lấy ID ảnh hiện tại
   // --------------------------------
