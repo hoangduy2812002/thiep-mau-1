@@ -404,31 +404,31 @@ async function getNickName() {
   });
 
   const data = [];
+  return result
+  // for (const blob of result.blobs) {
+  //   try {
+  //     const item = await readBlob(blob.pathname);
+  //     console.log('item->',item)
+  //     if (!item) {
+  //       continue;
+  //     }
 
-  for (const blob of result.blobs) {
-    try {
-      const item = await readBlob(blob.pathname);
-      console.log('item->',item)
-      if (!item) {
-        continue;
-      }
+  //     data.push({
+  //       // Đây chính là ID
+  //       // dùng để sửa và xóa
+  //       id: blob.pathname,
 
-      data.push({
-        // Đây chính là ID
-        // dùng để sửa và xóa
-        id: blob.pathname,
+  //       name: item.name,
 
-        name: item.name,
+  //       message: item.message,
 
-        message: item.message,
-
-        createdAt: item.createdAt || null
-      });
-    } catch (error) {
-      console.error("READ ERROR:", blob.pathname, error);
-    }
-    return data;
-  }
+  //       createdAt: item.createdAt || null
+  //     });
+  //   } catch (error) {
+  //     console.error("READ ERROR:", blob.pathname, error);
+  //   }
+  //   return data;
+  // }
 }
 
 // ========================================
