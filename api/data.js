@@ -403,9 +403,12 @@ async function getNickName() {
     prefix: NICKNAME_DIRECTORY
   });
 
+  const data = [];
+
   for (const blob of result.blobs) {
     try {
       const item = await readBlob(blob.pathname);
+
       if (!item) {
         continue;
       }
@@ -424,6 +427,7 @@ async function getNickName() {
     } catch (error) {
       console.error("READ ERROR:", blob.pathname, error);
     }
+
     return data;
   }
 }
