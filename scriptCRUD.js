@@ -3,6 +3,11 @@ const listElement = document.getElementById("list");
 const listImage = document.getElementById("listImage");
 
 const reloadButton = document.getElementById("reloadButton");
+let selectedImageBase64 = null;
+let updateButton = null;
+
+
+
 
 function openTab(tabId, button) {
   // Ẩn tất cả nội dung
@@ -184,8 +189,7 @@ async function deleteMessage(id) {
 
 reloadButton.addEventListener("click", loadMessages);
 
-let selectedImageBase64 = null;
-let updateButton = null;
+
 function changeImage(album) {
   console.log(album?.id)
   _id = album?.id;
@@ -274,8 +278,10 @@ function changeImage(album) {
   input.click();
 }
 async function updateImage(event,album) {
+  event.stopPropagation();
+  updateButton.style.display = "none";
   if (_id === undefined || _id === 'undefined') {
-    updateButton.style.display = "none";
+  
     const base64 = album.dataset.base64;
 
     if (!base64) {
@@ -407,7 +413,6 @@ function createListImage(e) {
 
 
 async function updateImageAPI(album) {
-  console.log('----',album)
   // --------------------------------
   // Lấy ID ảnh hiện tại
   // --------------------------------
@@ -491,13 +496,6 @@ async function updateImageAPI(album) {
       );
 
     }
-
-
-    console.log(
-      "Ảnh sau khi cập nhật:",
-      result.data
-    );
-
 
     const notification = document.getElementById("notification");
     notification.style.display = "block";
