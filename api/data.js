@@ -35,39 +35,37 @@ async function getMessages() {
     prefix: DIRECTORY
   });
 
-  return result;
+  const data = [];
 
-  // const data = [];
+  for (const blob of result.blobs) {
+    try {
+      const item = await readBlob(blob.pathname);
 
-  // for (const blob of result.blobs) {
-  //   try {
-  //     const item = await readBlob(blob.pathname);
+      if (!item) {
+        continue;
+      }
 
-  //     if (!item) {
-  //       continue;
-  //     }
+      data.push({
+        // Đây chính là ID
+        // dùng để sửa và xóa
+        id: blob.pathname,
 
-  //     data.push({
-  //       // Đây chính là ID
-  //       // dùng để sửa và xóa
-  //       id: blob.pathname,
+        name: item.name,
 
-  //       name: item.name,
+        message: item.message,
 
-  //       message: item.message,
+        createdAt: item.createdAt || null
+      });
+    } catch (error) {
+      console.error("READ ERROR:", blob.pathname, error);
+    }
+  }
 
-  //       createdAt: item.createdAt || null
-  //     });
-  //   } catch (error) {
-  //     console.error("READ ERROR:", blob.pathname, error);
-  //   }
-  // }
+  // Mới nhất lên đầu
 
-  // // Mới nhất lên đầu
+  data.reverse();
 
-  // data.reverse();
-
-  // return data;
+  return data;
 }
 
 // ========================================
@@ -404,33 +402,34 @@ async function getNickName() {
   const result = await list({
     prefix: NICKNAME_DIRECTORY
   });
+return result;
+  // const data = [];
 
-  const data = [];
+  // for (const blob of result.blobs) {
+  //   try {
+  //     const item = await readBlob(blob.pathname);
 
-  for (const blob of result.blobs) {
-    try {
-      const item = await readBlob(blob.pathname);
+  //     if (!item) {
+  //       continue;
+  //     }
 
-      if (!item) {
-        continue;
-      }
+  //     data.push({
+  //       // Đây chính là ID
 
-      data.push({
-        // Đây chính là ID
-        id: blob.pathname,
+  //       id: blob.pathname,
 
-        name: item.name,
+  //       name: item.name,
 
-        message: item.message,
+  //       message: item.message,
 
-        createdAt: item.createdAt || null
-      });
-    } catch (error) {
-      console.error("READ ERROR:", blob.pathname, error);
-    }
+  //       createdAt: item.createdAt || null
+  //     });
+  //   } catch (error) {
+  //     console.error("READ ERROR:", blob.pathname, error);
+  //   }
 
-    return data;
-  }
+  //   return data;
+  // }
 }
 
 // ========================================
