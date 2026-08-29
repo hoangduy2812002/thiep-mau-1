@@ -436,57 +436,57 @@ export default async function handler(req, res) {
     // POST
     // =================================
 
-    // if (req.method === "POST") {
-    //   console.log('runnn---check->');
-    //   const { type, image,stt,name,message } = req.body || {};
+    if (req.method === "POST") {
+      console.log('runnn---check->');
+      // const { type, image,stt,name,message } = req.body || {};
 
-    //   // =================================
-    //   // LƯU ẢNH BASE64
-    //   // =================================
+      // // =================================
+      // // LƯU ẢNH BASE64
+      // // =================================
 
-    //   if (type === "image") {
-    //     if (typeof image !== "string" || !image.startsWith("data:image/")) {
-    //       return res.status(400).json({
-    //         success: false,
+      // if (type === "image") {
+      //   if (typeof image !== "string" || !image.startsWith("data:image/")) {
+      //     return res.status(400).json({
+      //       success: false,
 
-    //         message: "Ảnh không hợp lệ"
-    //       });
-    //     }
+      //       message: "Ảnh không hợp lệ"
+      //     });
+      //   }
 
-    //     const data = await addImage(image,stt);
+      //   const data = await addImage(image,stt);
 
-    //     return res.status(201).json({
-    //       success: true,
+      //   return res.status(201).json({
+      //     success: true,
 
-    //       message: "Lưu ảnh thành công",
+      //     message: "Lưu ảnh thành công",
 
-    //       data: data
-    //     });
-    //   }
+      //     data: data
+      //   });
+      // }
 
 
-    //   if(type==='nickName'){
-    //     console.log('runnn---->');
-    //   }
+      // if(type==='nickName'){
+      //   console.log('runnn---->');
+      // }
+      
+      // // Kiểm tra tên
+      // if (typeof name !== "string" || !name.trim()) {
+      //   return res.status(400).json({
+      //     success: false,
 
-    //   // Kiểm tra tên
-    //   if (typeof name !== "string" || !name.trim()) {
-    //     return res.status(400).json({
-    //       success: false,
+      //     message: "Tên không được để trống"
+      //   });
+      // }
+      // const data = await addMessage(name, message);
 
-    //       message: "Tên không được để trống"
-    //     });
-    //   }
-    //   const data = await addMessage(name, message);
+      // return res.status(201).json({
+      //   success: true,
 
-    //   return res.status(201).json({
-    //     success: true,
+      //   message: "Thêm thành công",
 
-    //     message: "Thêm thành công",
-
-    //     data: data
-    //   });
-    // }
+      //   data: data
+      // });
+    }
 
     // =================================
     // PUT
