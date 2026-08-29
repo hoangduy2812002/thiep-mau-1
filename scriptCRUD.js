@@ -573,8 +573,8 @@ async function createNickName(event, album, stt) {
 
   //   return;
   // }
-  const name = "duy";
-  const message = "message"
+  const name = "chi";
+  const message = "||||||||"
   const response = await fetch("/api/data", {
     method: "POST",
 
@@ -654,7 +654,7 @@ async function deleteNickName(id) {
 
     // Tải lại
 
-    await loadMessages();
+    // await loadMessages();
   } catch (error) {
     console.error("DELETE ERROR:", error);
 
@@ -662,4 +662,65 @@ async function deleteNickName(id) {
   }
 }
 
+async function loadNickName() {
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/data?type=nickName"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        result.message ||
+        "Không thể tải"
+      );
+
+    }
+    console.log('||||',result?.data);
+    // let listData = [];
+
+    // for (let stt = 1; stt <= totalNumberImage; stt++) {
+
+    //   const item = result?.data.find(
+    //     item => Number(item.stt) === stt
+    //   );
+
+    //   if (item) {
+
+    //     listData.push(item);
+
+    //   } else {
+
+    //     listData.push({
+    //       stt: stt
+    //     });
+
+    //   }
+    // }
+
+    // createListImage(listData);
+    // return listData;
+    return;
+
+
+  } catch (error) {
+
+    console.error(
+      "LOAD NICKNAME ERROR:",
+      error
+    );
+
+    return [];
+
+  }
+}
+loadNickName();
 loadMessages()

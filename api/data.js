@@ -388,12 +388,51 @@ async function getImages() {
 
   // Ảnh mới nhất lên đầu
 
-  data.reverse();
+  // data.reverse();
 
   return data;
 }
 
+// ========================================
+// LẤY DANH SÁCH NICKNAME
+// ========================================
 
+async function getNickName() {
+
+  const result = await list({
+    prefix: NICKNAME_DIRECTORY
+  });
+
+  const data = [];
+
+  for (const blob of result.blobs) {
+    try {
+      const item = await readBlob(blob.pathname);
+
+      if (!item) {
+        continue;
+      }
+
+      data.push({
+        // Đây chính là ID
+        // dùng để sửa và xóa
+        id: blob.pathname,
+
+        name: item.name,
+
+        message: item.message,
+
+        createdAt: item.createdAt || null
+      });
+    } catch (error) {
+      console.error("READ ERROR:", blob.pathname, error);
+    }
+
+    console.log('--->', data);
+
+    return data;
+  }
+}
 
 // ========================================
 // API HANDLER
@@ -420,6 +459,21 @@ export default async function handler(req, res) {
       }
 
       // ==============================
+      // LẤY NICKNAME
+      // ==============================
+
+      if (req.query.type === "nickName") {
+        const data = await getNickName();
+
+        return res.status(200).json({
+          success: true,
+
+          data: data
+        });
+      }
+
+
+      // ==============================
       // LẤY MESSAGES
       // ==============================
 
@@ -437,7 +491,6 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "POST") {
-      console.log('runnn---check->');
       const { type, image, stt, name, message } = req.body || {};
 
       // =================================
@@ -624,7 +677,7 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "DELETE") {
-      const { id ,type } = req.body || {};
+      const { id, type } = req.body || {};
 
       if (typeof id !== "string") {
         return res.status(400).json({
@@ -634,9 +687,9 @@ export default async function handler(req, res) {
         });
       }
 
-      if(type==='nickName'){
+      if (type === 'nickName') {
         await deleteNickName(id);
-      }else{
+      } else {
         await deleteMessage(id);
       }
       return res.status(200).json({
@@ -645,7 +698,7 @@ export default async function handler(req, res) {
         message: "Xóa thành công"
       });
 
-    
+
     }
 
     // =================================
