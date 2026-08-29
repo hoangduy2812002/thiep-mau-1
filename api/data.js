@@ -437,6 +437,7 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "POST") {
+      console.log('runnn---check->');
       const { type, image,stt,name,message } = req.body || {};
 
       // =================================
