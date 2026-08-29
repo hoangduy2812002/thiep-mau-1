@@ -3,6 +3,9 @@ const listElement = document.getElementById("list");
 const listImage = document.getElementById("listImage");
 
 const reloadButton = document.getElementById("reloadButton");
+let selectedImageBase64 = null;
+let updateButton = null;
+
 
 function openTab(tabId, button) {
   // Ẩn tất cả nội dung
@@ -184,11 +187,10 @@ async function deleteMessage(id) {
 
 reloadButton.addEventListener("click", loadMessages);
 
-let selectedImageBase64 = null;
-let updateButton = null;
+
 function changeImage(album) {
   console.log(album?.id)
-  _id = album?.id ;
+  _id = album?.id;
   updateButton = album.querySelector(".update-button");
   // 1. Tìm thẻ <img> bên trong album
   const img = album.querySelector("img");
@@ -274,46 +276,46 @@ function changeImage(album) {
   input.click();
 }
 async function updateImage(album) {
-  if(_id === undefined || _id === 'undefined'){
   updateButton.style.display = "none";
-  const base64 = album.dataset.base64;
+  if (_id === undefined || _id === 'undefined') {
+    const base64 = album.dataset.base64;
 
-  if (!base64) {
-    alert("Không có ảnh mới để cập nhật!");
+    if (!base64) {
+      alert("Không có ảnh mới để cập nhật!");
 
-    return;
-  }
+      return;
+    }
 
-  const response = await fetch("/api/data", {
-    method: "POST",
+    const response = await fetch("/api/data", {
+      method: "POST",
 
-    headers: {
-      "Content-Type": "application/json"
-    },
+      headers: {
+        "Content-Type": "application/json"
+      },
 
-    body: JSON.stringify({
-      type: "image",
+      body: JSON.stringify({
+        type: "image",
 
-      image: base64
-    })
-  });
+        image: base64
+      })
+    });
 
-  const result = await response.json();
+    const result = await response.json();
 
-  if (!response.ok) {
-    throw new Error(result.message);
+    if (!response.ok) {
+      throw new Error(result.message);
+    } else {
+
+      const notification = document.getElementById("notification");
+      notification.style.display = "block";
+      // Chờ 2s để Sheets kịp ghi rồi reload
+      setTimeout(() => {
+
+        notification.style.display = "none";
+
+      }, 4000);
+    }
   } else {
-
-    const notification = document.getElementById("notification");
-    notification.style.display = "block";
-     // Chờ 2s để Sheets kịp ghi rồi reload
-     setTimeout(() => {
-
-      notification.style.display = "none";
-  
-  }, 4000);
-  }
-  }else{
     updateImageAPI(album);
   }
 
@@ -408,7 +410,6 @@ function createListImage(e) {
 async function updateImageAPI(album) {
 
   // Không cho click truyền lên album-item
-  event.stopPropagation();
   // --------------------------------
   // Lấy ID ảnh hiện tại
   // --------------------------------
@@ -421,15 +422,15 @@ async function updateImageAPI(album) {
   // --------------------------------
 
   const base64 =
-      album.dataset.base64;
+    album.dataset.base64;
   // Kiểm tra ID
   if (!id) {
 
-      alert(
-          "Không tìm thấy ID ảnh!"
-      );
+    alert(
+      "Không tìm thấy ID ảnh!"
+    );
 
-      return;
+    return;
 
   }
 
@@ -437,105 +438,94 @@ async function updateImageAPI(album) {
   // Kiểm tra Base64
   if (!base64) {
 
-      alert(
-          "Không có ảnh mới để cập nhật!"
-      );
+    alert(
+      "Không có ảnh mới để cập nhật!"
+    );
 
-      return;
+    return;
 
   }
 
 
   try {
 
-      const response =
-          await fetch(
-              "/api/data",
-              {
+    const response =
+      await fetch(
+        "/api/data",
+        {
 
-                  method: "PUT",
+          method: "PUT",
 
-                  headers: {
+          headers: {
 
-                      "Content-Type":
-                          "application/json"
+            "Content-Type":
+              "application/json"
 
-                  },
+          },
 
-                  body:
-                      JSON.stringify({
+          body:
+            JSON.stringify({
 
-                          type:
-                              "image",
+              type:
+                "image",
 
-                          id:
-                              id,
+              id:
+                id,
 
-                          image:
-                              base64
+              image:
+                base64
 
-                      })
+            })
 
-              }
-          );
-
-
-      const result =
-          await response.json();
-
-
-      if (!response.ok) {
-
-          throw new Error(
-              result.message ||
-              "Không thể cập nhật ảnh"
-          );
-
-      }
-
-
-      console.log(
-          "Ảnh sau khi cập nhật:",
-          result.data
+        }
       );
 
 
-      alert(
-          "Cập nhật ảnh thành công!"
+    const result =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        result.message ||
+        "Không thể cập nhật ảnh"
       );
 
-
-      // Ẩn nút cập nhật
-      const updateButton =
-          album.querySelector(
-              ".update-button"
-          );
+    }
 
 
-      if (updateButton) {
-
-          updateButton.style.display =
-              "none";
-
-      }
+    console.log(
+      "Ảnh sau khi cập nhật:",
+      result.data
+    );
 
 
-      // Xóa Base64 tạm
-      delete album.dataset.base64;
+    const notification = document.getElementById("notification");
+    notification.style.display = "block";
+    // Chờ 2s để Sheets kịp ghi rồi reload
+    setTimeout(() => {
+
+      notification.style.display = "none";
+
+    }, 4000);
+
+    // Xóa Base64 tạm
+    delete album.dataset.base64;
 
 
   } catch (error) {
 
-      console.error(
-          "UPDATE IMAGE ERROR:",
-          error
-      );
+    console.error(
+      "UPDATE IMAGE ERROR:",
+      error
+    );
 
 
-      alert(
-          "Lỗi: " +
-          error.message
-      );
+    alert(
+      "Lỗi: " +
+      error.message
+    );
 
   }
 
