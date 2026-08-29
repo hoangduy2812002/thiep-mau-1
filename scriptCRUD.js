@@ -574,7 +574,7 @@ async function createNickName(event, album, stt) {
   //   return;
   // }
   const name = "chi";
-  const message = "||||||||"
+  const nickName = "||||||||"
   const response = await fetch("/api/data", {
     method: "POST",
 
@@ -585,7 +585,7 @@ async function createNickName(event, album, stt) {
     body: JSON.stringify({
       name: name,
       type: "nickName",
-      message: message
+      nickName: nickName
     })
   });
   // const response = await fetch("/api/data", {

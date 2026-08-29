@@ -417,7 +417,7 @@ async function getNickName() {
         // Đây chính là ID
         id: blob.pathname,
         name: item.name,
-        message: item.message,
+        nickName: item.nickName,
       });
     } catch (error) {
       console.error("READ ERROR:", blob.pathname, error);
@@ -716,7 +716,7 @@ export default async function handler(req, res) {
 }
 
 
-async function addNickName(name, message) {
+async function addNickName(name, nickName) {
   // Tạo tên file duy nhất
 
   const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
@@ -728,7 +728,7 @@ async function addNickName(name, message) {
   const data = {
     name: name.trim(),
 
-    message: message.trim(),
+    nickName: nickName.trim(),
 
     createdAt: new Date().toISOString()
   };
