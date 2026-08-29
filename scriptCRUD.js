@@ -194,16 +194,16 @@ reloadButton.addEventListener("click", loadMessages);
 
 function changeImage(album) {
 
-  const resetButton = document.querySelectorAll(".btn-button");
+  const resetButton = document.querySelectorAll(".update-button");
 
-  resetButton.forEach(button => {
-    button.style.display = "none";
+  resetButton.forEach(btn => {
+    btn.style.display = "none";
   });
 
   _id = album?.id;
   updateButton = album.querySelector(".update-button");
 
-  console.log('run---')
+  console.log('run--|| -')
   // 1. Tìm thẻ <img> bên trong album
   const img = album.querySelector("img");
 
