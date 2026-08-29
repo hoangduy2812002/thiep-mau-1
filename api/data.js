@@ -192,6 +192,7 @@ async function deleteMessage(id) {
 
 async function addImage(base64) {
   // Kiểm tra Base64
+
   if (typeof base64 !== "string" || !base64.startsWith("data:image/")) {
     throw new Error("Dữ liệu hình ảnh không hợp lệ");
   }
@@ -227,6 +228,126 @@ async function addImage(base64) {
   };
 }
 
+// ========================================
+// CẬP NHẬT ẢNH BASE64
+// ========================================
+
+async function updateImage(
+  id,
+  base64
+) {
+
+  // ------------------------------------
+  // Kiểm tra ID
+  // ------------------------------------
+
+  if (
+      typeof id !== "string" ||
+      !id.startsWith(IMAGE_DIRECTORY) ||
+      !id.endsWith(".json")
+  ) {
+
+      throw new Error(
+          "ID ảnh không hợp lệ"
+      );
+
+  }
+
+
+  // ------------------------------------
+  // Kiểm tra Base64
+  // ------------------------------------
+
+  if (
+      typeof base64 !== "string" ||
+      !base64.startsWith("data:image/")
+  ) {
+
+      throw new Error(
+          "Dữ liệu ảnh không hợp lệ"
+      );
+
+  }
+
+
+  // ------------------------------------
+  // Đọc dữ liệu ảnh cũ
+  // ------------------------------------
+
+  const oldData =
+      await readBlob(id);
+
+
+  if (!oldData) {
+
+      throw new Error(
+          "Không tìm thấy ảnh"
+      );
+
+  }
+
+
+  // ------------------------------------
+  // Tạo dữ liệu mới
+  // ------------------------------------
+
+  const newData = {
+
+      image:
+          base64,
+
+      // Giữ ngày tạo cũ
+      createdAt:
+          oldData.createdAt ||
+          new Date().toISOString()
+
+  };
+
+
+  // ------------------------------------
+  // Ghi đè Blob
+  // ------------------------------------
+
+  await put(
+
+      id,
+
+      JSON.stringify(
+          newData,
+          null,
+          4
+      ),
+
+      {
+
+          access:
+              "private",
+
+          contentType:
+              "application/json",
+
+          allowOverwrite:
+              true
+
+      }
+
+  );
+
+
+  // ------------------------------------
+  // Trả kết quả
+  // ------------------------------------
+
+  return {
+
+      id:
+          id,
+
+      ...newData
+
+  };
+
+}
 // ========================================
 // LẤY DANH SÁCH ẢNH
 // ========================================
@@ -371,7 +492,82 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "PUT") {
-      const { id, name, message } = req.body || {};
+      // const { id, name, message } = req.body || {};
+      const {
+        type,
+        id,
+        image,
+        name,
+        message
+    } =
+        req.body || {};
+
+
+    // =================================
+    // CẬP NHẬT ẢNH
+    // =================================
+
+    if (
+        type === "image"
+    ) {
+
+        if (
+            typeof id !== "string"
+        ) {
+
+            return res.status(400).json({
+
+                success:
+                    false,
+
+                message:
+                    "Thiếu ID ảnh"
+
+            });
+
+        }
+
+
+        if (
+            typeof image !== "string" ||
+            !image.startsWith("data:image/")
+        ) {
+
+            return res.status(400).json({
+
+                success:
+                    false,
+
+                message:
+                    "Ảnh không hợp lệ"
+
+            });
+
+        }
+
+
+        const data =
+            await updateImage(
+                id,
+                image
+            );
+
+
+        return res.status(200).json({
+
+            success:
+                true,
+
+            message:
+                "Cập nhật ảnh thành công",
+
+            data:
+                data
+
+        });
+
+    }
+
 
       // Kiểm tra ID
 
