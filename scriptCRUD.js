@@ -351,23 +351,27 @@ async function loadImages() {
       );
 
     }
-    const listData = [];
-    for (let stt = 1; stt <= totalNumberImage; stt++) {
+    let listData = result?.data;
     
-      const item = result?.data.find(
-          item => Number(item.stt) === stt
-      );
+    if(result?.data.length < totalNumberImage-1){
+      console.log('------->',)
+      for (let stt = 1; stt <= totalNumberImage; stt++) {
     
-      if (item) {
-    
-          listData.push(item);
-    
-      } else {
-    
-          listData.push({
-              stt: stt
-          });
-    
+        const item = result?.data.find(
+            item => Number(item.stt) === stt
+        );
+      
+        if (item) {
+      
+            listData.push(item);
+      
+        } else {
+      
+            listData.push({
+                stt: stt
+            });
+      
+        }
       }
     }
 
@@ -392,7 +396,6 @@ async function loadImages() {
 // ========================================
 
 function createListImage(e) {
-  console.log('--',e)
 
   e.forEach((item,stt) => {
     let index = stt+1;
