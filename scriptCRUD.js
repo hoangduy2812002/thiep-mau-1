@@ -12,10 +12,11 @@ let updateButton = null;
 
 
 function openTab(tabId, button) {
-  if(tabId==='tab2'){
+  if (tabId === 'tab2') {
     loadImages();
-  }else if(tabId==='tab1'){
-  loadMessages();
+  } else if (tabId === 'tab1') {
+    loadMessages();
+    listImage.innerHTML = "";
 
   }
   // Ẩn tất cả nội dung
