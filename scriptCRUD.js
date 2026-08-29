@@ -12,9 +12,11 @@ let updateButton = null;
 
 
 function openTab(tabId, button) {
-  loadMessages();
   if(tabId==='tab2'){
     loadImages();
+  }else if(tabId==='tab1'){
+  loadMessages();
+
   }
   // Ẩn tất cả nội dung
   document.querySelectorAll(".tab-content").forEach(tab => {
@@ -559,3 +561,7 @@ async function updateImageAPI(album) {
   }
 
 }
+
+
+
+loadMessages()
