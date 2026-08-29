@@ -199,7 +199,7 @@ async function addImage(base64,stt) {
 
   // Tạo ID duy nhất
 
-  const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}${stt}`;
+  const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
 
   // Tạo đường dẫn
 
