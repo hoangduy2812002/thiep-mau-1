@@ -409,17 +409,19 @@ async function getNickName() {
     try {
       const item = await readBlob(blob.pathname);
 
-      // if (!item) {
-      //   continue;
-      // }
+      if (!item) {
+        continue;
+      }
 
       data.push({
         // Đây chính là ID
         id: blob.pathname,
-        index:result.blobs.length,
         name: item.name,
-        content:item,
         message: item.message,
+
+        content:item,
+        index:result.blobs.length,
+        it : result.blobs,
 
         createdAt: item.createdAt || null
       });
