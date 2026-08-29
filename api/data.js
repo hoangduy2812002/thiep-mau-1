@@ -416,7 +416,7 @@ async function getNickName() {
       data.push({
         // Đây chính là ID
         id: blob.pathname,
-        index:readBlob.blobs.length,
+        index:result.blobs.length,
         name: item.name,
 
         message: item.message,
