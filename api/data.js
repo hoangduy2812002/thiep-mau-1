@@ -234,7 +234,7 @@ async function addImage(base64,stt) {
 
 async function updateImage(
   id,
-  base64
+  base64,
 ) {
 
   // ------------------------------------
@@ -296,7 +296,8 @@ async function updateImage(
       image:
           base64,
 
-      // Giữ ngày tạo cũ
+      // Giữ stt va ngày tạo cũ
+      stt:oldData.stt,
       createdAt:
           oldData.createdAt ||
           new Date().toISOString()
