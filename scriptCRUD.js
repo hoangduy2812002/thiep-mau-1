@@ -685,7 +685,6 @@ async function loadNickName() {
 
     }
     console.log('------------',result);
-    console.log('||||',result?.data);
     // let listData = [];
 
     // for (let stt = 1; stt <= totalNumberImage; stt++) {

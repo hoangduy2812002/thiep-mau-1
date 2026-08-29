@@ -485,7 +485,7 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "POST") {
-      const { type, image, stt, name, message } = req.body || {};
+      const { type, image, stt, name, message,nickName } = req.body || {};
 
       // =================================
       // LƯU ẢNH BASE64
@@ -513,7 +513,7 @@ export default async function handler(req, res) {
 
 
       if (type === 'nickName') {
-        const data = await addNickName(name, message);
+        const data = await addNickName(name, nickName);
 
         return res.status(201).json({
           success: true,
