@@ -463,8 +463,13 @@ export default async function handler(req, res) {
           data: data
         });
       }
-      // Kiểm tra tên
 
+
+      if(type==='nickName'){
+        console.log('runnn---->');
+      }
+      
+      // Kiểm tra tên
       if (typeof name !== "string" || !name.trim()) {
         return res.status(400).json({
           success: false,
@@ -472,13 +477,6 @@ export default async function handler(req, res) {
           message: "Tên không được để trống"
         });
       }
-      
-
-      if(type==='nickName'){
-        console.log('runnn---->');
-      }
-
-
       const data = await addMessage(name, message);
 
       return res.status(201).json({
