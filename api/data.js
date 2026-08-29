@@ -190,7 +190,7 @@ async function deleteMessage(id) {
 // THÊM ẢNH BASE64
 // ========================================
 
-async function addImage(base64) {
+async function addImage(base64,stt) {
   // Kiểm tra Base64
 
   if (typeof base64 !== "string" || !base64.startsWith("data:image/")) {
@@ -199,7 +199,7 @@ async function addImage(base64) {
 
   // Tạo ID duy nhất
 
-  const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
+  const id = `${Date.now()}-${Math.random().toString(36).substring(2, 10)}${stt}`;
 
   // Tạo đường dẫn
 
@@ -209,7 +209,7 @@ async function addImage(base64) {
 
   const data = {
     image: base64,
-
+    stt:stt,
     createdAt: new Date().toISOString()
   };
 
@@ -431,7 +431,7 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "POST") {
-      const { type, image } = req.body || {};
+      const { type, image,stt } = req.body || {};
 
       // =================================
       // LƯU ẢNH BASE64
@@ -446,7 +446,7 @@ export default async function handler(req, res) {
           });
         }
 
-        const data = await addImage(image);
+        const data = await addImage(image,stt);
 
         return res.status(201).json({
           success: true,

@@ -277,9 +277,10 @@ function changeImage(album) {
   // 20. Mở cửa sổ chọn file
   input.click();
 }
-async function updateImage(event,album) {
+async function createImage(event,album,stt) {
   event.stopPropagation();
   updateButton.style.display = "none";
+
   if (_id === undefined || _id === 'undefined') {
   
     const base64 = album.dataset.base64;
@@ -299,8 +300,8 @@ async function updateImage(event,album) {
 
       body: JSON.stringify({
         type: "image",
-
-        image: base64
+        image: base64,
+        stt:stt
       })
     });
 
@@ -369,7 +370,7 @@ async function loadImages() {
 // ========================================
 
 function createListImage(e) {
-  for (let index = 0; index < 7; index++) {
+  for (let index = 1; index < 9; index++) {
     const item = e[index];
 
     const elementDiv = document.createElement("div");
@@ -394,7 +395,7 @@ function createListImage(e) {
     elementDiv.appendChild(albumDiv)
     elementDiv.appendChild(btnCapNhat)
     // ===== Lay index anh
-    albumNote.innerHTML = "Ảnh " + (index + 1);
+    albumNote.innerHTML = "Ảnh " +index;
 
     // Them chuc nang click vao anh
     imgDiv.addEventListener("click", (event) => {
@@ -404,7 +405,7 @@ function createListImage(e) {
 
     // Them chuc nang click vao button
     btnCapNhat.addEventListener("click", (event) => {
-      updateImage(event, elementDiv);
+      createImage(event, elementDiv,index);
     });
     listImage.appendChild(elementDiv);
 
