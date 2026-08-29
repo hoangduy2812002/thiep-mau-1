@@ -392,6 +392,8 @@ async function getImages() {
   return data;
 }
 
+
+
 // ========================================
 // API HANDLER
 // ========================================
@@ -434,7 +436,7 @@ export default async function handler(req, res) {
     // =================================
 
     if (req.method === "POST") {
-      const { type, image,stt } = req.body || {};
+      const { type, image,stt,name,message } = req.body || {};
 
       // =================================
       // LƯU ẢNH BASE64
@@ -500,8 +502,8 @@ export default async function handler(req, res) {
         type,
         id,
         image,
-        name,
-        message
+        // name,
+        // message
     } =
         req.body || {};
 
@@ -574,43 +576,43 @@ export default async function handler(req, res) {
 
       // Kiểm tra ID
 
-      if (typeof id !== "string") {
-        return res.status(400).json({
-          success: false,
+      // if (typeof id !== "string") {
+      //   return res.status(400).json({
+      //     success: false,
 
-          message: "Thiếu ID"
-        });
-      }
+      //     message: "Thiếu ID"
+      //   });
+      // }
 
-      // Kiểm tra tên
+      // // Kiểm tra tên
 
-      if (typeof name !== "string" || !name.trim()) {
-        return res.status(400).json({
-          success: false,
+      // if (typeof name !== "string" || !name.trim()) {
+      //   return res.status(400).json({
+      //     success: false,
 
-          message: "Tên không được để trống"
-        });
-      }
+      //     message: "Tên không được để trống"
+      //   });
+      // }
 
-      // Kiểm tra lời chúc
+      // // Kiểm tra lời chúc
 
-      if (typeof message !== "string" || !message.trim()) {
-        return res.status(400).json({
-          success: false,
+      // if (typeof message !== "string" || !message.trim()) {
+      //   return res.status(400).json({
+      //     success: false,
 
-          message: "Lời chúc không được để trống"
-        });
-      }
+      //     message: "Lời chúc không được để trống"
+      //   });
+      // }
 
-      const data = await updateMessage(id, name, message);
+      // const data = await updateMessage(id, name, message);
 
-      return res.status(200).json({
-        success: true,
+      // return res.status(200).json({
+      //   success: true,
 
-        message: "Sửa thành công",
+      //   message: "Sửa thành công",
 
-        data: data
-      });
+      //   data: data
+      // });
     }
 
     // =================================
