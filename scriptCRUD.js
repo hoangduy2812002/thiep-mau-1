@@ -349,6 +349,7 @@ async function loadImages() {
       );
 
     }
+    console.log(result?.data);
     createListImage(result?.data);
     return result?.data;
 

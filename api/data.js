@@ -372,10 +372,12 @@ async function getImages() {
         id: blob.pathname,
 
         // Base64
-        image: item.image,
+        image: item?.image,
+
+        stt:item?.stt,
 
         // Ngày tạo
-        createdAt: item.createdAt || null
+        createdAt: item?.createdAt || null
       });
     } catch (error) {
       console.error("READ IMAGE ERROR:", blob.pathname, error);
