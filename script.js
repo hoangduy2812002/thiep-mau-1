@@ -612,7 +612,7 @@ function createListImage(e) {
     btnCapNhat.addEventListener("click", (event) => {
       // createImage(event, elementDiv, Number(index));
     });
-    listImage.appendChild(elementDiv);
+    listImageHome.appendChild(elementDiv);
   });
 }
 
