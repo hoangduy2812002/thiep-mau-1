@@ -299,10 +299,8 @@ function changeImage(album) {
 async function createImage(event, album, stt) {
   event.stopPropagation();
   updateButton.style.display = "none";
-      console.log('<<<<')
-
   if (_id === undefined || _id === 'undefined') {
-    console.log('check')
+
     const base64 = album.dataset.base64;
 
     if (!base64) {
@@ -326,32 +324,31 @@ async function createImage(event, album, stt) {
     });
 
     const result = await response.json();
-    console.log('resuet',result)
-    if (response) {
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    } else {
       console.log('=====>')
-      const notification = document.getElementById("notification");
-      notification.style.display = "block";
+      const notification_img = document.getElementById("notification-image");
+      notification_img.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
       // setTimeout(() => {
 
       //   notification.style.display = "none";
 
       // }, 4000);
-    } else {
-      console.log('=====>')
-      throw new Error(result);
-     
     }
   } else {
     updateImageAPI(album);
-    const notification = document.getElementById("notification");
-      notification.style.display = "block";
+    console.log('update')
+    const notification_img = document.getElementById("notification_image");
+      notification_img.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
-      setTimeout(() => {
+      // setTimeout(() => {
 
-        notification.style.display = "none";
+      //   notification_img.style.display = "none";
 
-      }, 4000);
+      // }, 4000);
   }
 
 
