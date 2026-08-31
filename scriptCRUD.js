@@ -813,4 +813,5 @@ function attachAnEventToTheForm() {
   }
 
 }
+
 loadMessages()

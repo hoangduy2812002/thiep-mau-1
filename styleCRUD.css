@@ -426,7 +426,7 @@ button:disabled {
 #notification-image{
     background-color: #1d39c4;
     color: #fff;
-    padding: 12px;
+    padding: 15px;
     position: absolute;
     top: 0;
     display: none;

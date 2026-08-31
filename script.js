@@ -250,37 +250,6 @@ async function loadMessages() {
 
 async function saveEntry(name, message) {
   try {
-    // =================================
-    // SỬA
-    // =================================
-
-    // if (editing) {
-    //   const response = await fetch("/api/data", {
-    //     method: "PUT",
-
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-
-    //     body: JSON.stringify({
-    //       name: name,
-
-    //       message: message
-    //     })
-    //   });
-
-    //   const result = await response.json();
-
-    //   if (!response.ok) {
-    //     throw new Error(result.message || "Không thể sửa");
-    //   }
-
-    //   alert("Sửa thành công!");
-
-    //   await loadMessages();
-
-    //   return;
-    // }
 
     // =================================
     // THÊM
@@ -539,7 +508,65 @@ function getGiaoXu() {
 
 
 
+async function loadImages() {
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/data?type=images"
+      );
 
 
+    const result =
+      await response.json();
 
+
+    if (!response.ok) {
+
+      throw new Error(
+        result.message ||
+        "Không thể tải ảnh"
+      );
+
+    }
+    let listData = [];
+
+    for (let stt = 1; stt <= totalNumberImage; stt++) {
+
+      const item = result?.data.find(
+        item => Number(item.stt) === stt
+      );
+
+      if (item) {
+
+        listData.push(item);
+
+      } else {
+
+        listData.push({
+          stt: stt
+        });
+
+      }
+    }
+
+    // createListImage(listData);
+    console.log('--->',listData)
+    return listData;
+
+
+  } catch (error) {
+
+    console.error(
+      "LOAD IMAGES ERROR:",
+      error
+    );
+
+    return [];
+
+  }
+}
+
+loadImages()
 
