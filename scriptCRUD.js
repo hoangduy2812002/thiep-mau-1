@@ -690,7 +690,6 @@ async function loadNickName() {
 
     const data = result.data || [];
 
-    console.log('------------', result);
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
@@ -721,10 +720,12 @@ async function loadNickName() {
       // =========================
 
       const name = document.createElement("div");
+      const titeName = document.createElement("span");
+      titeName.innerHTML = "Tên: "
 
       name.className = "name";
-
       name.textContent = item.name;
+      name.appendChild(titeName);
 
       // =========================
       // MESSAGE
