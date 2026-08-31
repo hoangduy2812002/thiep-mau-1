@@ -1,3 +1,5 @@
+ const totalNumberImage = CONFIG.totalNumberImage;
+
 /* ================================================
    THIỆP CƯỚI – Script.js
    Văn Chương & Hồng Thư – 25/07/2026

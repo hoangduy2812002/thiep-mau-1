@@ -1,4 +1,4 @@
-const totalNumberImage = 8;
+const totalNumberImage = CONFIG.totalNumberImage;
 
 let _id = undefined;
 const listElement = document.getElementById("list_loiChuc");
