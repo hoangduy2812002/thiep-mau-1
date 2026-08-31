@@ -718,10 +718,17 @@ async function loadNickName() {
       // NAME
       // =========================
 
-      const name = document.createElement("div");
+      const titeNickname = document.createElement("div");
 
-      name.className = "name";
-      name.textContent = "Tên "+item.name;
+      titeNickname.className = "titeNickname";
+      const nameNick = document.createElement("div");
+      nameNick.innerHTML = "Tên:";
+      const nameNickInput = document.createElement("input");
+
+
+      titeNickname.appendChild(titeNickname);
+      titeNickname.appendChild(nameNickInput);
+      // titeNickname.textContent = "Tên: "+item.name;
       // =========================
       // MESSAGE
       // =========================
@@ -730,7 +737,7 @@ async function loadNickName() {
 
       message.className = "message";
 
-      message.textContent = "Biệt danh "+item.nickName;
+      message.textContent = "Biệt danh: "+item.nickName;
 
       // =========================
       // DELETE
@@ -750,7 +757,7 @@ async function loadNickName() {
       // APPEND
       // =========================
 
-      element.appendChild(name);
+      element.appendChild(titeNickname);
 
       element.appendChild(message);
 

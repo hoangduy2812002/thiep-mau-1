@@ -422,3 +422,7 @@ button:disabled {
     top: 0;
     display: none;
 }
+
+.titeNickname{
+    display: flex;
+}
