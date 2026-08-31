@@ -327,9 +327,7 @@ async function createImage(event, album, stt) {
 
     const result = await response.json();
 
-    if (!response) {
-      throw new Error(result.message);
-    } else {
+    if (response) {
       console.log('=====>')
       const notification = document.getElementById("notification");
       notification.style.display = "block";
@@ -339,6 +337,10 @@ async function createImage(event, album, stt) {
       //   notification.style.display = "none";
 
       // }, 4000);
+    } else {
+      console.log('=====>')
+      throw new Error(result);
+     
     }
   } else {
     updateImageAPI(album);
