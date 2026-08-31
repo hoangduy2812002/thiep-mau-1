@@ -299,6 +299,7 @@ function changeImage(album) {
 async function createImage(event, album, stt) {
   event.stopPropagation();
   updateButton.style.display = "none";
+      console.log('<<<<')
 
   if (_id === undefined || _id === 'undefined') {
 
@@ -329,15 +330,15 @@ async function createImage(event, album, stt) {
     if (!response.ok) {
       throw new Error(result.message);
     } else {
-
+      console.log('=====>')
       const notification = document.getElementById("notification");
       notification.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
-      setTimeout(() => {
+      // setTimeout(() => {
 
-        notification.style.display = "none";
+      //   notification.style.display = "none";
 
-      }, 4000);
+      // }, 4000);
     }
   } else {
     updateImageAPI(album);
