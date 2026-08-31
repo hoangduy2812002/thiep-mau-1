@@ -726,7 +726,7 @@ async function loadNickName() {
       const nameNickInput = document.createElement("input");
 
 
-      titeNickname.appendChild(titeNickname);
+      titeNickname.appendChild(nameNick);
       titeNickname.appendChild(nameNickInput);
       // titeNickname.textContent = "Tên: "+item.name;
       // =========================
