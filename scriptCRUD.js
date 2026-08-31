@@ -712,14 +712,12 @@ async function loadNickName() {
 
     data.forEach(item => {
       const element = document.createElement("div");
-
-      element.className = "item";
-
+      element.className = "item-nickname";
       // =========================
       // NAME
       // =========================
 
-      const name = document.createElement("span");
+      const name = document.createElement("div");
       const titeName = document.createElement("span");
       titeName.innerHTML = "Tên: "
 
@@ -731,10 +729,13 @@ async function loadNickName() {
       // =========================
 
       const message = document.createElement("div");
+      const titeMessage = document.createElement("span");
+      titeMessage.innerHTML = "Biệt danh: "
 
       message.className = "message";
 
       message.textContent = item.nickName;
+      element.appendChild(titeMessage);
 
       // =========================
       // DELETE
