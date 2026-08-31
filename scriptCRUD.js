@@ -565,17 +565,7 @@ async function updateImageAPI(album) {
 
 }
 
-async function createNickName(event, album, stt) {
-  // event.stopPropagation();
-  // updateButton.style.display = "none";
-
-  // const base64 = album.dataset.base64;
-
-  // if (!base64) {
-  //   alert("Không có ảnh mới để cập nhật!");
-
-  //   return;
-  // }
+async function createNickName(name,nickName) {
   const name = "chi";
   const nickName = "||||||||"
   const response = await fetch("/api/data", {
@@ -591,33 +581,22 @@ async function createNickName(event, album, stt) {
       nickName: nickName
     })
   });
-  // const response = await fetch("/api/data", {
-  //   method: "POST",
 
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   },
+  const result = await response.json();
 
-  //   body: JSON.stringify({
-  //     type: "nickName",
-  //   })
-  // });
+  if (!response.ok) {
+    throw new Error(result.message);
+  } else {
 
-  // const result = await response.json();
+    const notification = document.getElementById("notification");
+    notification.style.display = "block";
+    // Chờ 2s để Sheets kịp ghi rồi reload
+    setTimeout(() => {
 
-  // if (!response.ok) {
-  //   throw new Error(result.message);
-  // } else {
+      notification.style.display = "none";
 
-  //   const notification = document.getElementById("notification");
-  //   notification.style.display = "block";
-  //   // Chờ 2s để Sheets kịp ghi rồi reload
-  //   setTimeout(() => {
-
-  //     notification.style.display = "none";
-
-  //   }, 4000);
-  // }
+    }, 4000);
+  }
 
 }
 
@@ -775,6 +754,36 @@ async function loadNickName() {
     return [];
 
   }
+}
+
+// Gắn sự kiện form NICK NAME
+const gbNickNameForm = document.getElementById("nickNameForm");
+if (gbNickNameForm) {
+  gbNickNameForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("gbTen").value.trim();
+    const nickName = document.getElementById("gbBietDanh").value.trim();
+
+    if (!name || !nickName) return;
+    if (name.length > 100 || nickName.length > 200) {
+      alert("Tên tối đa 100 ký tự, Biệt danh tối đa 200 ký tự.");
+      return;
+    }
+    const btn = gbNickNameForm.querySelector(".btn-create");
+    btn.disabled = true;
+    btn.textContent = "⏳ Đang gửi...";
+
+    createNickName(name, nickName)
+      .then(() => {
+        gbNickNameForm.reset();
+        document.getElementById("gbTen").focus();
+      })
+      .catch(() => alert("Không thể Thêm. Vui lòng thử lại!"))
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = "🪄 Thêm";
+      });
+  });
 }
 
 loadMessages()

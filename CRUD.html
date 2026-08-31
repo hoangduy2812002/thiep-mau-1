@@ -19,7 +19,7 @@
 <body>
 
     <div class="tabs">
-      <!-- 2 nút tab -->
+        <!-- 2 nút tab -->
         <div class="tab-buttons">
             <button class="tab-button active" onclick="openTab('tab1', this)">
                 Lời chúc
@@ -29,7 +29,7 @@
                 Biệt danh 7
                 <button onclick="createNickName()">Nick name</button>
                 <!-- <button onclick="deleteNickName('nickname/1787996518712-j0sv6qs8.json')">DELETE</button> -->
-                
+
             </button>
 
             <button class="tab-button" onclick="openTab('tab3', this)">
@@ -70,21 +70,22 @@
         <!-- Nội dung Tab 2 -->
         <div id="tab2" class="tab-content">
             <div class="box">
-
-                <div >
-                    <div>
-                        Tên <input type="text">
-                    </div>
-                    <div>
-                        Biệt danh <input type="text">
-                    </div>
-                    <button style="background-color: #389e0d;">Thêm</button>
-                </div>
+                <form class="gb-form animate-on-scroll" id="nickNameForm" novalidate>
+                    <!-- <div class="item-create"> -->
+                        <!-- <div> -->
+                            Tên <input type="text" id="gbTen" maxlength="100" required>
+                        <!-- </div> -->
+                        <!-- <div> -->
+                            Biệt danh <input type="text" id="gbBietDanh" maxlength="200" required >
+                        <!-- </div> -->
+                        <button class="btn-create" type="submit">Thêm</button>
+                    <!-- </div> -->
+                </form>
 
                 <h2>
                     Danh sách biệt danh 6
                 </h2>
-                
+
 
                 <div id="list_nickName">
 
@@ -100,11 +101,11 @@
             <div id="tab3">
                 <div style="position: relative;">
                     <h2>Click để sửa 2</h2>
-                <h2 id="notification">Cập nhật thành công</h2>
+                    <h2 id="notification">Cập nhật thành công</h2>
                 </div>
-                
+
                 <section class="section">
-                    
+
                     <div class="album-grid animate-on-scroll" id="listImage">
                         <!-- <div class="album-item">
                             <img src="/images/noImage.png" alt="Ảnh 1" onclick="changeImage(this.parentElement)">
