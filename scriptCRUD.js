@@ -302,7 +302,7 @@ async function createImage(event, album, stt) {
       console.log('<<<<')
 
   if (_id === undefined || _id === 'undefined') {
-
+    console.log('check')
     const base64 = album.dataset.base64;
 
     if (!base64) {
@@ -326,7 +326,7 @@ async function createImage(event, album, stt) {
     });
 
     const result = await response.json();
-
+    console.log('resuet',result)
     if (response) {
       console.log('=====>')
       const notification = document.getElementById("notification");
