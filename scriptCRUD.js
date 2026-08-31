@@ -16,7 +16,9 @@ function openTab(tabId, button) {
   if (tabId === 'tab1') {
     loadMessages();
     listImage.innerHTML = "";
-  }else if (tabId === 'tab3') {
+  } else if (tabId === 'tab2') {
+    loadNickName();
+  } else {
     loadImages();
   }
   // Ẩn tất cả nội dung
@@ -641,7 +643,7 @@ async function deleteNickName(id) {
 
       body: JSON.stringify({
         id: id,
-      type: "nickName",
+        type: "nickName",
       })
     });
 
@@ -655,7 +657,7 @@ async function deleteNickName(id) {
 
     // Tải lại
 
-    // await loadMessages();
+    await loadNickName();
   } catch (error) {
     console.error("DELETE ERROR:", error);
 
@@ -688,7 +690,7 @@ async function loadNickName() {
 
     const data = result.data || [];
 
-    console.log('------------',result);
+    console.log('------------', result);
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
@@ -703,9 +705,9 @@ async function loadNickName() {
       return;
     }
 
-    listNickName.innerHTML="";
+    listNickName.innerHTML = "";
 
-       // ------------------------------
+    // ------------------------------
     // Hiển thị nickname
     // ------------------------------
 
@@ -735,18 +737,6 @@ async function loadNickName() {
       message.textContent = item.nickName;
 
       // =========================
-      // DATE
-      // =========================
-
-      const date = document.createElement("div");
-
-      date.className = "date";
-
-      if (item.createdAt) {
-        date.textContent = new Date(item.createdAt).toLocaleString("vi-VN");
-      }
-
-      // =========================
       // DELETE
       // =========================
 
@@ -768,7 +758,6 @@ async function loadNickName() {
 
       element.appendChild(message);
 
-      element.appendChild(date);
 
       element.appendChild(deleteButton);
 
@@ -790,6 +779,4 @@ async function loadNickName() {
   }
 }
 
-
-loadNickName();
 loadMessages()
