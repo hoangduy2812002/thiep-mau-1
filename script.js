@@ -605,7 +605,8 @@ function createListImage(e) {
     // Them chuc nang click vao anh
     imgDiv.addEventListener("click", (event) => {
       event.stopPropagation();
-      openLightbox(event);
+      console.log('event')
+      openLightbox(this);
     });
 
     // Them chuc nang click vao button
