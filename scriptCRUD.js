@@ -722,7 +722,8 @@ async function loadNickName() {
 
       titeNickname.className = "lablTitle";
       const nameNick = document.createElement("div");
-      nameNick.innerHTML = "Tên:";
+      nameNick.innerHTML = "Tên";
+      
       const nameNickInput = document.createElement("input");
       nameNickInput.className = "input-nickname";
       nameNickInput.id = index;
@@ -734,12 +735,21 @@ async function loadNickName() {
       // =========================
       // MESSAGE
       // =========================
-
       const messageNickName = document.createElement("div");
+      messageNickName.className = "lablTitle";
+      const lablMessage= document.createElement("div");
+      lablMessage.innerHTML = "Biệt danh";
 
-      messageNickName.className = "message";
+      const messageNickInput = document.createElement("input");
+      messageNickInput.className = "input-nickname";
+      messageNickInput.id = index+1;
+      messageNickInput.defaultValue = item?.message;
 
-      messageNickName.textContent = "Biệt danh: "+item.nickName;
+      messageNickName.appendChild(lablMessage);
+      messageNickName.appendChild(messageNickInput);
+      // messageNickName.className = "message";
+
+      // messageNickName.textContent = "Biệt danh: "+item.nickName;
 
       // =========================
       // DELETE
