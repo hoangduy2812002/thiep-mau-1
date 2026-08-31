@@ -330,12 +330,7 @@ async function createImage(event, album, stt) {
       throw new Error(result.message);
     } else {
 
-    }
-  } else {
-    updateImageAPI(album);
-  }
-
-  const notification = document.getElementById("notification");
+      const notification = document.getElementById("notification");
       notification.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
       setTimeout(() => {
@@ -343,6 +338,18 @@ async function createImage(event, album, stt) {
         notification.style.display = "none";
 
       }, 4000);
+    }
+  } else {
+    updateImageAPI(album);
+    const notification = document.getElementById("notification");
+      notification.style.display = "block";
+      // Chờ 2s để Sheets kịp ghi rồi reload
+      setTimeout(() => {
+
+        notification.style.display = "none";
+
+      }, 4000);
+  }
 
 
 }
