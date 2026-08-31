@@ -591,28 +591,28 @@ function createListImage(e) {
     // const albumNote = document.createElement("div");
     // albumNote.className = "album-note";
 
-    const btnCapNhat = document.createElement("button");
-    btnCapNhat.className = "update-button";
-    btnCapNhat.innerHTML = "Cập nhật";
+    // const btnCapNhat = document.createElement("button");
+    // btnCapNhat.className = "update-button";
+    // btnCapNhat.innerHTML = "Cập nhật";
 
     elementDiv.appendChild(imgDiv);
     // albumDiv.appendChild(albumNote);
     elementDiv.appendChild(albumDiv)
-    elementDiv.appendChild(btnCapNhat)
+    // elementDiv.appendChild(btnCapNhat)
     // ===== Lay index anh
     // albumNote.innerHTML = "Ảnh " + index;
 
     // Them chuc nang click vao anh
     imgDiv.addEventListener("click", (event) => {
       event.stopPropagation();
-      // changeImage(elementDiv);
+      openLightbox(event);
     });
 
     // Them chuc nang click vao button
-    btnCapNhat.addEventListener("click", (event) => {
-      // createImage(event, elementDiv, Number(index));
-    });
-    listImageHome.appendChild(elementDiv);
+    // btnCapNhat.addEventListener("click", (event) => {
+    //   // createImage(event, elementDiv, Number(index));
+    // });
+    // listImageHome.appendChild(elementDiv);
   });
 }
 
