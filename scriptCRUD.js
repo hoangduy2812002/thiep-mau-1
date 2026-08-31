@@ -674,7 +674,7 @@ async function loadNickName() {
     // ------------------------------
 
     if (data.length === 0) {
-      listElement.innerHTML = `
+      listNickName.innerHTML = `
                 <div class="empty">
                 Chưa có dữ liệu!
                 </div>
