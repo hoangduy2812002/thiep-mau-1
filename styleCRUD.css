@@ -423,12 +423,13 @@ button:disabled {
     display: none;
 }
 
-.item-create{
+/* .item-create{
      padding: 5px;
-}
+} */
 
 .btn-create{
     background-color: #389e0d;
+    margin-bottom: 10px;
 }
 /* 
 .lablTitle{

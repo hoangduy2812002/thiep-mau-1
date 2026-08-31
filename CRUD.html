@@ -27,9 +27,6 @@
 
             <button class="tab-button" onclick="openTab('tab2', this)">
                 Biệt danh 7
-                <button onclick="createNickName()">Nick name</button>
-                <!-- <button onclick="deleteNickName('nickname/1787996518712-j0sv6qs8.json')">DELETE</button> -->
-
             </button>
 
             <button class="tab-button" onclick="openTab('tab3', this)">
@@ -69,19 +66,13 @@
         </div>
         <!-- Nội dung Tab 2 -->
         <div id="tab2" class="tab-content">
+            <h2 id="notification">Thành công</h2>
             <div class="box">
                 <form class="gb-form animate-on-scroll" id="nickNameForm" novalidate>
-                    <!-- <div class="item-create"> -->
-                        <!-- <div> -->
-                            Tên <input type="text" id="gbTen" maxlength="100" required>
-                        <!-- </div> -->
-                        <!-- <div> -->
-                            Biệt danh <input type="text" id="gbBietDanh" maxlength="200" required >
-                        <!-- </div> -->
-                        <button class="btn-create" type="submit">Thêm</button>
-                    <!-- </div> -->
+                    Tên <input type="text" id="gbTen" maxlength="100" required>
+                    Biệt danh <input type="text" id="gbBietDanh" maxlength="200" required>
+                    <button class="btn-create" type="submit">Thêm</button>
                 </form>
-
                 <h2>
                     Danh sách biệt danh 6
                 </h2>
@@ -101,7 +92,7 @@
             <div id="tab3">
                 <div style="position: relative;">
                     <h2>Click để sửa 2</h2>
-                    <h2 id="notification">Cập nhật thành công</h2>
+                    <h2 id="notification">Thành công</h2>
                 </div>
 
                 <section class="section">

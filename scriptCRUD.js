@@ -781,6 +781,7 @@ if (gbNickNameForm) {
       .finally(() => {
         btn.disabled = false;
         btn.textContent = "🪄 Thêm";
+        loadNickName();
       });
   });
 }
