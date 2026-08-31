@@ -566,8 +566,7 @@ async function updateImageAPI(album) {
 }
 
 async function createNickName(name,nickName) {
-  const name = "chi";
-  const nickName = "||||||||"
+
   const response = await fetch("/api/data", {
     method: "POST",
 
