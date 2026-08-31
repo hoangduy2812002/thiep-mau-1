@@ -566,7 +566,7 @@ async function updateImageAPI(album) {
 
 }
 
-async function createNickName(name,nickName) {
+async function createNickName(name, nickName) {
 
   const response = await fetch("/api/data", {
     method: "POST",
@@ -669,7 +669,6 @@ async function loadNickName() {
 
     const data = result.data || [];
     checkListNickName = data;
-    console.log('---> ',checkListNickName)
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
@@ -702,7 +701,7 @@ async function loadNickName() {
       const name = document.createElement("div");
 
       name.className = "name";
-      name.textContent ="Tên: " +item?.name;
+      name.textContent = "Tên: " + item?.name;
 
       // =========================
       // MESSAGE
@@ -712,7 +711,7 @@ async function loadNickName() {
 
       message.className = "message";
 
-      message.textContent = "Biệt danh: "+item?.nickName;
+      message.textContent = "Biệt danh: " + item?.nickName;
 
       // =========================
       // DELETE
@@ -757,37 +756,54 @@ async function loadNickName() {
   }
 }
 
-function attachAnEventToTheForm (){
+function attachAnEventToTheForm() {
+
+  const checkNameForm = document.getElementById("notification-error-name");
+  const checkNickNameForm = document.getElementById("notification-error-nickName");
   // Gắn sự kiện form NICK NAME
-const gbNickNameForm = document.getElementById("nickNameForm");
-if (gbNickNameForm) {
-  gbNickNameForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const name = document.getElementById("gbTen").value.trim();
-    const nickName = document.getElementById("gbBietDanh").value.trim();
+  const gbNickNameForm = document.getElementById("nickNameForm");
+  if (gbNickNameForm) {
+    gbNickNameForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("gbTen").value.trim();
+      const nickName = document.getElementById("gbBietDanh").value.trim();
 
-    if (!name || !nickName) return;
-    if (name.length > 100 || nickName.length > 200) {
-      alert("Tên tối đa 100 ký tự, Biệt danh tối đa 200 ký tự.");
-      return;
-    }
-    const btn = gbNickNameForm.querySelector(".btn-create");
-    btn.disabled = true;
-    btn.textContent = "⏳ Đang gửi...";
+      if (!name || !nickName) return;
+      const checkName = checkListNickName.find(item => item?.name === name);
+      if (checkName) {
+        checkNameForm.style.display = "block";
+        return;
+      }
+      const checkValueNickName = checkListNickName.find(item => item?.nickName === nickName);
+      if (checkValueNickName) {
+        checkNickNameForm.style.display = "block";
+        return;
+      }
 
-    createNickName(name, nickName)
-      .then(() => {
-        gbNickNameForm.reset();
-        document.getElementById("gbTen").focus();
-      })
-      .catch(() => alert("Không thể Thêm. Vui lòng thử lại!"))
-      .finally(() => {
-        btn.disabled = false;
-        btn.textContent = "Thêm";
-        loadNickName();
-      });
-  });
-}
+      if (name.length > 100 || nickName.length > 200) {
+        alert("Tên tối đa 100 ký tự, Biệt danh tối đa 200 ký tự.");
+        return;
+      }
+      const btn = gbNickNameForm.querySelector(".btn-create");
+      btn.disabled = true;
+      btn.textContent = "⏳ Đang gửi...";
+
+      createNickName(name, nickName)
+        .then(() => {
+          gbNickNameForm.reset();
+          document.getElementById("gbTen").focus();
+        })
+        .catch(() => alert("Không thể Thêm. Vui lòng thử lại!"))
+        .finally(() => {
+          btn.disabled = false;
+          btn.textContent = "Thêm";
+          checkNickNameForm.style.display = "none";
+          checkNameForm.style.display = "none";
+
+          loadNickName();
+        });
+    });
+  }
 
 }
 loadMessages()
