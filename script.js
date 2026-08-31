@@ -570,5 +570,51 @@ async function loadImages() {
   }
 }
 
+// ========================================
+// TẢI DANH SÁCH IMAGE
+// ========================================
+
+function createListImage(e) {
+
+  e.forEach((item, stt) => {
+    let index = stt + 1;
+    const elementDiv = document.createElement("div");
+    elementDiv.className = "album-item";
+    elementDiv.id = item?.id
+    const imgDiv = document.createElement("img");
+    imgDiv.src = item?.image || '/images/noImage.png'
+
+    const albumDiv = document.createElement("div");
+    albumDiv.className = "album-placeholder";
+
+    const albumNote = document.createElement("div");
+    albumNote.className = "album-note";
+
+    const btnCapNhat = document.createElement("button");
+    btnCapNhat.className = "update-button";
+    btnCapNhat.innerHTML = "Cập nhật";
+
+    elementDiv.appendChild(imgDiv);
+    albumDiv.appendChild(albumNote);
+    elementDiv.appendChild(albumDiv)
+    elementDiv.appendChild(btnCapNhat)
+    // ===== Lay index anh
+    albumNote.innerHTML = "Ảnh " + index;
+
+    // Them chuc nang click vao anh
+    imgDiv.addEventListener("click", (event) => {
+      event.stopPropagation();
+      changeImage(elementDiv);
+    });
+
+    // Them chuc nang click vao button
+    btnCapNhat.addEventListener("click", (event) => {
+      createImage(event, elementDiv, Number(index));
+    });
+    listImage.appendChild(elementDiv);
+  });
+}
+
+
 loadImages()
 
