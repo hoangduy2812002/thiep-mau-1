@@ -299,6 +299,8 @@ function changeImage(album) {
 async function createImage(event, album, stt) {
   event.stopPropagation();
   updateButton.style.display = "none";
+  const notification_img = document.getElementById("notification-image");
+
   if (_id === undefined || _id === 'undefined') {
 
     const base64 = album.dataset.base64;
@@ -328,27 +330,23 @@ async function createImage(event, album, stt) {
     if (!response.ok) {
       throw new Error(result.message);
     } else {
-      console.log('=====>')
-      const notification_img = document.getElementById("notification-image");
       notification_img.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
-      // setTimeout(() => {
+      setTimeout(() => {
 
-      //   notification.style.display = "none";
+        notification_img.style.display = "none";
 
-      // }, 4000);
+      }, 4000);
     }
   } else {
     updateImageAPI(album);
-    console.log('update')
-    const notification_img = document.getElementById("notification_image");
       notification_img.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
-      // setTimeout(() => {
+      setTimeout(() => {
 
-      //   notification_img.style.display = "none";
+        notification_img.style.display = "none";
 
-      // }, 4000);
+      }, 4000);
   }
 
 
