@@ -757,7 +757,7 @@ async function loadNickName() {
       deleteButton.textContent = "Xóa";
 
       deleteButton.addEventListener("click", () => {
-        deleteMessage(item.id);
+        deleteNickName(item.id);
       });
 
       // =========================
