@@ -710,7 +710,7 @@ async function loadNickName() {
     // Hiển thị nickname
     // ------------------------------
 
-    data.forEach(item => {
+    data.forEach((item,index) => {
       const element = document.createElement("div");
 
       element.className = "item";
@@ -720,11 +720,12 @@ async function loadNickName() {
 
       const titeNickname = document.createElement("div");
 
-      titeNickname.className = "titeNickname";
+      titeNickname.className = "lablTitle";
       const nameNick = document.createElement("div");
       nameNick.innerHTML = "Tên:";
       const nameNickInput = document.createElement("input");
       nameNickInput.className = "input-nickname";
+      nameNickInput.id = index;
       nameNickInput.defaultValue = item?.name;
 
       titeNickname.appendChild(nameNick);

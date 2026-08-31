@@ -423,8 +423,9 @@ button:disabled {
     display: none;
 }
 
-.titeNickname{
+.lablTitle{
     display: flex;
+    width: 100%;
 }
 
 .input-nickname{
