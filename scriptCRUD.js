@@ -724,7 +724,8 @@ async function loadNickName() {
       const nameNick = document.createElement("div");
       nameNick.innerHTML = "Tên:";
       const nameNickInput = document.createElement("input");
-
+      nickName.className = "input-nickname";
+      nameNickInput.defaultValue = item?.name;
 
       titeNickname.appendChild(nameNick);
       titeNickname.appendChild(nameNickInput);

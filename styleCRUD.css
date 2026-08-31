@@ -426,3 +426,7 @@ button:disabled {
 .titeNickname{
     display: flex;
 }
+
+.input-nickname{
+    width: 100%;
+}
