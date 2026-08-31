@@ -554,7 +554,7 @@ async function loadImages() {
       }
     }
 
-    // createListImage(listData);
+    createListImage(listData);
     console.log('--->',listData)
     return listData;
 
