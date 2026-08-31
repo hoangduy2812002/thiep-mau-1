@@ -722,6 +722,7 @@ async function loadNickName() {
 
       titeNickname.className = "lablTitle";
       const nameNick = document.createElement("div");
+      nameNick.className= "labl-nickname";
       nameNick.innerHTML = "Tên";
 
       const nameNickInput = document.createElement("input");
@@ -738,6 +739,7 @@ async function loadNickName() {
       const messageNickName = document.createElement("div");
       messageNickName.className = "lablTitle";
       const lablMessage= document.createElement("div");
+      lablMessage.className= "labl-nickname";
       lablMessage.innerHTML = "Biệt danh";
 
       const messageNickInput = document.createElement("input");
