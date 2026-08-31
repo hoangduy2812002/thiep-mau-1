@@ -8,7 +8,7 @@ const listImage = document.getElementById("listImage");
 const reloadButton = document.getElementById("reloadButton");
 let selectedImageBase64 = null;
 let updateButton = null;
-
+let checkListNickName;
 
 
 
@@ -17,6 +17,7 @@ function openTab(tabId, button) {
     loadMessages();
     listImage.innerHTML = "";
   } else if (tabId === 'tab2') {
+    attachAnEventToTheForm();
     loadNickName();
   } else {
     loadImages();
@@ -667,7 +668,8 @@ async function loadNickName() {
     }
 
     const data = result.data || [];
-
+    checkListNickName = data;
+    console.log('---> ',checkListNickName)
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
@@ -755,7 +757,8 @@ async function loadNickName() {
   }
 }
 
-// Gắn sự kiện form NICK NAME
+function attachAnEventToTheForm (){
+  // Gắn sự kiện form NICK NAME
 const gbNickNameForm = document.getElementById("nickNameForm");
 if (gbNickNameForm) {
   gbNickNameForm.addEventListener("submit", e => {
@@ -780,10 +783,11 @@ if (gbNickNameForm) {
       .catch(() => alert("Không thể Thêm. Vui lòng thử lại!"))
       .finally(() => {
         btn.disabled = false;
-        btn.textContent = "🪄 Thêm";
+        btn.textContent = "Thêm";
         loadNickName();
       });
   });
 }
 
+}
 loadMessages()
