@@ -1,7 +1,8 @@
 const totalNumberImage = 8;
 
 let _id = undefined;
-const listElement = document.getElementById("list");
+const listElement = document.getElementById("list_loiChuc");
+const listNickName = document.getElementById("list_nickName");
 const listImage = document.getElementById("listImage");
 
 const reloadButton = document.getElementById("reloadButton");
@@ -663,7 +664,7 @@ async function deleteNickName(id) {
 }
 
 async function loadNickName() {
-
+  listNickName.innerHTML = "";
   try {
 
     const response =
@@ -684,30 +685,96 @@ async function loadNickName() {
       );
 
     }
+
+    const data = result.data || [];
+
     console.log('------------',result);
-    // let listData = [];
+    // ------------------------------
+    // Không có dữ liệu
+    // ------------------------------
 
-    // for (let stt = 1; stt <= totalNumberImage; stt++) {
+    if (data.length === 0) {
+      listElement.innerHTML = `
+                <div class="empty">
+                Chưa có dữ liệu!
+                </div>
+            `;
 
-    //   const item = result?.data.find(
-    //     item => Number(item.stt) === stt
-    //   );
+      return;
+    }
 
-    //   if (item) {
+    listNickName.innerHTML="";
 
-    //     listData.push(item);
+       // ------------------------------
+    // Hiển thị nickname
+    // ------------------------------
 
-    //   } else {
+    data.forEach(item => {
+      const element = document.createElement("div");
 
-    //     listData.push({
-    //       stt: stt
-    //     });
+      element.className = "item";
 
-    //   }
-    // }
+      // =========================
+      // NAME
+      // =========================
 
-    // createListImage(listData);
-    // return listData;
+      const name = document.createElement("div");
+
+      name.className = "name";
+
+      name.textContent = item.name;
+
+      // =========================
+      // MESSAGE
+      // =========================
+
+      const message = document.createElement("div");
+
+      message.className = "message";
+
+      message.textContent = item.nickName;
+
+      // =========================
+      // DATE
+      // =========================
+
+      const date = document.createElement("div");
+
+      date.className = "date";
+
+      if (item.createdAt) {
+        date.textContent = new Date(item.createdAt).toLocaleString("vi-VN");
+      }
+
+      // =========================
+      // DELETE
+      // =========================
+
+      const deleteButton = document.createElement("button");
+
+      deleteButton.className = "delete-button";
+
+      deleteButton.textContent = "Xóa";
+
+      deleteButton.addEventListener("click", () => {
+        deleteMessage(item.id);
+      });
+
+      // =========================
+      // APPEND
+      // =========================
+
+      element.appendChild(name);
+
+      element.appendChild(message);
+
+      element.appendChild(date);
+
+      element.appendChild(deleteButton);
+
+      listNickName.appendChild(element);
+    });
+
     return;
 
 
@@ -722,5 +789,7 @@ async function loadNickName() {
 
   }
 }
+
+
 loadNickName();
 loadMessages()
