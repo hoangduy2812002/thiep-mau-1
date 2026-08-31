@@ -719,7 +719,7 @@ async function loadNickName() {
       // NAME
       // =========================
 
-      const name = document.createElement("div");
+      const name = document.createElement("span");
       const titeName = document.createElement("span");
       titeName.innerHTML = "Tên: "
 
