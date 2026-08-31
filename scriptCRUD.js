@@ -710,45 +710,29 @@ async function loadNickName() {
     // Hiển thị nickname
     // ------------------------------
 
-    data.forEach((item,index) => {
+    data.forEach(item => {
       const element = document.createElement("div");
 
       element.className = "item";
+
       // =========================
       // NAME
       // =========================
 
-      const titeNickname = document.createElement("div");
+      const name = document.createElement("div");
 
-      titeNickname.className = "lablTitle";
-      const nameNick = document.createElement("div");
-      nameNick.className= "labl-nickname";
-      nameNick.innerHTML = "Tên";
+      name.className = "name";
+      name.textContent ="Tên: " +item?.name;
 
-      const nameNickInput = document.createElement("input");
-      nameNickInput.className = "input-nickname";
-      nameNickInput.id = index;
-      nameNickInput.defaultValue = item?.name;
-
-      titeNickname.appendChild(nameNick);
-      titeNickname.appendChild(nameNickInput);
-      // titeNickname.textContent = "Tên: "+item.name;
       // =========================
       // MESSAGE
       // =========================
-      const messageNickName = document.createElement("div");
-      messageNickName.className = "lablTitle";
-      const lablMessage= document.createElement("div");
-      lablMessage.className= "labl-nickname";
-      lablMessage.innerHTML = "Biệt danh";
 
-      const messageNickInput = document.createElement("input");
-      messageNickInput.className = "input-nickname";
-      messageNickInput.id = index+1;
-      messageNickInput.defaultValue = item?.nickName;
+      const message = document.createElement("div");
 
-      messageNickName.appendChild(lablMessage);
-      messageNickName.appendChild(messageNickInput);
+      message.className = "message";
+
+      message.textContent = "Biệt danh: "+item?.nickName;
 
       // =========================
       // DELETE
@@ -768,9 +752,9 @@ async function loadNickName() {
       // APPEND
       // =========================
 
-      element.appendChild(titeNickname);
+      element.appendChild(name);
 
-      element.appendChild(messageNickName);
+      element.appendChild(message);
 
 
       element.appendChild(deleteButton);

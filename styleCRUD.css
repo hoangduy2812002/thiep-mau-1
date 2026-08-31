@@ -422,9 +422,8 @@ button:disabled {
     top: 0;
     display: none;
 }
-
+/* 
 .lablTitle{
-    display: flex;
     width: 100%;
 }
 
@@ -434,4 +433,4 @@ button:disabled {
 
 .labl-nickname{
     width: 100%;
-}
+} */
