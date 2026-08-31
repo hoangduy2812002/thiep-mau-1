@@ -725,8 +725,7 @@ async function loadNickName() {
 
       name.className = "name";
       name.textContent = item.name;
-      name.appendChild(titeName);
-
+      element.appendChild(titeName);
       // =========================
       // MESSAGE
       // =========================
