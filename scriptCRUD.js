@@ -712,30 +712,25 @@ async function loadNickName() {
 
     data.forEach(item => {
       const element = document.createElement("div");
-      element.className = "item-nickname";
+
+      element.className = "item";
       // =========================
       // NAME
       // =========================
 
       const name = document.createElement("div");
-      const titeName = document.createElement("span");
-      titeName.innerHTML = "Tên: "
 
       name.className = "name";
-      name.textContent = item.name;
-      element.appendChild(titeName);
+      name.textContent = "Tên "+item.name;
       // =========================
       // MESSAGE
       // =========================
 
       const message = document.createElement("div");
-      const titeMessage = document.createElement("span");
-      titeMessage.innerHTML = "Biệt danh: "
 
       message.className = "message";
 
-      message.textContent = item.nickName;
-      element.appendChild(titeMessage);
+      message.textContent = "Biệt danh "+item.nickName;
 
       // =========================
       // DELETE
