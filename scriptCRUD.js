@@ -5,7 +5,7 @@ const listElement = document.getElementById("list_loiChuc");
 const listNickName = document.getElementById("list_nickName");
 const listImage = document.getElementById("listImage");
 
-const reloadButton = document.getElementById("reloadButton");
+// const reloadButton = document.getElementById("reloadButton");
 let selectedImageBase64 = null;
 let updateButton = null;
 let checkListNickName;
@@ -199,7 +199,7 @@ async function deleteMessage(id) {
   }
 }
 
-reloadButton.addEventListener("click", loadMessages);
+// reloadButton.addEventListener("click", loadMessages);
 
 
 function changeImage(album) {
@@ -330,7 +330,12 @@ async function createImage(event, album, stt) {
       throw new Error(result.message);
     } else {
 
-      const notification = document.getElementById("notification");
+    }
+  } else {
+    updateImageAPI(album);
+  }
+
+  const notification = document.getElementById("notification");
       notification.style.display = "block";
       // Chờ 2s để Sheets kịp ghi rồi reload
       setTimeout(() => {
@@ -338,10 +343,6 @@ async function createImage(event, album, stt) {
         notification.style.display = "none";
 
       }, 4000);
-    }
-  } else {
-    updateImageAPI(album);
-  }
 
 
 }
