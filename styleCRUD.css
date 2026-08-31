@@ -435,6 +435,7 @@ button:disabled {
     margin-top: -10px;
     max-width: fit-content;
     display: none;
+    margin-bottom: 10px;
 }
 
 #notification-error-nickName{
@@ -444,6 +445,7 @@ button:disabled {
     margin-top: -10px;
     max-width: fit-content;
     display: none;
+    margin-bottom: 10px;
 }
 /* 
 .lablTitle{

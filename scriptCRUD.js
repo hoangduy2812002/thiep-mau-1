@@ -776,6 +776,7 @@ function attachAnEventToTheForm() {
       }
       const checkValueNickName = checkListNickName.find(item => item?.nickName === nickName);
       if (checkValueNickName) {
+        checkNameForm.style.display = "none";
         checkNickNameForm.style.display = "block";
         return;
       }
