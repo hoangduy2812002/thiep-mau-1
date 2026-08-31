@@ -327,7 +327,7 @@ async function createImage(event, album, stt) {
 
     const result = await response.json();
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error(result.message);
     } else {
       console.log('=====>')
