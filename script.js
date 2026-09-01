@@ -364,6 +364,7 @@ function toggleGift() {
 
 // ── LIGHTBOX ẢNH ─────────────────────────────
 function openLightbox(item) {
+  console.log('-->',item)
   const img = item.querySelector("img");
   if (!img || img.style.display === "none" || !img.src) return;
 
@@ -605,8 +606,7 @@ function createListImage(e) {
     // Them chuc nang click vao anh
     imgDiv.addEventListener("click", (event) => {
       event.stopPropagation();
-      console.log('event',event)
-      openLightbox(event?.target);
+      openLightbox(elementDiv);
     });
 
     // Them chuc nang click vao button
