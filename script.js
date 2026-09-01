@@ -623,5 +623,43 @@ function createListImage(e) {
 }
 
 
+async function loadCheckNickName() {
+  listNickName.innerHTML = "";
+  try {
+
+    const response =
+      await fetch(
+        "/api/data?type=nickName"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        result.message ||
+        "Không thể tải"
+      );
+
+    }
+
+    return data;
+
+
+  } catch (error) {
+
+    console.error(
+      "LOAD NICKNAME ERROR:",
+      error
+    );
+
+    return [];
+
+  }
+}
+loadCheckNickName();
 loadImages()
 
