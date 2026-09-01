@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // ── TÊN KHÁCH MỜI TỪ URL ────────────────────────
 // URL dạng https://.../dam-cuoi/anh-viet → slug "anh-viet"
-// Tra trong danhSachKhachMoi (danhSachKhachMoi.js) để hiện tên lên bìa.
 async function initGuestName() {
   const url = window.location.pathname.substring(1);
 

@@ -674,7 +674,7 @@ async function loadNickName() {
     }
 
     const data = result.data || [];
-    checkListNickName = data;
+    checkListNickName = data?.reverse();
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
