@@ -228,7 +228,7 @@ function initScrollAnimations() {
   });
 }
 
-// ── SỔ LƯU BÚT (Google Sheets) ─────────────────────────────────────
+// ── SỔ LƯU BÚT ─────────────────────────────────────
 
 async function loadMessages() {
   const list = document.getElementById("gbList");
@@ -364,7 +364,6 @@ function toggleGift() {
 
 // ── LIGHTBOX ẢNH ─────────────────────────────
 function openLightbox(item) {
-  console.log('-->',item)
   const img = item.querySelector("img");
   if (!img || img.style.display === "none" || !img.src) return;
 
