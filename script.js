@@ -653,7 +653,7 @@ async function loadCheckNickName() {
     // if (data.length === 0) {
       
     // }
-
+    console.log(data)
     return data;
 
 
