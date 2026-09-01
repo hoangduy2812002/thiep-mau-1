@@ -645,6 +645,15 @@ async function loadCheckNickName() {
 
     }
 
+    const data = result.data || [];
+    // ------------------------------
+    // Không có dữ liệu
+    // ------------------------------
+
+    // if (data.length === 0) {
+      
+    // }
+
     return data;
 
 
@@ -659,6 +668,6 @@ async function loadCheckNickName() {
 
   }
 }
-loadCheckNickName();
+
 loadImages()
 
