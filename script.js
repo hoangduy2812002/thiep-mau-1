@@ -624,7 +624,6 @@ function createListImage(e) {
 
 
 async function loadCheckNickName() {
-  listNickName.innerHTML = "";
   try {
 
     const response =
