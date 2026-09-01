@@ -18,7 +18,7 @@ function initGuestName() {
   const url = window.location.pathname.substring(1);
 
   console.log(url);
-  const name = decodeURIComponent(name);
+  const name = decodeURIComponent(url);
   console.log('--> ',name);
 
   // if (typeof danhSachKhachMoi === "undefined") return;
