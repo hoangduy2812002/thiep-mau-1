@@ -1,9 +1,9 @@
  const totalNumberImage = CONFIG.totalNumberImage;
  const listImageHome = document.getElementById("listImageHome");
 
+
 /* ================================================
    THIỆP CƯỚI – Script.js
-   Văn Chương & Hồng Thư – 25/07/2026
 ================================================ */
 // Khởi động khi load: tên khách mời + hiệu ứng trái tim
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // URL dạng https://.../dam-cuoi/anh-viet → slug "anh-viet"
 // Tra trong danhSachKhachMoi (danhSachKhachMoi.js) để hiện tên lên bìa.
 function initGuestName() {
+  console.log("run")
   if (typeof danhSachKhachMoi === "undefined") return;
 
   const segments = window.location.pathname.split("/").filter(Boolean);
@@ -555,7 +556,7 @@ async function loadImages() {
     }
 
     createListImage(listData);
-    console.log('--->',listData)
+
     return listData;
 
 
