@@ -29,11 +29,10 @@ async function initGuestName() {
 
 
   // Điền tên khách mời ở cả bìa thiệp và phần thông tin nhà hàng
-  document.getElementById('coverGuestName').innerHTML = guest?.name;
-  // ["coverGuestName", "venueGuestName"].forEach(id => {
-  //   const el = document.getElementById(id);
-  //   if (el) el.textContent = guest.ten;
-  // });
+  ["coverGuestName", "venueGuestName"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = guest.name;
+  });
 }
 
 // ── TRÁI TIM RƠI ────────────────────────────────
