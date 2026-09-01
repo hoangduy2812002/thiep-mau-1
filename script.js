@@ -15,25 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
 // URL dạng https://.../dam-cuoi/anh-viet → slug "anh-viet"
 // Tra trong danhSachKhachMoi (danhSachKhachMoi.js) để hiện tên lên bìa.
 function initGuestName() {
-  console.log("run")
-  if (typeof danhSachKhachMoi === "undefined") return;
+  const name = window.location.pathname.substring(1);
 
-  const segments = window.location.pathname.split("/").filter(Boolean);
-  const slug = decodeURIComponent(segments[segments.length - 1] || "")
-    .replace(/\.html$/i, "")
-    .toLowerCase();
-  if (!slug) return;
+  console.log(name);
+  // if (typeof danhSachKhachMoi === "undefined") return;
 
-  const guest = danhSachKhachMoi.find(k => k.link.toLowerCase() === slug);
-  if (!guest) return;
+  // const segments = window.location.pathname.split("/").filter(Boolean);
+  // const slug = decodeURIComponent(segments[segments.length - 1] || "")
+  //   .replace(/\.html$/i, "")
+  //   .toLowerCase();
+  // if (!slug) return;
 
-  document.title = `Thiệp Cưới – Văn Chương & Hồng Thư – Kính mời ${guest.ten}`;
+  // const guest = danhSachKhachMoi.find(k => k.link.toLowerCase() === slug);
+  // if (!guest) return;
 
-  // Điền tên khách mời ở cả bìa thiệp và phần thông tin nhà hàng
-  ["coverGuestName", "venueGuestName"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = guest.ten;
-  });
+  // document.title = `Thiệp Cưới – Văn Chương & Hồng Thư – Kính mời ${guest.ten}`;
+
+  // // Điền tên khách mời ở cả bìa thiệp và phần thông tin nhà hàng
+  // ["coverGuestName", "venueGuestName"].forEach(id => {
+  //   const el = document.getElementById(id);
+  //   if (el) el.textContent = guest.ten;
+  // });
 }
 
 // ── TRÁI TIM RƠI ────────────────────────────────
