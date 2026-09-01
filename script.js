@@ -14,27 +14,23 @@ document.addEventListener("DOMContentLoaded", () => {
 // ── TÊN KHÁCH MỜI TỪ URL ────────────────────────
 // URL dạng https://.../dam-cuoi/anh-viet → slug "anh-viet"
 // Tra trong danhSachKhachMoi (danhSachKhachMoi.js) để hiện tên lên bìa.
-function initGuestName() {
+async function initGuestName() {
   const url = window.location.pathname.substring(1);
 
   console.log(url);
   const name = decodeURIComponent(url);
+  const slug = name.trim();
+
+  const checkGuest = await loadCheckNickName();
+
   console.log('--> ',name);
+  console.log('-||-> ',checkGuest);
+  const guest = checkGuest.find(k => k.nickName.toLowerCase() === slug);
+  if (!guest) return;
 
-  // if (typeof danhSachKhachMoi === "undefined") return;
 
-  // const segments = window.location.pathname.split("/").filter(Boolean);
-  // const slug = decodeURIComponent(segments[segments.length - 1] || "")
-  //   .replace(/\.html$/i, "")
-  //   .toLowerCase();
-  // if (!slug) return;
-
-  // const guest = danhSachKhachMoi.find(k => k.link.toLowerCase() === slug);
-  // if (!guest) return;
-
-  // document.title = `Thiệp Cưới – Văn Chương & Hồng Thư – Kính mời ${guest.ten}`;
-
-  // // Điền tên khách mời ở cả bìa thiệp và phần thông tin nhà hàng
+  // Điền tên khách mời ở cả bìa thiệp và phần thông tin nhà hàng
+  document.getElementById('coverGuestName').innerHTML = guest?.name;
   // ["coverGuestName", "venueGuestName"].forEach(id => {
   //   const el = document.getElementById(id);
   //   if (el) el.textContent = guest.ten;
@@ -653,7 +649,6 @@ async function loadCheckNickName() {
     // if (data.length === 0) {
       
     // }
-    console.log(data)
     return data;
 
 
@@ -669,7 +664,7 @@ async function loadCheckNickName() {
   }
 }
 
-loadCheckNickName();
+
 
 loadImages()
 
