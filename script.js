@@ -15,9 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // URL dạng https://.../dam-cuoi/anh-viet → slug "anh-viet"
 // Tra trong danhSachKhachMoi (danhSachKhachMoi.js) để hiện tên lên bìa.
 function initGuestName() {
-  const name = window.location.pathname.substring(1);
+  const url = window.location.pathname.substring(1);
 
-  console.log(name);
+  console.log(url);
+  const name = decodeURIComponent(name);
+  console.log('--> ',name);
+
   // if (typeof danhSachKhachMoi === "undefined") return;
 
   // const segments = window.location.pathname.split("/").filter(Boolean);
