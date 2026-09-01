@@ -22,8 +22,6 @@ async function initGuestName() {
 
   const checkGuest = await loadCheckNickName();
 
-  console.log('--> ',name);
-  console.log('-||-> ',checkGuest);
   const guest = checkGuest.find(k => k.nickName.toLowerCase() === slug);
   if (!guest) return;
 
