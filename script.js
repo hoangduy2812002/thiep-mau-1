@@ -582,7 +582,6 @@ async function loadImages() {
 function createListImage(e) {
 
   e.forEach((item, stt) => {
-    let index = stt + 1;
     const elementDiv = document.createElement("div");
     elementDiv.className = "album-item";
     elementDiv.id = item?.id
