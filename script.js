@@ -1,5 +1,5 @@
- const totalNumberImage = CONFIG.totalNumberImage;
- const listImageHome = document.getElementById("listImageHome");
+const totalNumberImage = CONFIG.totalNumberImage;
+const listImageHome = document.getElementById("listImageHome");
 
 
 /* ================================================
@@ -238,6 +238,12 @@ async function loadMessages() {
     const result = await response.json();
     list.innerHTML = "";
     result?.data?.forEach(e => list.appendChild(buildEntry(e)));
+
+    const btn = gbForm.querySelector(".gb-btn");
+    if (result?.data?.length > 2) {
+      btn.disabled = false;
+    }
+
   } catch (error) {
     list.innerHTML =
       '<p class="gb-empty">⚠️ Không thể tải lời chúc. Vui lòng thử lại sau.</p>';
@@ -642,7 +648,7 @@ async function loadCheckNickName() {
     // ------------------------------
 
     // if (data.length === 0) {
-      
+
     // }
     return data;
 

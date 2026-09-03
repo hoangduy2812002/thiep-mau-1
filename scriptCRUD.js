@@ -694,12 +694,12 @@ async function loadNickName() {
     total_list.innerHTML= data?.length;
     listNickName.innerHTML = "";
 
+    // Dat gioi han cho phep
     const check_total = document.getElementById("btn_them_biet_danh");
-    if(data?.length > 3){
+    if(data?.length > 3000){
       check_total.disabled = true;
     }else{
       check_total.disabled = false;
-
     }
 
     
