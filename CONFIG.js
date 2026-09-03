@@ -33,7 +33,7 @@ const CONFIG = {
   ngayThangNamDienRaTiecCuoi: new Date(Date.now() + 24 * 60 * 60 * 1000),
   totalNumberImage : 8,
   limit_loiChuc: 7000,
-  limit_NickName: 3,
+  limit_NickName: 3000,
 
   // diaChi: "TP. Hồ Chí Minh",
 };
