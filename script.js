@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 async function initGuestName() {
   const url = window.location.pathname.substring(1);
 
-  console.log(url);
   const name = decodeURIComponent(url);
   const slug = name.trim();
 

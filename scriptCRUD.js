@@ -416,7 +416,8 @@ async function loadImages() {
 // ========================================
 
 function createListImage(e) {
-
+  listImage.innerHTML="";
+  
   e.forEach((item, stt) => {
     let index = stt + 1;
     const elementDiv = document.createElement("div");
