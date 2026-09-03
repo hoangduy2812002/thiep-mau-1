@@ -693,10 +693,10 @@ async function loadNickName() {
     const total_list = document.getElementById("total_biet_danh");
     total_list.innerHTML= data?.length;
     listNickName.innerHTML = "";
-    console.log(total_list)
-    if(total_list > 3){
+
+    if(data?.length > 3){
       const check_total = document.getElementById("btn_them_biet_danh");
-      check_total.disabled = false;
+      check_total.disabled = true;
     }
 
     
