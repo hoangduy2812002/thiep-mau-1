@@ -60,6 +60,8 @@ async function loadMessages() {
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
+    const total_list = document.getElementById("total_loi_chuc");
+    total_list.innerHTML= data?.length;
 
     if (data.length === 0) {
       listElement.innerHTML = `
@@ -70,8 +72,7 @@ async function loadMessages() {
 
       return;
     }
-    const total_list = document.getElementById("total_loi_chuc");
-    total_list.innerHTML= data?.length;
+  
     listElement.innerHTML = "";
 
     // ------------------------------
@@ -680,7 +681,9 @@ async function loadNickName() {
     // ------------------------------
     // Không có dữ liệu
     // ------------------------------
-
+    const total_list = document.getElementById("total_biet_danh");
+    total_list.innerHTML= data?.length;
+    
     if (data.length === 0) {
       listNickName.innerHTML = `
                 <div class="empty">
@@ -690,8 +693,7 @@ async function loadNickName() {
 
       return;
     }
-    const total_list = document.getElementById("total_biet_danh");
-    total_list.innerHTML= data?.length;
+  
     listNickName.innerHTML = "";
 
     // Dat gioi han cho phep
