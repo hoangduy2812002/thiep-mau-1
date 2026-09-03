@@ -694,6 +694,14 @@ async function loadNickName() {
     total_list.innerHTML= data?.length;
     listNickName.innerHTML = "";
 
+    if(total_list > 3){
+      const check_total = document.getElementById("btn_them_biet_danh");
+      check_total.disabled = true;
+    }
+
+    
+
+
     // ------------------------------
     // Hiển thị nickname
     // ------------------------------
