@@ -4,6 +4,7 @@ let _id = undefined;
 const listElement = document.getElementById("list_loiChuc");
 const listNickName = document.getElementById("list_nickName");
 const listImage = document.getElementById("listImage");
+const total_list = document.querySelectorAll("total_list");
 
 // const reloadButton = document.getElementById("reloadButton");
 let selectedImageBase64 = null;
@@ -70,7 +71,7 @@ async function loadMessages() {
 
       return;
     }
-
+    total_list.innerHTML= data?.length;
     listElement.innerHTML = "";
 
     // ------------------------------
@@ -417,7 +418,7 @@ async function loadImages() {
 
 function createListImage(e) {
   listImage.innerHTML="";
-  
+
   e.forEach((item, stt) => {
     let index = stt + 1;
     const elementDiv = document.createElement("div");
