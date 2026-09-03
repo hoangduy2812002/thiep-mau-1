@@ -71,6 +71,7 @@ async function loadMessages() {
 
       return;
     }
+    console.log('-->',data?.length)
     total_list.innerHTML= data?.length;
     listElement.innerHTML = "";
 
@@ -690,7 +691,7 @@ async function loadNickName() {
 
       return;
     }
-
+    total_list.innerHTML= data?.length;
     listNickName.innerHTML = "";
 
     // ------------------------------
