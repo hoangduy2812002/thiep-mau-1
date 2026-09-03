@@ -4,7 +4,7 @@ let _id = undefined;
 const listElement = document.getElementById("list_loiChuc");
 const listNickName = document.getElementById("list_nickName");
 const listImage = document.getElementById("listImage");
-const total_list = document.querySelectorAll("total_list");
+const total_list = document.querySelectorAll(".total_list");
 
 // const reloadButton = document.getElementById("reloadButton");
 let selectedImageBase64 = null;
