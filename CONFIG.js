@@ -31,7 +31,9 @@ const CONFIG = {
   nhamNgayTiecCuoiDienRa: "(NHẰM NGÀY 10 THÁNG 12 NĂM ....)",
   // ngayThangNamDienRaTiecCuoi:"2026-12-25T05:00:00Z",
   ngayThangNamDienRaTiecCuoi: new Date(Date.now() + 24 * 60 * 60 * 1000),
-  totalNumberImage : 8
+  totalNumberImage : 8,
+  limit_loiChuc: 7000,
+  limit_NickName: 3,
 
   // diaChi: "TP. Hồ Chí Minh",
 };

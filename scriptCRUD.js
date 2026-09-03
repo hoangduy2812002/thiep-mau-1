@@ -696,7 +696,7 @@ async function loadNickName() {
 
     // Dat gioi han cho phep
     const check_total = document.getElementById("btn_them_biet_danh");
-    if(data?.length > 3000){
+    if(data?.length > CONFIG.limit_NickName){
       check_total.disabled = true;
     }else{
       check_total.disabled = false;

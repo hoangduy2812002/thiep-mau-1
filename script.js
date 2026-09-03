@@ -240,8 +240,8 @@ async function loadMessages() {
     result?.data?.forEach(e => list.appendChild(buildEntry(e)));
 
     const btn = gbForm.querySelector(".gb-btn");
-    console.log('----',result?.data);
-    if (result?.data?.length > 2) {
+
+    if (result?.data?.length > CONFIG.limit_loiChuc) {
       btn.disabled = true;
     }
 
